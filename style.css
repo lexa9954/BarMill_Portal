@@ -562,7 +562,7 @@ input, input:hover, input:focus {
     flex-direction: row;
 }
 .img_mat{
-    width: 150px;
+    max-width: 150px;
     height: 150px;
     margin: 10px 10px;
 }
@@ -617,7 +617,7 @@ th{
 td{
     text-align: center;
     vertical-align: top;
-    
+    width: 150px;
 }
 .minItemMatTR{
     background-color: #FFBCBCBC;

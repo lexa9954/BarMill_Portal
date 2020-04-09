@@ -625,10 +625,15 @@ input, input:hover, input:focus {
 
 .tableMats thead th{
 /*	position: sticky;*/
-    background-color: black;
-    color: white;
+    background-color: #c7c7c7;
+    color: #525252;
 	text-align: left;
 	padding: 5px 10px;
+}
+
+.tableMats tbody .selectedMaterialRow td{
+	font-weight: bold;
+/*	padding-top: 10px;*/
 }
 
 .tableMats tbody td{
@@ -653,7 +658,7 @@ input, input:hover, input:focus {
 }
 
 .tableMats .itemMatTR:hover, .tableMats .minItemMatTR:hover{
-    background-color: #d8d8d8;
+    background-color: #f2f2f2;
     cursor: pointer;
 }
 
@@ -670,7 +675,7 @@ input, input:hover, input:focus {
 }
 
 .tableMats .minItemMatTR{
-    background-color: #ff9090;
+    background-color: #fdd2d2;
 }
 
 .tableMats .openedItemClose{
@@ -679,11 +684,13 @@ input, input:hover, input:focus {
 .tableMats .openedItemOpen{
     background-color: white;
 }
+
 /*Когда выбрана строка в таблице материалов*/
 .tableMats .selectedMaterialRow{
     padding: 0px;
     border: none;
-    background-color: #ffffff;
+/*    background-color: #f2f2f2;*/
+	background: linear-gradient(to top, #ffffff, #f2f2f2);
     border-bottom: none;
 }
 

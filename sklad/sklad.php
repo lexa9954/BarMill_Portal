@@ -96,14 +96,14 @@ function CreateItemMat($stmt){
 /*Создание таблицы*/
 function CreateTable($stmt){
     echo "
-        <div id=\"tableMats\">
-            <table>
+        <div class=\"tableMats\">
+            <table class=\"tableMats\">
                 <thead>
                 <tr>
-                    <th class=\"headTB\">ОЗМ</th>
-                    <th class=\"headTB\">Наименование</th>
-                    <th class=\"headTB\">Количество</th>
-                    <th class=\"headTB\">Последнее поступление</th>
+                    <th id=\"columOZM\" >ОЗМ</th>
+                    <th id=\"columName\" >Наименование</th>
+                    <th id=\"columQty\" >Количество</th>
+                    <th id=\"columDate\" >Последнее поступление</th>
                 </tr>
                 </thead>
                 <tbody id=\"containerItems\">";
@@ -124,10 +124,10 @@ function CreateTable($stmt){
                 </tr>
                 
                 <tr  id=\"itemInfo\" class=\"openedItemClose\">
-                    <td>
+                    <td class=\"imgBut\">
                         <img class=\"img_mat\" src=\"sklad/img/",$row['ozm'],".jpg\" onerror=\"this.onerror=null;this.src='img/error_pictures/noImg.jpg';\">
                         
-                        <input type=\"button\" onclick=\"moreMaterialInfo('",$row['name_mat'],"');\" value=\"Подробно\"/>
+                        <input type=\"button\" id=\"itemInfoBut\" class=\"knopka\" onclick=\"moreMaterialInfo('",$row['name_mat'],"');\" value=\"Подробно\"/>
                         
                     </td>
                     <td colspan=3>

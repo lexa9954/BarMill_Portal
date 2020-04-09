@@ -115,11 +115,7 @@ p {
 
 /* Стили элементов списка выезжающего меню */
 #left_sidebar ul, #right_sidebar ul {
-/*	position: fixed;*/
-/*	margin: 0px;*/
-/*  padding: 20px 0px 0px 0px;*/
     padding: 0;
-/*	text-align: center;*/
 }
 /*DropDown меню выбора свойств у контейнера*/
 ul li:hover ul.Sklad1{
@@ -502,10 +498,45 @@ input, input:hover, input:focus {
     width: 100%;
 }
 .MatBar{
-    overflow-y: scroll;
-    width: 100%;
-    height: 100%;
+    overflow-y: auto;
+	margin: 20px;
+    max-width: 100%;
+    max-height: 100%;
+	background-color: white;
 }
+	
+.MatBar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.MatBar::-webkit-scrollbar-thumb {
+    background-color: #d8d8d8;
+}
+
+.MatBar::-webkit-scrollbar-track {
+    background-color: #fcfcfc;
+}
+
+.MatBar:hover {
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	-moz-overflow-scrolling: touch;
+	-ms-overflow-scrolling: touch;
+	-o-overflow-scrolling: touch;
+	overflow-scrolling: touch;
+}
+
+.MatBar:hover::-webkit-scrollbar-thumb {
+    background-color: #d8d8d8;
+	-webkit-appearance: none;
+	width: 8px;
+}
+
+.MatBar:hover::-webkit-scrollbar-track {
+    background-color: #fcfcfc;
+}
+
+
 .mats_container{
     display: grid;
     justify-content: center;
@@ -561,13 +592,21 @@ input, input:hover, input:focus {
     min-width: 400px;
     flex-direction: row;
 }
+.imgBut{
+	display: flex;
+	flex-direction: column;	
+}
 .img_mat{
-    max-width: 150px;
+    max-width: 100%;
     height: 150px;
-    margin: 10px 10px;
+    margin: 20px auto;
 }
 .item_info{
     margin: 10px;
+}
+#itemInfoBut.knopka{
+    margin: 20px auto;
+	padding: 5px 20px;
 }
 .name_mat{
     color: rgba(40, 41, 51, 0.9);
@@ -578,61 +617,73 @@ input, input:hover, input:focus {
 }
 
 /*Таблица материалов*/
-table{
-    width: 100%;
-    position: relative;
+.tableMats {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
 }
-table,th{
-    padding: 5px;
-    border-collapse: collapse;
-    border: 1px solid #ddd;
-    background-color: white;
-}
-.headTB{
-    background-color: rgba(40, 41, 51, 0.9);
-    color: white;
-}
-.tableMats{
-    overflow-y: auto;
-}
+
 .tableMats thead th{
-    position: sticky;
-    top: 0;
+/*	position: sticky;*/
+    background-color: black;
+    color: white;
+	text-align: left;
+	padding: 5px 10px;
 }
-.itemMatTR:hover, .minItemMatTR:hover{
-    background-color: white;
+
+.tableMats tbody td{
+	text-align: left;
+	padding: 5px 10px;
+}
+
+#columOZM {
+	width: 200px;
+}
+
+#columName {
+	width: auto;
+}
+
+#columQty {
+	width: 10%;
+}
+
+#columDate {
+	width: 20%;
+}
+
+.tableMats .itemMatTR:hover, .tableMats .minItemMatTR:hover{
+    background-color: #d8d8d8;
     cursor: pointer;
 }
-tr{
-    background-color: #f5f5f5;
+
+.tableMats tr{
+    background-color: #ffffff;	
     border: none;
     border-bottom: 1px solid #ddd;
 }
-th{
+
+.tableMats th{
       position: sticky;
       top: 0;
-      box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
-    
+      box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);    
 }
-td{
-    text-align: center;
-    vertical-align: top;
-    width: 150px;
+
+.tableMats .minItemMatTR{
+    background-color: #ff9090;
 }
-.minItemMatTR{
-    background-color: #FFBCBCBC;
-}
-.openedItemClose{
+
+.tableMats .openedItemClose{
     display: none;
 }
-.openedItemOpen{
+.tableMats .openedItemOpen{
     background-color: white;
 }
 /*Когда выбрана строка в таблице материалов*/
-.selectedMaterialRow{
+.tableMats .selectedMaterialRow{
     padding: 0px;
     border: none;
-    background-color: white;
+    background-color: #ffffff;
     border-bottom: none;
 }
 

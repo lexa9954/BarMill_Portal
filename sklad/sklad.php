@@ -1,5 +1,5 @@
 <div class="WareHouse">
-   <div class="Details">
+   	<div class="Details">
    		<div class="material_data">
    			<div class="material_img">
    				<img id="imgMatId" class="img_mat" src="sklad/img/587687.jpg">
@@ -16,14 +16,10 @@
                 <canvas id="myChartAxis"></canvas>
             </div>
    		</div>
-   </div>
-      
-   <div class="NavMat">
-
-<div class="MatBar" id="MatBarId">
-
-</div>
-</div>
+   	</div>
+	<div class="MatBar" id="MatBarId"> <!-- Предлагаю переименовать в "material_table" -->
+	<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
+	</div>
 </div>
 
 <script type="text/javascript">

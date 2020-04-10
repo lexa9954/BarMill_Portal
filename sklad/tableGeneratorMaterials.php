@@ -39,17 +39,17 @@ function CreateTable($stmt){
             <table class=\"tableMats\">
                 <thead>
                 <tr>
-                    <th id=\"columOZM\" >ОЗМ</th>
-                    <th>Наименование</th>
-                    <th id=\"columQty\" >Количество</th>
-                    <th id=\"columQty\" >Категория
+                    <th class=\"columnOZM\">ОЗМ</th>
+                    <th class=\"columnName\">Наименование</th>
+                    <th class=\"columnQty\">Количество</th>
+                    <th class=\"columnCategory\">Категория
                     <select id=\"selectCategorDD\" onchange=\"SelectCat();\">";
                     include "categoriesGenerator.php";
                     GenerateCategories($_POST['categor']);
               echo "</select>
               
                     </th>
-                    <th id=\"columDate\" >Последнее поступление</th>
+                    <th class=\"columnDate\" >Последнее поступление</th>
                 </tr>
                 </thead>
                 <tbody id=\"containerItems\">";
@@ -63,14 +63,14 @@ function CreateTable($stmt){
         }
         echo "
                 <tr class=\"$classMin\" onclick=\"selectTd(this)\">
-                    <td class=\"itemOzmTD\">",$row['ozm'],"</td> 
+                    <td class=\"columnOZM\">",$row['ozm'],"</td>					
                     <td class=\"itemNameTD\">",$row['name_mat'],"</td>
-                    <td class=\"itemQtyTD\">",$row['qty'],"</td>
-                    <td class=\"itemQtyTD\">",$row['nameC'],"</td>
-                    <td class=\"itemLD_TD\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
+                    <td class=\"columnQty\">",$row['qty'],"</td>
+                    <td class=\"columnCategory\">",$row['nameC'],"</td>
+                    <td class=\"columnDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                 </tr>
         ";
-        
+        /* Нужно вместо itemNameTD установить columnName */
     }
     echo "  </tbody>
             </table>

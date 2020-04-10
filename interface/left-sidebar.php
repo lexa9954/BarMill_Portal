@@ -15,6 +15,6 @@
                 </li>
                 </ul>
             </li>	
-            <li><a href="index.php?page=home" onclick="close_all_sidebar()">Кнопка</a></li>
+            <li><a href="index.php?page=testTable" onclick="close_all_sidebar()">Кнопка</a></li>
 		</ul> 	
 	</div>	

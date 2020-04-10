@@ -22,6 +22,9 @@
         case "/Barmill_Portal/index.php?page=materialMore":
 			require "sklad/materialMore.php";
 			break;
+		case "/Barmill_Portal/index.php?page=testTable":
+			require "testTable.php";
+			break;
     	default: 
 			echo "<div class=\"text\">1 октября 1942 г. распоряжением Совета народных комиссаров СССР Наркомчермету предложено разработать проектное задание на строительство Карагандинского металлургического завода на базе железных руд Атасуйского месторождения;
 			2012 г. – выполнен запуск нового блока разделения воздуха, построенного ТОО «Линде Газ Казахстан»</div>";

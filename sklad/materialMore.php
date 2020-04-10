@@ -1,55 +1,51 @@
+
 <div class="MaterialPage">
     <div class="barMaterial">
-        <Label class="preview">Материал</Label>
-        <img class="img_mat" src="sklad/img",$row['ozm'],".jpg" onerror="this.onerror=null;this.src='img/error_pictures/noImg.jpg';">
-        <div class="chartWrapper">
-            <div class="chartAreaWrapper">
-                <canvas id="myChart"></canvas>
+        <Label id="nameMat" class="preview">Материал</Label>
+        <div class="containerIconAndGraf">
+            <div >
+                <img id="matIcon" class="img_mat" src="sklad/img",$row['ozm'],".jpg" onerror="this.onerror=null;this.src='img/error_pictures/noImg.jpg';">
+                <input type="button" value="Изменить"/>
             </div>
-            <canvas id="myChartAxis" height="200" width="0"></canvas>
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <canvas id="myChartAxis" height="200" width="0"></canvas>
+            </div>
         </div>
     </div>
-<?php 
-    
-    
-    $selName = $_POST['selNameMat'];
-    SelectMatVariables($selName);
-    
-function SelectMatVariables($name){
-    include   "sql_connect.php";
-    
-    $query_ = "select mat_date,spisanie_or_dobavlenie,mat_qty,min,max from history join materials on materials.id=history.mat_id where name_mat ='$name'";
-    $stmt = sqlsrv_query($conn,$query_);
-    while($row = sqlsrv_fetch_array($stmt)){
-        $mat_date = $row['mat_date']->format('d.m.Y');
-        $spisanie_or_dobavlenie = $row['spisanie_or_dobavlenie'];
-        $mat_qty = $row['mat_qty'];
-        $min = $row['min'];
-        $max = $row['max'];
+    <div id="matInfo" class="notVisibleElements">
         
-        $matDateArr = $mat_date;
-        $spisanieDobavlenieArr = $spisanie_or_dobavlenie;
-        $matQtyArr = $mat_qty;
-        $minArr = $min;
-        $maxArr = $max;
-        echo "$spisanieDobavlenieArr $matDateArr $matQtyArr $minArr $maxArr;";
-    }
-    sqlsrv_close($conn);
-}
-?>
+    </div>
 </div>
 
-<script>	
-function selectMaterial(){
-        $.post('materialMore.php',{selNameMat:nameMat},
-        function(){
-           console.log('aaa'); 
-        });
-}   
+<script>
+var nameMat = document.querySelector("#nameMat").innerHTML = sessionStorage.getItem("selNameMat");
+           $.ajax({
+               type: "POST",
+               url: "sklad/materialVariables.php",
+               data: {nameMat:nameMat},
+               success: function(result,status,xhr){
+                   $( "#matInfo" ).html( result );
+                   console.log("Success "+result+" Status "+status);
+               },
+               error: function(e){
+                   console.log("Error "+e);
+               }
+           });
+    
+    $(document).ready(function() {
+        createGrafik();
+    });
+    
 function createGrafik(){
+    
         var infoMat = document.querySelector('#matInfo').innerHTML;
+        while(infoMat.length ==0)
+            infoMat = document.querySelector('#matInfo').innerHTML;
+    
         var ctx = document.querySelector('#myChart');
-        
         var res = infoMat.split(";");
         
         var _sod =new Array();

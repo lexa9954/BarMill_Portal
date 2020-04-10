@@ -753,6 +753,7 @@ input, input:hover, input:focus {
 .chartWrapper {
     position: relative;
     padding: 5px;
+    width: 100%;
 }
 .chartWrapper > canvas {
     position: absolute;
@@ -839,14 +840,16 @@ input, input:hover, input:focus {
     display: none;
 }
 
-/*Страница Материала*/
+/*Страница подробнее о материале*/
 .MaterialPage{
     width: 50%;
     height: 100%;
 }
 .barMaterial{
     width: 100%;
-    height: 200px;
     background-color: white;
+}
+.containerIconAndGraf{
+    display: flex;
 }
 

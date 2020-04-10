@@ -182,6 +182,7 @@ function SelectMatVariables($name){
     sqlsrv_close($conn);
 }
 
+    
 ?>
 </div>
 </div>
@@ -352,9 +353,10 @@ function SelectMatVariables($name){
     
     function moreMaterialInfo(nameMat){
         console.log(nameMat);
+        sessionStorage.setItem("selNameMat",nameMat);
 
-        var newwindow = window.open('/Barmill_Portal/index.php?page=materialMore',nameMat);
-        newwindow.document.write("wawaw");
+        window.open('/Barmill_Portal/index.php?page=materialMore',nameMat);
+
     }
     /*Применение выбираемой категории полю с id*/
     function SelectCat(a){

@@ -748,7 +748,7 @@ input, input:hover, input:focus {
 /*График*/
 #myChart{
     width: 100% !important;
-    max-height: 200px;
+    max-height: 300px;
 }
 .chartWrapper {
     position: relative;

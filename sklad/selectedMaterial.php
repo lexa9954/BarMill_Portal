@@ -5,6 +5,16 @@ $matQtyArr = array();
 $minArr = array();
 $maxArr = array();
     
+$action = $_POST['action'];
+switch($action){
+    case 'infoMatGrafic':
+        SelectMatVariables($_POST['nameMat']);
+    break;
+    case 'imgSelMat':
+        imgSelMat($_POST['nameMat']);
+    break;
+}
+
 function SelectMatVariables($name){
     include   "../sql_connect.php";
     
@@ -23,6 +33,15 @@ function SelectMatVariables($name){
         $minArr = $min;
         $maxArr = $max;
         echo "$spisanieDobavlenieArr $matDateArr $matQtyArr $minArr $maxArr;";
+    }
+    sqlsrv_close($conn);
+}
+function imgSelMat($name){
+    include   "../sql_connect.php";
+    $query_ = "select ozm from materials where name_mat ='$name'";
+    $stmt = sqlsrv_query($conn,$query_);
+    while($row = sqlsrv_fetch_array($stmt)){
+        echo $row['ozm'];
     }
     sqlsrv_close($conn);
 }

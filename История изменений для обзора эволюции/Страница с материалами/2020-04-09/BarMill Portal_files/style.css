@@ -330,7 +330,7 @@ input, input:hover, input:focus {
 	width: 100%;
 	height: 100%;
 	margin-bottom: 0;
-	padding-top: 85px;	
+	padding-top: 100px;	
 	background-color: #f0f0f0;
 }
 
@@ -478,68 +478,17 @@ input, input:hover, input:focus {
 /*WareHouse*/
 .WareHouse{
     display: flex;
-    flex-direction: column;
-	position: relative;
+    flex-direction: row;
     width: 100%;
     height: 100%;
-}
-
-.Details {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	height: 100%;
-}
-
-.material_data, .material_chart, .NavMat {
-	margin: 0px 0px 0px 25px;
-}
-
-.material_img, .material_info, .material_chart, .NavMat {
-	background-color: #ffffff;
-	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
-	-ms-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
-	-o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-.material_data {
-	width: 300px;
-	height: 100%;
-}
-
-.material_img img {
-	width: 100%;
-}
-
-.material_info {
-	margin-top: 25px;
-	height: auto;
-}
-
-.material_chart {
-	width: 100%;
-	height: 300px;
-	margin-right: 25px;
-}
-
-.material_chart img {
-	width: 100%;
-	height: 300px;
 }
 
 .NavMat{
     display: flex;
     flex-direction: column;
-	bottom: 0;
     width: 100%;
-	height: 50%;
     padding: 0  0 0 10px;
-	margin: 25px;
 }
-
-
 #selCatId,#selTypeId{
     display: none;
 }
@@ -601,10 +550,10 @@ input, input:hover, input:focus {
 /*Categors*/
 .category_bar{
     overflow-y: scroll;
-    height: 0;
-    width: 0;	
+    height: 100%;
+    width: 260px;	
 	background-color: #ffffff;
-/*    min-width: 200px;*/
+    min-width: 200px;
 }
 .categors_container{
     padding: 5px;

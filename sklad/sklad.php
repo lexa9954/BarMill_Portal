@@ -1,5 +1,5 @@
 <div class="WareHouse">
-    <form method="post" class="category_bar" action="http://localhost/Barmill_Portal/index.php?page=sklad">
+   <form method="post" class="category_bar" action="http://localhost/Barmill_Portal/index.php?page=sklad">
     <ul class="categors_container">
     <?php
         require "sql_connect.php";
@@ -19,8 +19,22 @@
     ?>
     </ul>
     </form>
-
-    <div class="NavMat">
+	
+   <div class="Details">
+   		<div class="material_data">
+   			<div class="material_img">
+   				<img src="sklad/img/587687.jpg">
+   			</div>
+   			<div class="material_info">
+   				Здесь информация о min-max категории и другое
+   			</div>
+   		</div>
+   		<div class="material_chart">
+   			<div><img src="sklad/img/chart.jpg"></div>
+   		</div>
+   </div>
+      
+   <div class="NavMat">
     <div class="NavBar">
         <form method="post" action="http://localhost/Barmill_Portal/index.php?page=sklad">
             <!--Выбор типа отображения материалов*-->

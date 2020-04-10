@@ -605,7 +605,7 @@ input, input:hover, input:focus {
   	display: block;
   	overflow: auto;
   	width: 100%;
-  	height: 200px;
+  	height: 150px;
 }
 
 .tableMats tbody::-webkit-scrollbar {

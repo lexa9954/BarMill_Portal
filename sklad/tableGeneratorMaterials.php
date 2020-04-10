@@ -66,23 +66,6 @@ echo "
                     <td class=\"itemQtyTD\">",$row['qty'],"</td>
                     <td class=\"itemLD_TD\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                 </tr>
-                
-                <tr  id=\"itemInfo\" class=\"openedItemClose\">
-                    <td class=\"imgBut\">
-                        <img class=\"img_mat\" src=\"sklad/img/",$row['ozm'],".jpg\" onerror=\"this.onerror=null;this.src='img/error_pictures/noImg.jpg';\">
-                        
-                        <input type=\"button\" id=\"itemInfoBut\" class=\"knopka\" onclick=\"moreMaterialInfo('",$row['name_mat'],"');\" value=\"Подробно\"/>
-                        
-                    </td>
-                    <td colspan=3>
-                        <div class=\"chartWrapper\">
-                            <div class=\"chartAreaWrapper\">
-                                <canvas id=\"myChart\"></canvas>
-                            </div>
-                            <canvas id=\"myChartAxis\" height=\"200\" width=\"0\"></canvas>
-                        </div>
-                    </td>
-                </tr>
         ";
         
     }

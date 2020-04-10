@@ -2,14 +2,19 @@
    <div class="Details">
    		<div class="material_data">
    			<div class="material_img">
-   				<img src="sklad/img/587687.jpg">
+   				<img id="imgMatId" class="img_mat" src="sklad/img/587687.jpg">
    			</div>
    			<div class="material_info">
    				Здесь информация о min-max категории и другое
    			</div>
    		</div>
    		<div class="material_chart">
-   			<div><img src="sklad/img/chart.jpg"></div>
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <canvas id="myChartAxis"></canvas>
+            </div>
    		</div>
    </div>
       
@@ -83,42 +88,35 @@
 
     /*Выбор материала в таблице*/
     function selectTd(e){
-        var tableItems = document.getElementById('containerItems').children;
-        var childIndex;
-        
-        if(selectedMaterialRow !=null){
-            selectedMaterialRow.className = sessionStorage.getItem("selectMaterialRowClass");
-        }
-        
-        for(var i=0;i<tableItems.length;i++){
-            if(tableItems[i].className == "openedItemClose" || tableItems[i].className == "openedItemOpen"){
-                tableItems[i].className = "openedItemClose";
-            }
-            if(e == tableItems[i]){
-                childIndex = i;
-            }
-        }
-        
-        if(tableItems[childIndex+1].className == "openedItemClose"){
-           tableItems[childIndex+1].className = "openedItemOpen";
-        }else if(tableItems[childIndex+1].className == "openedItemOpen"){
-           tableItems[childIndex+1].className = "openedItemClose";
-        }
-        sessionStorage.setItem("selectMaterialRowClass",e.className);
-        
-        e.className ="selectedMaterialRow";
-        //alert(e.querySelector('.itemNameTD').innerHTML);
-        
-        createGrafik(tableItems[childIndex+1]);
-        selectedMaterialRow = e;
+        var selNameMat = e.querySelector('.itemNameTD').innerHTML;
+        var imgMat = document.getElementById("imgMatId");
+            $.ajax({
+               type: "POST",
+               url: "sklad/selectedMaterial.php",
+               data: {action:'infoMatGrafic', nameMat:selNameMat},
+               success: function(result){
+                   createGrafik(result);
+               }
+           });
+            $.ajax({
+               type: "POST",
+               url: "sklad/selectedMaterial.php",
+               data: {action:'imgSelMat', nameMat:selNameMat},
+               success: function(result){
+                   if(result != "")
+                    imgMat.src = "sklad/img/"+result+".jpg";
+                   else
+                    imgMat.src = "img/error_pictures/noImg.jpg";
+               }
+           });
     }
     /*Рисуем график*/
-    function createGrafik(_parent){
-        var infoMat = _parent.querySelector('#matInfo').innerHTML;
-        var ctx = _parent.querySelector('#myChart');
+    function createGrafik(selMatInfo){
+        var infoMat = selMatInfo;
+        var ctx = document.querySelector('#myChart');
         
         var res = infoMat.split(";");
-        
+
         var _sod =new Array();
         var _date = new Array();
         var _qty =  new Array();
@@ -245,94 +243,6 @@
                }
            });
         });
-    }
-    /*Выбор стиля контейнера с материалами*/
-    function ChangeMatItem(typeItem){
-        sessionStorage.setItem("typeItem",typeItem);
-        
-        var table = document.getElementById("tableMats");
-        var plitka_or_list = document.getElementById("mats_contID");
-        plitka_or_list.style.display = "grid";
-        //if(table != null)
-            //table.parentNode.removeChild(table);
-            
-        var item_mat = document.querySelectorAll("#itemID");
-        var item_cont = document.getElementById("mats_contID");
-        switch(typeItem){
-            case 0:
-                item_cont.style.gridTemplateColumns="repeat(auto-fill,80%)";
-                for(i=0;i<item_mat.length;i++){
-                    item_mat[i].classList.replace('item_mat_plitka','item_mat_list');
-                }
-            break;
-            case 1:
-                item_cont.style.gridTemplateColumns="repeat(auto-fill,230px)";
-                for(i=0;i<item_mat.length;i++){
-                    item_mat[i].classList.replace('item_mat_list','item_mat_plitka');
-                }
-            break;
-            case 2:
-                plitka_or_list.style.display = "none";
-                
-                var container = document.getElementById("MatBarId");
-                var div = document.createElement("div");
-                var table = document.createElement("table");
-                table.id = "tableMats";
-                var tr1 = document.createElement("tr");
-
-                var th1 = document.createElement("th");
-                var th2 = document.createElement("th");
-                var th3 = document.createElement("th");
-                var th4 = document.createElement("th");
-                
-                th1.innerHTML = "ОЗМ";
-                th2.innerHTML = "Наименование";
-                th3.innerHTML = "Количество";
-                th4.innerHTML = "Последнее поступление";
-                
-                tr1.appendChild(th1);
-                tr1.appendChild(th2);
-                tr1.appendChild(th3);
-                tr1.appendChild(th4);
-                table.appendChild(tr1);
-                div.appendChild(table);
-                
-                var item_name = document.getElementsByClassName("name_mat");
-                var item_ozm = document.getElementsByClassName("item_ozm");
-                var item_qty = document.getElementsByClassName("item_count");
-                var item_lastDate = document.getElementsByClassName("item_date");
-                
-                for(i=0;i<item_mat.length;i++){
-                    var tr = document.createElement("tr");
-                    var itemName = document.createElement("td");
-                    var itemOzm = document.createElement("td");
-                    var itemQty = document.createElement("td");
-                    var itemLastDate = document.createElement("td");
-                    
-                    itemName.innerHTML = item_name[i].innerHTML;
-                    itemOzm.innerHTML = item_ozm[i].innerHTML;
-                    itemQty.innerHTML = item_qty[i].innerHTML;
-                    itemLastDate.innerHTML = item_lastDate[i].innerHTML;
-                    
-                    tr.onclick = function(){
-                        pressItem(""+i); 
-                    };
-                    
-                    itemName.className = "itemNameTD";
-                    itemOzm.className = "itemOzmTD";
-                    itemQty.className = "itemQtyTD";
-                    itemLastDate.className = "itemLD_TD";
-                    
-                    tr.appendChild(itemOzm);
-                    tr.appendChild(itemName);
-                    tr.appendChild(itemQty);
-                    tr.appendChild(itemLastDate);
-                    table.appendChild(tr);
-                }
-                container.appendChild(table);
-            break;
-        }
-        
     }
        
     /*Запись и чтение с куков*/

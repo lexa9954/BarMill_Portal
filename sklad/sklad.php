@@ -19,20 +19,6 @@
    </div>
       
    <div class="NavMat">
-    <div class="NavBar">
-        <form method="post" action="http://localhost/Barmill_Portal/index.php?page=sklad">
-            <!--Выбор типа отображения материалов*-->
-            <input type="number" id="selTypeId"/>
-            <input type="button" onclick="ChangeMatItem(0)" value="a"/>
-            <input type="button" onclick="ChangeMatItem(1)" value="b"/>
-            <input type="button" onclick="ChangeMatItem(2)" value="c"/>
-            <!--Меньше чем мин*-->
-            <label><input type="checkbox" id="MinQtyCB" name="minQty"/>Мин</label>
-            <!--Поиск материалов*-->
-            <input type="text" name="searchMat" id="searchMatId"/>
-            <input type="submit" name="searchMatsBut" value="Поиск"/>
-        </form>
-    </div>
 
 <div class="MatBar" id="MatBarId">
 
@@ -40,16 +26,11 @@
 </div>
 </div>
 
-
 <script type="text/javascript">
-    var item_type = sessionStorage.getItem("typeItem");
-    var minCB = document.getElementById("MinQtyCB");
-    var mat_date = new Array()
-    var selectedMaterialRow;
-    
     $(document).ready(function(){
         StartDocument();
     });
+    /*Функция запускается при прогрузке страницы*/
     function StartDocument(){
         $.ajax({
             type: "POST",
@@ -64,27 +45,6 @@
             }
         });
     }
-    
-    start();
-    
-    minCB.onclick = function(){
-        localStorage.setItem("MinQtyB",minCB.checked);
-    }
-    
-    function start(){
-        minCB.checked = JSON.parse(localStorage.getItem("MinQtyB"));
-        getItemType();
-    }
-    
-    /*Выбор типа отображения материалов с куков*/
-    function getItemType(){
-        if(item_type ==""){
-            ChangeMatItem(0);
-        }else{
-            ChangeMatItem(parseInt(item_type));
-        }   
-    }
-
     /*Выбор материала в таблице*/
     function selectTd(e){
         var selNameMat = e.querySelector('.itemNameTD').innerHTML;
@@ -213,15 +173,6 @@
           options: chartOptions
         });
     }
-    
-    function moreMaterialInfo(nameMat){
-        console.log(nameMat);
-        sessionStorage.setItem("selNameMat",nameMat);
-
-        window.open('/Barmill_Portal/index.php?page=materialMore',nameMat);
-
-    }
-    
     /*Применение выбираемой категории полю с id*/
     function SelectCat(){
         var e = document.getElementById("selectCategorDD");
@@ -242,24 +193,5 @@
                }
            });
         });
-    }
-       
-    /*Запись и чтение с куков*/
-    function setCookie(cname,cvalue){
-        document.cookie = cname+"="+cvalue+";";
-    }
-    function getCookie(cname){
-        var name = cname+"=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for(var i =0;i<ca.length;i++){
-            var c = ca[i];
-            while(c.charAt[0]==''){
-                c = c.substring(1);
-            }
-            if(c.indexOf(name)==0)
-                return c.substring(name.length,c.length);
-        }
-        return "";
     }
 </script>

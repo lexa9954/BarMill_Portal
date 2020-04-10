@@ -1,10 +1,5 @@
 <?php
-$matDateArr = array();
-$spisanieDobavlenieArr = array();
-$matQtyArr = array();
-$minArr = array();
-$maxArr = array();
-    
+
 $action = $_POST['action'];
 switch($action){
     case 'infoMatGrafic':
@@ -17,7 +12,11 @@ switch($action){
 
 function SelectMatVariables($name){
     include   "../sql_connect.php";
-    
+    $matDateArr = array();
+    $spisanieDobavlenieArr = array();
+    $matQtyArr = array();
+    $minArr = array();
+    $maxArr = array();
     $query_ = "select mat_date,spisanie_or_dobavlenie,mat_qty,min,max from history join materials on materials.id=history.mat_id where name_mat ='$name'";
     $stmt = sqlsrv_query($conn,$query_);
     while($row = sqlsrv_fetch_array($stmt)){

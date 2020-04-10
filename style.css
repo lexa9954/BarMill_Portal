@@ -491,11 +491,12 @@ input, input:hover, input:focus {
 	height: 100%;
 }
 
-.material_data, .material_chart, .NavMat {
+.material_data, .material_chart {
 	margin: 0px 0px 0px 25px;
 }
 
-.material_img, .material_info, .material_chart, .NavMat {
+/* Цвет плиток и из тени */
+.material_img, .material_info, .material_chart, .MatBar {
 	background-color: #ffffff;
 	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
@@ -533,10 +534,10 @@ input, input:hover, input:focus {
     display: flex;
     flex-direction: column;
 	bottom: 0;
-    width: 100%;
-	height: 50%;
+/*    width: 100%;*/
+	height: 30%;
     padding: 0  0 0 10px;
-	margin: 25px;
+/*	margin: 25px;*/
 }
 
 
@@ -549,10 +550,12 @@ input, input:hover, input:focus {
     width: 100%;
 }
 .MatBar{
+/*	display: flex;*/
     overflow-y: auto;
 	margin: 20px;
-    max-width: 100%;
-    max-height: 100%;
+	padding: 10px;
+/*    max-width: 100%;*/
+/*    max-height: 100%;*/
 	background-color: white;
 }
 	
@@ -669,7 +672,7 @@ input, input:hover, input:focus {
 
 /*Таблица материалов*/
 .tableMats {
-  width: 100%;
+/*  width: 100%;*/
   table-layout: fixed;
   border-collapse: collapse;
 }

@@ -14,20 +14,21 @@
    </div>
       
    <div class="NavMat">
-    <div class="NavBar">
+    
+       <!--<div class="NavBar">
         <form method="post" action="http://localhost/Barmill_Portal/index.php?page=sklad">
-            <!--Выбор типа отображения материалов*-->
+            <!--Выбор типа отображения материалов*-- >
             <input type="number" id="selTypeId"/>
             <input type="button" onclick="ChangeMatItem(0)" value="a"/>
             <input type="button" onclick="ChangeMatItem(1)" value="b"/>
             <input type="button" onclick="ChangeMatItem(2)" value="c"/>
-            <!--Меньше чем мин*-->
+            <!--Меньше чем мин*-- >
             <label><input type="checkbox" id="MinQtyCB" name="minQty"/>Мин</label>
-            <!--Поиск материалов*-->
+            <!--Поиск материалов*-- >
             <input type="text" name="searchMat" id="searchMatId"/>
             <input type="submit" name="searchMatsBut" value="Поиск"/>
         </form>
-    </div>
+    </div> -->
 
 <div class="MatBar" id="MatBarId">
 

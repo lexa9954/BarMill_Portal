@@ -32,49 +32,84 @@ function SelectMats($categor,$searchName,$minQty){
     sqlsrv_close($conn);
 }
     
-/*Создание таблицы*/
+/* ▼ Создание таблицы ▼ */
 function CreateTable($stmt){
     echo "
         <div class=\"tableMats\">
             <table class=\"tableMats\">
-                <thead>
-                <tr>
-                    <th class=\"columnOZM\">ОЗМ</th>
-                    <th class=\"columnName\">Наименование</th>
-                    <th class=\"columnQty\">Количество</th>
-                    <th class=\"columnCategory\">Категория
-                    <select id=\"selectCategorDD\" onchange=\"SelectCat();\">";
-                    include "categoriesGenerator.php";
-                    GenerateCategories($_POST['categor']);
-              echo "</select>
-              
-                    </th>
-                    <th class=\"columnDate\" >Последнее поступление</th>
-                </tr>
+                <thead id=\"material_table_head\">
+                	<tr>
+                    	<th class=\"columnOZM\">ОЗМ</th>
+                    	<th class=\"columnName\">Наименование</th>
+                    	<th class=\"columnQty\">Количество</th>
+                    	<th class=\"columnCategory\">
+						<div id=\"txtCategory\">Категория</div>
+							<label for=\"select\" class=\"select\">
+    							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"bg\" checked />
+    							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select\">
+    							<label class=\"bg\" for=\"bg\"></label>
+    							<div class=\"items\">
+      								<input type=\"radio\" name=\"list\" value=\"first_value\" id=\"list[0]\">
+      								<label for=\"list[0]\">Коннектор</label>
+									
+      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[1]\">
+      								<label for=\"list[1]\">Медиаконвертер</label>
+									
+      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[2]\">
+      								<label for=\"list[2]\">Энкодер</label>
+									
+      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[3]\">
+      								<label for=\"list[3]\">Датчики</label>
+									
+      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[4]\">
+      								<label for=\"list[4]\">Фильтры</label>
+									
+      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[5]\">
+      								<label for=\"list[5]\">Коммутатор</label>
+									
+      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[6]\">
+      								<label for=\"list[6]\">Коннектор</label>
+									
+      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[7]\">
+      								<label for=\"list[7]\">Автомат</label>
+    							</div>
+							</label>
+                    	</th>
+                    	<th class=\"columnDate\" >Последнее поступление</th>
+                	</tr>
                 </thead>
                 <tbody id=\"containerItems\">";
-    while($row = sqlsrv_fetch_array($stmt)){
-        $classMin = "itemMatTR";
-        if($row['qty']<$row['min']){
-            $classMin = "minItemMatTR";
-            echo "<script>
-            notifSet('Материал на исходе',","'",$row['name_mat'],"','sklad/img/",$row['ozm'],".jpg');
-            </script>";
-        }
-        echo "
-                <tr class=\"$classMin\" onclick=\"selectTd(this)\">
-                    <td class=\"columnOZM\">",$row['ozm'],"</td>					
-                    <td class=\"itemNameTD\">",$row['name_mat'],"</td>
-                    <td class=\"columnQty\">",$row['qty'],"</td>
-                    <td class=\"columnCategory\">",$row['nameC'],"</td>
-                    <td class=\"columnDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
-                </tr>
-        ";
-        /* Нужно вместо itemNameTD установить columnName */
-    }
-    echo "  </tbody>
+    				while($row = sqlsrv_fetch_array($stmt)){
+        				$classMin = "itemMatTR";
+        				if($row['qty']<$row['min']){
+            				$classMin = "minItemMatTR";
+            				echo "<script>
+            				notifSet('Материал на исходе',","'",$row['name_mat'],"','sklad/img/",$row['ozm'],".jpg');
+            				</script>";
+        				}
+        				echo "
+                		<tr class=\"$classMin\" onclick=\"selectTd(this)\">
+                    		<td class=\"columnOZM\">",$row['ozm'],"</td>					
+                    		<td class=\"itemNameTD\">",$row['name_mat'],"</td>
+                    		<td class=\"columnQty\">",$row['qty'],"</td>
+                    		<td class=\"columnCategory\">",$row['nameC'],"</td>
+                    		<td class=\"columnDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
+               	 		</tr>
+        				";
+        				/* Нужно вместо itemNameTD установить columnName */
+    				}
+    				echo "
+				</tbody>
             </table>
         </div>";
 }
 
+
+//							<select 		id=\"selectCategorDD\" onchange=\"SelectCat();\">";
+//                    			include "categoriesGenerator.php";
+//                    			GenerateCategories($_POST['categor']);
+//              					echo "
+//							</select>
+
+/* ▲ Создание таблицы ▲ */
 ?>

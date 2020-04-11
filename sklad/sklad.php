@@ -171,15 +171,17 @@
     }
     /*Применение выбираемой категории полю с id*/
     function SelectCat(){
-        var e = document.getElementById("selectCategorDD");
-        var nameCategor = e.options[e.selectedIndex].value;
+        //var e = document.getElementById("selectCategorDD");
+        //var nameCategor = e.options[e.selectedIndex].value;
+        var idCategor = document.querySelector('input[name=list]:checked').value;
+        
         var searchMat = "";
         var minQty = "";
         $(document).ready(function(){
            $.ajax({
                type: "POST",
                url: "sklad/tableGeneratorMaterials.php",
-               data: {categor:nameCategor, searchName:searchMat, minQty:minQty},
+               data: {categor:idCategor, searchName:searchMat, minQty:minQty},
                success: function(result,status,xhr){
                    $( "#MatBarId" ).html( result );
                    console.log("Success "+result+" Status "+status);

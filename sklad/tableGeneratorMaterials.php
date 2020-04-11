@@ -48,30 +48,10 @@ function CreateTable($stmt){
     							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"bg\" checked />
     							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select\">
     							<label class=\"bg\" for=\"bg\"></label>
-    							<div class=\"items\">
-      								<input type=\"radio\" name=\"list\" value=\"first_value\" id=\"list[0]\">
-      								<label for=\"list[0]\">Коннектор</label>
-									
-      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[1]\">
-      								<label for=\"list[1]\">Медиаконвертер</label>
-									
-      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[2]\">
-      								<label for=\"list[2]\">Энкодер</label>
-									
-      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[3]\">
-      								<label for=\"list[3]\">Датчики</label>
-									
-      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[4]\">
-      								<label for=\"list[4]\">Фильтры</label>
-									
-      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[5]\">
-      								<label for=\"list[5]\">Коммутатор</label>
-									
-      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[6]\">
-      								<label for=\"list[6]\">Коннектор</label>
-									
-      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[7]\">
-      								<label for=\"list[7]\">Автомат</label>
+    							<div class=\"items\">";
+                    			include "categoriesGenerator.php";
+                    			GenerateCategories($_POST['categor']);
+              					echo "
     							</div>
 							</label>
                     	</th>

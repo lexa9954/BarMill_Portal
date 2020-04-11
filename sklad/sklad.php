@@ -17,7 +17,7 @@
             </div>
    		</div>
    	</div>
-	<div class="MatBar" id="MatBarId"> <!-- Предлагаю переименовать в "material_table" -->
+	<div class="material_table" id="material_table"> <!-- Предлагаю переименовать в "material_table" -->
 	<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
 	</div>
 </div>
@@ -33,7 +33,7 @@
             url: "sklad/tableGeneratorMaterials.php",
             data: {categor:-1, searchName:"", minQty:""},
             success: function(result,status,xhr){
-            $( "#MatBarId" ).html( result );
+            $( "#material_table" ).html( result );
                 console.log("Success "+result+" Status "+status);
             },
             error: function(e){
@@ -183,7 +183,7 @@
                url: "sklad/tableGeneratorMaterials.php",
                data: {categor:idCategor, searchName:searchMat, minQty:minQty},
                success: function(result,status,xhr){
-                   $( "#MatBarId" ).html( result );
+                   $( "#material_table" ).html( result );
                    console.log("Success "+result+" Status "+status);
                },
                error: function(e){

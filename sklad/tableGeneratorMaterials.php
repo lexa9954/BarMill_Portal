@@ -35,20 +35,37 @@ function SelectMats($categor,$searchName,$minQty){
 /* ▼ Создание таблицы ▼ */
 function CreateTable($stmt){
     echo "
-        <div class=\"tableMats\">
-            <table class=\"tableMats\">
+        <table class=\"tableMats\">
                 <thead id=\"material_table_head\">
                 	<tr>
                     	<th class=\"columnOZM\">ОЗМ</th>
                     	<th class=\"columnName\">Наименование</th>
-                    	<th class=\"columnQty\">Количество</th>
+                    	<th class=\"columnQty\">
+						<div id=\"txtQty\">Количество</div>
+							<label for=\"select1\" class=\"select1\">
+    							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"bg\" checked />
+    							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select1\">
+    							<label class=\"bg\" for=\"bg\"></label>
+    							
+								<div class=\"items\">
+                    				<input type=\"radio\" name=\"list\" value=\"first_value\" id=\"list[0]\">
+      								<label for=\"list[0]\">> min</label>
+									
+      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[1]\">
+      								<label for=\"list[1]\">⩽ min</label>
+									
+      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[2]\">
+      								<label for=\"list[2]\">отсутствует</label>
+    							</div>
+							</label></th>
                     	<th class=\"columnCategory\">
 						<div id=\"txtCategory\">Категория</div>
 							<label for=\"select\" class=\"select\">
     							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"bg\" checked />
     							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select\">
     							<label class=\"bg\" for=\"bg\"></label>
-    							<div class=\"items\">";
+    							
+								<div class=\"items\">";
                     			include "categoriesGenerator.php";
                     			GenerateCategories($_POST['categor']);
               					echo "
@@ -80,8 +97,7 @@ function CreateTable($stmt){
     				}
     				echo "
 				</tbody>
-            </table>
-        </div>";
+            </table>";
 }
 
 

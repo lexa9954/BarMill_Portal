@@ -23,6 +23,7 @@
 </div>
 
 <script type="text/javascript">
+    var selRowNow;
     $(document).ready(function(){
         StartDocument();
     });
@@ -45,6 +46,7 @@
     function selectTd(e){
         var selNameMat = e.querySelector('.itemNameTD').innerHTML;
         var imgMat = document.getElementById("imgMatId");
+        
             $.ajax({
                type: "POST",
                url: "sklad/selectedMaterial.php",
@@ -64,6 +66,8 @@
                     imgMat.src = "img/error_pictures/noImg.jpg";
                }
            });
+        
+        selRowNow = selNameMat;
     }
     /*Рисуем график*/
     function createGrafik(selMatInfo){
@@ -171,8 +175,6 @@
     }
     /*Применение выбираемой категории полю с id*/
     function SelectCat(){
-        //var e = document.getElementById("selectCategorDD");
-        //var nameCategor = e.options[e.selectedIndex].value;
         var idCategor = document.querySelector('input[name=list]:checked').value;
         
         var searchMat = "";

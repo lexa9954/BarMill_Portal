@@ -35,7 +35,8 @@ function SelectMats($categor,$searchName,$minQty){
 /* ▼ Создание таблицы ▼ */
 function CreateTable($stmt){
     echo "
-        <table class=\"tableMats\">
+        <div class=\"tableMats\">
+            <table class=\"tableMats\">
                 <thead id=\"material_table_head\">
                 	<tr>
                     	<th class=\"columnOZM\">ОЗМ 
@@ -47,31 +48,17 @@ function CreateTable($stmt){
 						</th>
                     	<th class=\"columnName\">Наименование</th>
                     	<th class=\"columnQty\">
-						<div id=\"txtQty\">Количество</div>
-							<label for=\"select1\" class=\"select1\">
-    							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"bg\" checked />
-    							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select1\">
-    							<label class=\"bg\" for=\"bg\"></label>
-    							
-								<div class=\"items\">
-                    				<input type=\"radio\" name=\"list\" value=\"first_value\" id=\"list[0]\">
-      								<label for=\"list[0]\">> min</label>
-									
-      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[1]\">
-      								<label for=\"list[1]\">⩽ min</label>
-									
-      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[2]\">
-      								<label for=\"list[2]\">отсутствует</label>
-    							</div>
-							</label></th>
+						<div id=\"txtCategory\">Количество</div>
+
+                    	</th>
+                        
                     	<th class=\"columnCategory\">
 						<div id=\"txtCategory\">Категория</div>
 							<label for=\"select\" class=\"select\">
     							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"bg\" checked />
     							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select\">
     							<label class=\"bg\" for=\"bg\"></label>
-    							
-								<div class=\"items\">";
+    							<div class=\"items\">";
                     			include "categoriesGenerator.php";
                     			GenerateCategories($_POST['categor']);
               					echo "
@@ -84,12 +71,11 @@ function CreateTable($stmt){
                 <tbody id=\"containerItems\">";
     				while($row = sqlsrv_fetch_array($stmt)){
         				$classMin = "itemMatTR";
-        				if($row['qty']<$row['min']){
+        				if($row['qty']<$row['min'] && $row['qty']!=0){
             				$classMin = "minItemMatTR";
-            				echo "<script>
-            				notifSet('Материал на исходе',","'",$row['name_mat'],"','sklad/img/",$row['ozm'],".jpg');
-            				</script>";
-        				}
+        				}else if($row['qty']==0){
+            				$classMin = "zeroItemMatTR";
+                        }
         				echo "
                 		<tr class=\"$classMin\" onclick=\"selectTd(this)\">
                     		<td class=\"columnOZM\">",$row['ozm'],"</td>					
@@ -103,15 +89,11 @@ function CreateTable($stmt){
     				}
     				echo "
 				</tbody>
-            </table>";
+            </table>
+        </div>";
 }
-
-
-//							<select 		id=\"selectCategorDD\" onchange=\"SelectCat();\">";
-//                    			include "categoriesGenerator.php";
-//                    			GenerateCategories($_POST['categor']);
-//              					echo "
-//							</select>
-
+//            				echo "<script>
+//            				notifSet('Материал на исходе',","'",$row['name_mat'],"','sklad/img/",$row['ozm'],".jpg');
+//            				</script>";
 /* ▲ Создание таблицы ▲ */
 ?>

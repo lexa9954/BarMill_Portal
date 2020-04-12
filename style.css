@@ -563,7 +563,7 @@ input, input:hover, input:focus {
 }
 
 .columnOZM {
-	width: 100px;
+	width: 200px;
 }
 
 .columnName, .itemNameTD {
@@ -598,18 +598,28 @@ input, input:hover, input:focus {
 	padding: 0;
 }
 
+/* Поиск по ОЗМ */
+
+#lname {
+	display: none;
+	position: absolute;
+	top: 0;
+	z-index: 100;
+}
+
+
 /* Выпадающий список для Категорий */
 
 #txtCategory {
 	padding: 5px 10px;	
 }
 
-input
+.tableMats input
 {
   display: none;
 }
 
-.select, .select1 {
+.select, .select1, select2 {
   	display: block;
   	line-height: 26.4px;
   	position: absolute;
@@ -648,6 +658,22 @@ input
   	line-height: 26px;
  	cursor: pointer;
 }
+.select2:before
+{
+  	content: "🔍";
+	color: #c6c6c6;
+  	display: inline-block;	
+    padding-right: 20px;
+  	text-align: right;
+ 	position: absolute;
+  	left: 0;
+	top: 0;
+  	z-index: 2;
+  	width: 150px;
+  	height: 26.4px;
+  	line-height: 26px;
+ 	cursor: pointer;
+}
 
 .items
 {
@@ -668,12 +694,18 @@ input
   background: white;
 }
 
+
 #select:checked ~ .items
 {
   top: 28px;
 }
 
 #select1:checked ~ .items
+{
+  top: 28px;
+}
+
+#select2:checked ~ .lname
 {
   top: 28px;
 }
@@ -688,25 +720,18 @@ input
   display: block;
 }
 
+#select2:checked ~ #lname
+{
+  display: block;
+}
+
 .items label:hover
 {
   background: #eee;
   cursor: pointer;
 }
 
-#select:checked ~ .bg
-{
-  	position: fixed;
-  	top: 0;
-  	left: 0;
-  	bottom: 0;
-  	right: 0;
-  	z-index: 0;
-  	background: rgba(0,0,0,0.4);
-	transition: background 0.2s linear;
-}
-
-#select1:checked ~ .bg
+#select:checked ~ .bg, #select1:checked ~ .bg, #select2:checked ~ .bg
 {
   	position: fixed;
   	top: 0;

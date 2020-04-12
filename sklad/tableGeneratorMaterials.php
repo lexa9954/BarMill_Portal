@@ -38,7 +38,13 @@ function CreateTable($stmt){
         <table class=\"tableMats\">
                 <thead id=\"material_table_head\">
                 	<tr>
-                    	<th class=\"columnOZM\">ОЗМ</th>
+                    	<th class=\"columnOZM\">ОЗМ 
+							<label for=\"select2\" class=\"select2\">
+							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select2\">
+    							<label class=\"bg\" for=\"bg\"></label>
+								<input type=\"text\" id=\"lname\" name=\"lname\">
+							</label>	
+						</th>
                     	<th class=\"columnName\">Наименование</th>
                     	<th class=\"columnQty\">
 						<div id=\"txtQty\">Количество</div>

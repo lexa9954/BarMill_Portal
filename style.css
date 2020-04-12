@@ -500,7 +500,7 @@ input, input:hover, input:focus {
 }
 
 /* Цвет плиток и из тени */
-.material_img, .material_info, .material_chart, .MatBar {
+.material_img, .material_info, .material_chart, .material_table {
 	background-color: #ffffff;
 	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
@@ -518,7 +518,7 @@ input, input:hover, input:focus {
 
 .material_img {
 	display: flex;
-  	align-items: center;
+  	align-items: center;	
   	justify-content: center;
 	width: 300px;
 	height: 300px;
@@ -547,8 +547,8 @@ input, input:hover, input:focus {
 }
 */
 
-.MatBar{
-    overflow-y: hidden;
+.material_table{
+/*    overflow-y: hidden;*/
 	margin: 0 25px 25px 25px;
 	padding: 15px;
 	background-color: white;
@@ -557,6 +557,7 @@ input, input:hover, input:focus {
 /*Таблица материалов*/
 .tableMats {
 	width: 100%;
+	overflow: hidden;
 	table-layout: fixed;
 	border-collapse: collapse;
 }
@@ -608,20 +609,8 @@ input
   display: none;
 }
 
-/*
-#text
-{
-  position: absolute;
-  top: 0px;
-  padding-left: 10px;
-}
-*/
-
-.select
-{
+.select, .select1 {
   	display: block;
-  	width: auto;
-  	height: 26.4px;
   	line-height: 26.4px;
   	position: absolute;
 	top: 0px;
@@ -629,46 +618,47 @@ input
 
 .select:before
 {
-  content: ">";
-  display: inline-block;
-  position: absolute;
-  left: 150px;
-  z-index: 2;
-  width: 30px;
-  height: 26.4px;
-  text-align: center;
-  line-height: 26px;
-/*  border: 2px solid #ddd;*/
-  transform: rotate(90deg);
-  cursor: pointer;
+  	content: "▼";
+	color: #c6c6c6;
+  	display: inline-block;	
+    padding-right: 20px;
+  	text-align: right;
+ 	position: absolute;
+  	left: 0;
+	top: 0;
+  	z-index: 2;
+  	width: 200px;
+  	height: 26.4px;
+  	line-height: 26px;
+ 	cursor: pointer;
 }
-
-.select input[name="list"]:checked ~ #text
+.select1:before
 {
-  background: transparent;
-  color: transparent;
-  z-index: 2;
-}
-
-#select:disabled ~ .items #text
-{
-  background: #eee;
+  	content: "▼";
+	color: #c6c6c6;
+  	display: inline-block;	
+    padding-right: 20px;
+  	text-align: right;
+ 	position: absolute;
+  	left: 0;
+	top: 0;
+  	z-index: 2;
+  	width: 150px;
+  	height: 26.4px;
+  	line-height: 26px;
+ 	cursor: pointer;
 }
 
 .items
 {
-  display: block;
-  min-height: 30px;
+  	display: block;
+  	min-height: 30px;
 	max-height: 100px;
-  position: absolute;
-  overflow-y: auto;
-  width: 200px;
-  cursor: pointer;
-}
-
-#select:not(:checked) ~ .items
-{
-  height: 30px;
+  	position: absolute;
+	top: 0;
+  	overflow-y: auto;
+  	width: 200px;
+  	cursor: pointer;
 }
 
 .items label
@@ -678,7 +668,22 @@ input
   background: white;
 }
 
+#select:checked ~ .items
+{
+  top: 28px;
+}
+
+#select1:checked ~ .items
+{
+  top: 28px;
+}
+
 #select:checked ~ .items label
+{
+  display: block;
+}
+
+#select1:checked ~ .items label
 {
   display: block;
 }
@@ -689,27 +694,28 @@ input
   cursor: pointer;
 }
 
-#select:checked ~ .items
-{
-  margin-top: 30px;
-}
-
-.items input:checked + label
-{
-  	display: block!important;
-  	border: none;
-	background-color: #efefef;
-}
-
 #select:checked ~ .bg
 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 0;
-  background: rgba(0,0,0,0.4);
+  	position: fixed;
+  	top: 0;
+  	left: 0;
+  	bottom: 0;
+  	right: 0;
+  	z-index: 0;
+  	background: rgba(0,0,0,0.4);
+	transition: background 0.2s linear;
+}
+
+#select1:checked ~ .bg
+{
+  	position: fixed;
+  	top: 0;
+  	left: 0;
+  	bottom: 0;
+  	right: 0;
+  	z-index: 0;
+  	background: rgba(0,0,0,0.4);
+	transition: background 0.2s linear;
 }
 
 

@@ -198,7 +198,6 @@
     function SelectQty(){
         var searchMat = "";
         minQty = document.querySelector('input[name=listQty]:checked').value;
-        alert(minQty);
         $(document).ready(function(){
            $.ajax({
                type: "POST",

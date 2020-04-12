@@ -1,25 +1,26 @@
 <div class="WareHouse">
-   	<div class="Details">
-   		<div class="material_data">
-   			<div class="material_img">
-   				<img id="imgMatId" class="img_mat" src="sklad/img/587687.jpg">
-   			</div>
-   			<div class="material_info">
-   				Здесь информация о min-max категории и другое
-   			</div>
+   	<div class="material_data">
+   		<div class="material_img">
+   			<img id="imgMatId" class="img_mat" src="sklad/img/587687.jpg">
    		</div>
-   		<div class="material_chart">
-            <div class="chartWrapper">
-                <div class="chartAreaWrapper">
-                    <canvas id="myChart"></canvas>
-                </div>
-                <canvas id="myChartAxis"></canvas>
-            </div>
+   		<div class="material_info">
+   			Здесь информация о min-max категории и другое
    		</div>
    	</div>
-	<div class="material_table" id="material_table"> <!-- Предлагаю переименовать в "material_table" -->
-	<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
-	</div>
+   		
+   	<div class="Details">
+   		<div class="material_chart">
+    		<div class="chartWrapper">
+        		<div class="chartAreaWrapper">
+            		<canvas id="myChart"></canvas>
+            	</div>
+            	<canvas id="myChartAxis"></canvas>
+        	</div>
+   		</div>
+		<div class="material_table" id="material_table">
+		<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
+		</div>		
+   	</div>   	
 </div>
 
 <script type="text/javascript">

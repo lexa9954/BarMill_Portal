@@ -35,7 +35,6 @@ function SelectMats($categor,$searchName,$minQty){
 /* ▼ Создание таблицы ▼ */
 function CreateTable($stmt){
     echo "
-        <div class=\"tableMats\">
             <table class=\"tableMats\">
                 <thead id=\"material_table_head\">
                 	<tr>
@@ -48,8 +47,23 @@ function CreateTable($stmt){
 						</th>
                     	<th class=\"columnName\">Наименование</th>
                     	<th class=\"columnQty\">
-						<div id=\"txtCategory\">Количество</div>
-
+						<div id=\"txtQty\">Количество</div>
+							<label for=\"select1\" class=\"select1\">
+    							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"bg\" checked />
+    							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select1\">
+    							<label class=\"bg\" for=\"bg\"></label>
+    							
+								<div class=\"items\">
+                    				<input type=\"radio\" name=\"list\" value=\"first_value\" id=\"list[0]\">
+      								<label for=\"list[0]\">> min</label>
+									
+      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[1]\">
+      								<label for=\"list[1]\">⩽ min</label>
+									
+      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[2]\">
+      								<label for=\"list[2]\">отсутствует</label>
+    							</div>
+							</label></th>
                     	</th>
                         
                     	<th class=\"columnCategory\">
@@ -89,8 +103,7 @@ function CreateTable($stmt){
     				}
     				echo "
 				</tbody>
-            </table>
-        </div>";
+            </table>";
 }
 //            				echo "<script>
 //            				notifSet('Материал на исходе',","'",$row['name_mat'],"','sklad/img/",$row['ozm'],".jpg');

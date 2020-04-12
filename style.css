@@ -480,7 +480,7 @@ input, input:hover, input:focus {
 .WareHouse{
     display: flex;
 	flex-grow: 1;
-    flex-direction: column;
+    flex-direction: row;
 	position: relative;
     width: 100%;
     height: auto;
@@ -489,14 +489,15 @@ input, input:hover, input:focus {
 .Details {
 	display: flex;
 	flex-grow: 1;
-	flex-direction: row;
+	flex-direction: column;
 	width: 100%;
 	height: auto;
-	margin-bottom: 25px;
+/*	margin-bottom: 25px;*/
 }
 
-.material_data, .material_chart {
-	margin: 0px 0px 0px 25px;
+.material_data {
+	display: flex;
+	flex-direction: column;
 }
 
 /* Цвет плиток и из тени */
@@ -509,11 +510,19 @@ input, input:hover, input:focus {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.material_data {
-	display: flex;
-	flex-direction: column;
-	width: 300px;
-	height: auto;
+
+/*
+.material_data, .material_chart {
+	margin: 0px 0px 0px 25px;
+}
+*/
+
+.material_img, .material_info {
+	margin: 0 0 25px 25px;
+}
+
+.material_chart, .material_table {
+	margin: 0 25px 25px 25px;
 }
 
 .material_img {
@@ -531,33 +540,26 @@ input, input:hover, input:focus {
 
 .material_info {
 	flex-grow: 1;
-	margin-top: 25px;
 	height: auto;
 }
 
 .material_chart {
-	width: 100%;
-	height: auto;
-	margin-right: 25px;
+/*	width: 100%;*/
+	height: 300px;
 }
-
-/* Это нужно?
-#selCatId,#selTypeId{
-    display: none;
-}
-*/
 
 .material_table{
-/*    overflow-y: hidden;*/
-	margin: 0 25px 25px 25px;
 	padding: 15px;
 	background-color: white;
+	height: 100%;
+	overflow: hidden;
 }
 
 /*Таблица материалов*/
 .tableMats {
 	width: 100%;
-	overflow: hidden;
+	height: inherit;
+/*	overflow: hidden;*/
 	table-layout: fixed;
 	border-collapse: collapse;
 }
@@ -610,7 +612,7 @@ input, input:hover, input:focus {
 
 /* Выпадающий список для Категорий */
 
-#txtCategory {
+#txtCategory, #txtQty {
 	padding: 5px 10px;	
 }
 
@@ -748,7 +750,7 @@ input, input:hover, input:focus {
   	display: block;
   	overflow: auto;
   	width: 100%;
-  	height: 150px;
+  	height: inherit;
 }
 
 .tableMats tbody::-webkit-scrollbar, #material_table_head .items::-webkit-scrollbar {
@@ -798,7 +800,7 @@ input, input:hover, input:focus {
 }
 
 .tableMats .minItemMatTR{
-    background-color: yellow;
+    background-color: #ffffaa;
 }
 .tableMats .zeroItemMatTR{
     background-color: #fdd2d2;

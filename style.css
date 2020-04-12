@@ -767,6 +767,9 @@ input
 }
 
 .tableMats .minItemMatTR{
+    background-color: yellow;
+}
+.tableMats .zeroItemMatTR{
     background-color: #fdd2d2;
 }
 

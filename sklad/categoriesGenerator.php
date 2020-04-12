@@ -6,7 +6,7 @@ function GenerateCategories($selId){
     $stmt = sqlsrv_query($conn,$query_select_categor);
     $counter = 0;
     /*Генерация кнопок категорий*/
-    createCategor(-1,"Категория",-1,0);
+    createCategor(-1,"Все",-1,0);
     while($row = sqlsrv_fetch_array($stmt)){
         $counter++;
         createCategor($row['id'],$row['nameC'],$selId,$counter);

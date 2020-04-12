@@ -41,7 +41,11 @@ function CreateTable($stmt){
                 	<tr>
                     	<th class=\"columnOZM\">ОЗМ</th>
                     	<th class=\"columnName\">Наименование</th>
-                    	<th class=\"columnQty\">Количество</th>
+                    	<th class=\"columnQty\">
+						<div id=\"txtCategory\">Количество</div>
+
+                    	</th>
+                        
                     	<th class=\"columnCategory\">
 						<div id=\"txtCategory\">Категория</div>
 							<label for=\"select\" class=\"select\">
@@ -61,12 +65,11 @@ function CreateTable($stmt){
                 <tbody id=\"containerItems\">";
     				while($row = sqlsrv_fetch_array($stmt)){
         				$classMin = "itemMatTR";
-        				if($row['qty']<$row['min']){
+        				if($row['qty']<$row['min'] && $row['qty']!=0){
             				$classMin = "minItemMatTR";
-            				echo "<script>
-            				notifSet('Материал на исходе',","'",$row['name_mat'],"','sklad/img/",$row['ozm'],".jpg');
-            				</script>";
-        				}
+        				}else if($row['qty']==0){
+            				$classMin = "zeroItemMatTR";
+                        }
         				echo "
                 		<tr class=\"$classMin\" onclick=\"selectTd(this)\">
                     		<td class=\"columnOZM\">",$row['ozm'],"</td>					
@@ -83,13 +86,8 @@ function CreateTable($stmt){
             </table>
         </div>";
 }
-
-
-//							<select 		id=\"selectCategorDD\" onchange=\"SelectCat();\">";
-//                    			include "categoriesGenerator.php";
-//                    			GenerateCategories($_POST['categor']);
-//              					echo "
-//							</select>
-
+//            				echo "<script>
+//            				notifSet('Материал на исходе',","'",$row['name_mat'],"','sklad/img/",$row['ozm'],".jpg');
+//            				</script>";
 /* ▲ Создание таблицы ▲ */
 ?>

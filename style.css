@@ -479,28 +479,16 @@ input, input:hover, input:focus {
 /*WareHouse*/
 .WareHouse{
     display: flex;
-	flex-grow: 1;
     flex-direction: row;
-	position: relative;
-    width: 100%;
-    height: auto;
-}
-
-.Details {
-	display: flex;
 	flex-grow: 1;
-	flex-direction: column;
-	width: 100%;
-	height: auto;
-/*	margin-bottom: 25px;*/
 }
 
-.material_data {
+.WH_left_column, .WH_right_column {
 	display: flex;
 	flex-direction: column;
 }
 
-/* Цвет плиток и из тени */
+/* Цвет плиток и их тени */
 .material_img, .material_info, .material_chart, .material_table {
 	background-color: #ffffff;
 	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
@@ -510,12 +498,6 @@ input, input:hover, input:focus {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-/*
-.material_data, .material_chart {
-	margin: 0px 0px 0px 25px;
-}
-*/
 
 .material_img, .material_info {
 	margin: 0 0 25px 25px;
@@ -544,22 +526,18 @@ input, input:hover, input:focus {
 }
 
 .material_chart {
-/*	width: 100%;*/
 	height: 300px;
 }
 
 .material_table{
 	padding: 15px;
-	background-color: white;
 	height: 100%;
-	overflow: hidden;
 }
 
 /*Таблица материалов*/
 .tableMats {
 	width: 100%;
 	height: inherit;
-/*	overflow: hidden;*/
 	table-layout: fixed;
 	border-collapse: collapse;
 }

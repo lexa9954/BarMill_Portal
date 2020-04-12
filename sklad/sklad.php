@@ -1,5 +1,5 @@
 <div class="WareHouse">
-   	<div class="material_data">
+   	<div class="WH_right_column">
    		<div class="material_img">
    			<img id="imgMatId" class="img_mat" src="sklad/img/587687.jpg">
    		</div>
@@ -8,7 +8,7 @@
    		</div>
    	</div>
    		
-   	<div class="Details">
+   	<div class="WH_left_column">
    		<div class="material_chart">
     		<div class="chartWrapper">
         		<div class="chartAreaWrapper">

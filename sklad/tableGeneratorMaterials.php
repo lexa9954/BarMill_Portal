@@ -1,7 +1,13 @@
 <?php
-$selCategor = $_POST['categor'];
-$searchName = $_POST['searchName'];
-$minQty = $_POST['minQty'];
+$selCategor ="";
+$searchName ="";
+$minQty = "";
+if (!empty($_POST["categor"]))
+    $selCategor = $_POST['categor'];
+if (!empty($_POST["searchName"]))
+    $searchName = $_POST['searchName'];
+if (!empty($_POST["minQty"]))
+    $minQty = $_POST['minQty'];
 
 SelectMats($selCategor,$searchName,$minQty);
 
@@ -19,8 +25,20 @@ function SelectMats($categor,$searchName,$minQty){
     if($searchName != "")
         $query_search_name = "and name_mat LIKE '%$searchName%'";
     /*Минимальное кол-во*/
-    if($minQty !="")
-        $query_select_min = "and mat_box_polka.qty<min";
+    if($minQty !=""){
+        switch($minQty){
+            case 1:
+                $query_select_min = "and mat_box_polka.qty>min ";
+            break;
+            case 2:
+                $query_select_min = "and mat_box_polka.qty<=min ";
+            break;
+            case 3:
+                $query_select_min = "and mat_box_polka.qty=0 ";
+            break;
+        }
+    }
+        
     
     $query_select_mats = "select distinct name_mat,mat_box_polka.qty,min,max,mat_box_polka.id_box,mat_box_polka.id_polka,ozm,ediniciIzmerenija.edinica_izmerenija,nameC,max(mat_date) 'mat_date' from materials join history on history.mat_id = materials.id 
     inner join ediniciIzmerenija on ediniciIzmerenija.id = materials.edinica_izmerenija 
@@ -49,19 +67,19 @@ function CreateTable($stmt){
                     	<th class=\"columnQty\">
 						<div id=\"txtQty\">Количество</div>
 							<label for=\"select1\" class=\"select1\">
-    							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"bg\" checked />
-    							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select1\">
+    							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"bg\" checked />
+    							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"select1\">
     							<label class=\"bg\" for=\"bg\"></label>
     							
 								<div class=\"items\">
-                    				<input type=\"radio\" name=\"list\" value=\"first_value\" id=\"list[0]\">
-      								<label for=\"list[0]\">> min</label>
+                    				<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"1\" id=\"listQty[0]\">
+      								<label for=\"listQty[0]\">> min</label>
 									
-      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[1]\">
-      								<label for=\"list[1]\">⩽ min</label>
+      								<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"2\" id=\"listQty[1]\">
+      								<label for=\"listQty[1]\">⩽ min</label>
 									
-      								<input type=\"radio\" name=\"list\" value=\"second_value\" id=\"list[2]\">
-      								<label for=\"list[2]\">отсутствует</label>
+      								<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"3\" id=\"listQty[2]\">
+      								<label for=\"listQty[2]\">отсутствует</label>
     							</div>
 							</label></th>
                     	</th>
@@ -85,7 +103,7 @@ function CreateTable($stmt){
                 <tbody id=\"containerItems\">";
     				while($row = sqlsrv_fetch_array($stmt)){
         				$classMin = "itemMatTR";
-        				if($row['qty']<$row['min'] && $row['qty']!=0){
+        				if($row['qty']<=$row['min'] && $row['qty']!=0){
             				$classMin = "minItemMatTR";
         				}else if($row['qty']==0){
             				$classMin = "zeroItemMatTR";

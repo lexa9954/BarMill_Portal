@@ -1,30 +1,31 @@
 <div class="WareHouse">
-   	<div class="WH_right_column">
-   		<div class="material_img">
-   			<img id="imgMatId" class="img_mat" src="sklad/img/587687.jpg">
+   	<div class="Details">
+   		<div class="material_data">
+   			<div class="material_img">
+   				<img id="imgMatId" class="img_mat" src="sklad/img/587687.jpg">
+   			</div>
+   			<div class="material_info">
+   				Здесь информация о min-max категории и другое
+   			</div>
    		</div>
-   		<div class="material_info">
-   			Здесь информация о min-max категории и другое
+   		<div class="material_chart">
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <canvas id="myChartAxis"></canvas>
+            </div>
    		</div>
    	</div>
-   		
-   	<div class="WH_left_column">
-   		<div class="material_chart">
-    		<div class="chartWrapper">
-        		<div class="chartAreaWrapper">
-            		<canvas id="myChart"></canvas>
-            	</div>
-            	<canvas id="myChartAxis"></canvas>
-        	</div>
-   		</div>
-		<div class="material_table" id="material_table">
-		<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
-		</div>		
-   	</div>   	
+	<div class="MatBar" id="MatBarId"> <!-- Предлагаю переименовать в "material_table" -->
+	<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
+	</div>
 </div>
 
 <script type="text/javascript">
     var selRowNow;
+    var selCatId =-1;
+    var minQty = "";
     $(document).ready(function(){
         StartDocument();
     });
@@ -35,7 +36,7 @@
             url: "sklad/tableGeneratorMaterials.php",
             data: {categor:-1, searchName:"", minQty:""},
             success: function(result,status,xhr){
-            $( "#material_table" ).html( result );
+            $( "#MatBarId" ).html( result );
                 console.log("Success "+result+" Status "+status);
             },
             error: function(e){
@@ -176,17 +177,35 @@
     }
     /*Применение выбираемой категории полю с id*/
     function SelectCat(){
-        var idCategor = document.querySelector('input[name=list]:checked').value;
-        
+        selCatId = document.querySelector('input[name=list]:checked').value;
         var searchMat = "";
-        var minQty = "";
         $(document).ready(function(){
            $.ajax({
                type: "POST",
                url: "sklad/tableGeneratorMaterials.php",
-               data: {categor:idCategor, searchName:searchMat, minQty:minQty},
+               data: {categor:selCatId, searchName:searchMat, minQty:minQty},
                success: function(result,status,xhr){
-                   $( "#material_table" ).html( result );
+                   $( "#MatBarId" ).html( result );
+                   console.log("Success "+result+" Status "+status);
+               },
+               error: function(e){
+                   console.log("Error "+e);
+               }
+           });
+        });
+    }
+    /*Выбор отображения по количеству*/
+    function SelectQty(){
+        var searchMat = "";
+        minQty = document.querySelector('input[name=listQty]:checked').value;
+        alert(minQty);
+        $(document).ready(function(){
+           $.ajax({
+               type: "POST",
+               url: "sklad/tableGeneratorMaterials.php",
+               data: {categor:selCatId, searchName:searchMat, minQty:minQty},
+               success: function(result,status,xhr){
+                   $( "#MatBarId" ).html( result );
                    console.log("Success "+result+" Status "+status);
                },
                error: function(e){

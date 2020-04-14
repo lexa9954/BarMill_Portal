@@ -85,7 +85,9 @@ function CreateTable($stmt){
 									
       								<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"3\" id=\"listQty[3]\">
       								<label for=\"listQty[3]\">отсутствует</label>
-    							</div>
+    							</div>";
+                    			// Нужно попробовать сделать AJAXom как у меню категорий
+              					echo "
 							</label>
                     	</th>
                         

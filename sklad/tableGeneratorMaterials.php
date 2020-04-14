@@ -1,18 +1,18 @@
 <?php
-$selCategor ="";
-$searchName ="";
+$selCategor =-1;
+$searchOzm ="";
 $minQty = "";
 if (!empty($_POST["categor"]))
     $selCategor = $_POST['categor'];
-if (!empty($_POST["searchName"]))
-    $searchName = $_POST['searchName'];
+if (!empty($_POST["searchOzm"]))
+    $searchOzm = $_POST['searchOzm'];
 if (!empty($_POST["minQty"]))
     $minQty = $_POST['minQty'];
 
-SelectMats($selCategor,$searchName,$minQty);
+SelectMats($selCategor,$searchOzm,$minQty);
 
 /*Запрос на получение материалов по фильтру*/
-function SelectMats($categor,$searchName,$minQty){
+function SelectMats($categor,$search,$min){
     require "../sql_connect.php";
     
     $query_select_categor ="";
@@ -21,12 +21,12 @@ function SelectMats($categor,$searchName,$minQty){
     /*Вывод по категории*/
     if($categor != -1)
         $query_select_categor = "and categor =$categor";
-    /*Поиск по имени*/
-    if($searchName != "")
-        $query_search_name = "and name_mat LIKE '%$searchName%'";
+    /*Поиск по озм*/
+    if($search !="")
+        $query_search_name = "and ozm =$search";
     /*Минимальное кол-во*/
-    if($minQty !=""){
-        switch($minQty){
+    if($min !=""){
+        switch($min){
             case 1:
                 $query_select_min = "and mat_box_polka.qty>min ";
             break;
@@ -60,7 +60,7 @@ function CreateTable($stmt){
 							<label for=\"select2\" class=\"select2\">
 							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select2\">
     							<label class=\"bg\" for=\"bg\"></label>
-								<input type=\"text\" id=\"lname\" name=\"lname\">
+								<input type=\"number\" id=\"lname\" name=\"lname\" onkeydown=\"searchOzm(event)\">
 							</label>	
 						</th>
                     	<th class=\"columnName\">Наименование</th>
@@ -72,14 +72,17 @@ function CreateTable($stmt){
     							<label class=\"bg\" for=\"bg\"></label>
     							
 								<div class=\"items\">
-                    				<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"1\" id=\"listQty[0]\">
-      								<label for=\"listQty[0]\">> min</label>
+                    				<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"0\" id=\"listQty[0]\">
+      								<label for=\"listQty[0]\">Все</label>
+                                
+                    				<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"1\" id=\"listQty[1]\">
+      								<label for=\"listQty[1]\">> min</label>
 									
-      								<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"2\" id=\"listQty[1]\">
-      								<label for=\"listQty[1]\">⩽ min</label>
+      								<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"2\" id=\"listQty[2]\">
+      								<label for=\"listQty[2]\">⩽ min</label>
 									
-      								<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"3\" id=\"listQty[2]\">
-      								<label for=\"listQty[2]\">отсутствует</label>
+      								<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"3\" id=\"listQty[3]\">
+      								<label for=\"listQty[3]\">отсутствует</label>
     							</div>
 							</label></th>
                     	</th>
@@ -92,7 +95,7 @@ function CreateTable($stmt){
     							<label class=\"bg\" for=\"bg\"></label>
     							<div class=\"items\">";
                     			include "categoriesGenerator.php";
-                    			GenerateCategories($_POST['categor']);
+                    			GenerateCategories();
               					echo "
     							</div>
 							</label>

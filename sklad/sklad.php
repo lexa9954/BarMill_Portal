@@ -18,6 +18,11 @@
    		</div>
 		<div class="material_table" id="material_table">
 		<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
+            <?php 
+            if(empty($_COOKIE['name'])){
+                header('Location:/Barmill_Portal/index.php');
+            }
+            ?>
 		</div>
    	</div>
 </div>
@@ -29,6 +34,20 @@
     $(document).ready(function(){
         StartDocument();
     });
+    /*Поис по ОЗМ*/
+    function searchOzm(e){
+        if (e.keyCode === 13) {
+            var searchMat = document.querySelector('#lname').value;
+               $.ajax({
+                   type: "POST",
+                   url: "sklad/tableGeneratorMaterials.php",
+                   data: {searchOzm:searchMat},
+                   success: function(result,status,xhr){
+                       $( "#material_table" ).html( result );
+                   }
+               });
+        }
+    }
     /*Функция запускается при прогрузке страницы*/
     function StartDocument(){
         $.ajax({
@@ -183,13 +202,9 @@
            $.ajax({
                type: "POST",
                url: "sklad/tableGeneratorMaterials.php",
-               data: {categor:selCatId, searchName:searchMat, minQty:minQty},
+               data: {categor:selCatId, minQty:minQty},
                success: function(result,status,xhr){
                    $( "#material_table" ).html( result );
-                   console.log("Success "+result+" Status "+status);
-               },
-               error: function(e){
-                   console.log("Error "+e);
                }
            });
         });

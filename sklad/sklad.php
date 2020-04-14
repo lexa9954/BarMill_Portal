@@ -1,5 +1,5 @@
 <div class="WareHouse">
-	<div class="WH_right_column">
+	<div class="WH_left_column">
    		<div class="material_img">
    			<img id="imgMatId" class="img_mat" src="sklad/img/587687.jpg">
    		</div>
@@ -7,7 +7,7 @@
    			Здесь информация о min-max категории и другое
    		</div>
    	</div>
-	<div class="WH_left_column">
+	<div class="WH_right_column">
    		<div class="material_chart">
             <div class="chartWrapper">
                 <div class="chartAreaWrapper">

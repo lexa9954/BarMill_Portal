@@ -60,17 +60,7 @@ function CreateTable($stmt){
 							<label for=\"select2\" class=\"select2\">ОЗМ
 								<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"bg\" checked /><input type=\"radio\" name=\"lname\" value=\"not_changed\" id=\"select2\">
     							<label class=\"bg\" for=\"bg\"></label>
-<<<<<<< HEAD
-<<<<<<< HEAD
 								<input type=\"number\" id=\"lname\" name=\"lname\" onkeydown=\"searchOzm(event)\" min=\"111\" max=\"9999999999\">
-=======
-								
-									<input type=\"number\" id=\"lname\" name=\"lname\" onkeydown=\"searchOzm(event)\">
->>>>>>> a2b9cd80351e538076b19560c952e07b347dac96
-=======
-								
-									<input type=\"number\" id=\"lname\" name=\"lname\" onkeydown=\"searchOzm(event)\">
->>>>>>> a2b9cd80351e538076b19560c952e07b347dac96
 							</label>	
 						</th>
 						

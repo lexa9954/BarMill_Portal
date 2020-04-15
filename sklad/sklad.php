@@ -34,9 +34,16 @@
     $(document).ready(function(){
         StartDocument();
     });
+    function DocumentReady(){
+        select2.addEventListener("click", searchOzm);
+    }
     /*Поис по ОЗМ*/
-    function searchOzm(e){
+    function searchOzmEnter(e){
         if (e.keyCode === 13) {
+            searchOzm();
+        }
+    }
+    function searchOzm(){
             var searchMat = document.querySelector('#lname').value;
             if(searchMat.length>9 || searchMat.length<3)
                 return;
@@ -46,9 +53,9 @@
                    data: {searchOzm:searchMat},
                    success: function(result,status,xhr){
                        $( "#material_table" ).html( result );
+                       DocumentReady();
                    }
             });
-        }
     }
     /*Функция запускается при прогрузке страницы*/
     function StartDocument(){
@@ -59,11 +66,13 @@
             success: function(result,status,xhr){
             $( "#material_table" ).html( result );
                 console.log("Success "+result+" Status "+status);
+                DocumentReady();
             },
             error: function(e){
                 console.log("Error "+e);
             }
         });
+        
     }
     /*Выбор материала в таблице*/
     function selectTd(e){
@@ -76,6 +85,7 @@
                data: {action:'infoMatGrafic', nameMat:selNameMat},
                success: function(result){
                    createGrafik(result);
+                   DocumentReady();
                }
            });
             $.ajax({
@@ -198,8 +208,7 @@
     }
     /*Применение выбираемой категории полю с id*/
     function SelectCat(){
-        selCatId = document.querySelector('input[name=list]:checked').value;
-        var searchMat = "";
+        selCatId = document.querySelector('input[name=ListCat]:checked').value;
         $(document).ready(function(){
            $.ajax({
                type: "POST",
@@ -207,25 +216,23 @@
                data: {categor:selCatId, minQty:minQty},
                success: function(result,status,xhr){
                    $( "#material_table" ).html( result );
+                   DocumentReady();
                }
            });
         });
     }
     /*Выбор отображения по количеству*/
     function SelectQty(){
-        var searchMat = "";
-        minQty = document.querySelector('input[name=listQty]:checked').value;
+        minQty = document.querySelector('input[name=ListQty]:checked').value;
         $(document).ready(function(){
            $.ajax({
                type: "POST",
                url: "sklad/tableGeneratorMaterials.php",
-               data: {categor:selCatId, searchName:searchMat, minQty:minQty},
+               data: {categor:selCatId, minQty:minQty},
                success: function(result,status,xhr){
                    $( "#material_table" ).html( result );
                    console.log("Success "+result+" Status "+status);
-               },
-               error: function(e){
-                   console.log("Error "+e);
+                   DocumentReady();
                }
            });
         });

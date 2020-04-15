@@ -69,7 +69,6 @@ function CreateTable($stmt){
                     	<th class=\"columnQty\">
 							<label for=\"select1\" class=\"select1\"><div class=\"columnHeader\">Количество</div>
     							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"bg\" checked />
-    							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"select1\">
     							<label class=\"bg\" for=\"bg\"></label>
     							
 								<div class=\"items\">
@@ -80,23 +79,13 @@ function CreateTable($stmt){
       								<label for=\"listQty[1]\">> min</label>
 									
       								<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"2\" id=\"listQty[2]\">
-      								<label for=\"listQty[2]\">⩽ min</label>
-									
-      								<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"3\" id=\"listQty[3]\">
-      								<label for=\"listQty[3]\">отсутствует</label>
-    							</div>";
-                    			// Нужно попробовать сделать AJAXom как у меню категорий
+                        <label for=\"select1\" class=\"select1\"><div class=\"columnHeader\">Количество</div>
               					echo "
 							</label>
                     	</th>
                         
                     	<th class=\"columnCategory\">
-							<label for=\"select\" class=\"select\"><div class=\"columnHeader\">Категория</div>
-    							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"bg\" checked />
-    							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select\">
-    							<label class=\"bg\" for=\"bg\"></label>
-    							<div class=\"items\">";
-                    			include "categoriesGenerator.php";
+							<label for=\"select\" class=\"select\"><div class=\"columnHeader\">Категория</div>";
                     			GenerateCategories();
               					echo "
     							</div>

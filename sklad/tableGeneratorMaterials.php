@@ -56,17 +56,23 @@ function CreateTable($stmt){
             <table class=\"tableMats\">
                 <thead id=\"material_table_head\">
                 	<tr>
-                    	<th class=\"columnOZM\">ОЗМ 
-							<label for=\"select2\" class=\"select2\">
-							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select2\">
+                    	<th class=\"columnOZM\"> 
+							<label for=\"select2\" class=\"select2\">ОЗМ
+								<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"bg\" checked /><input type=\"radio\" name=\"lname\" value=\"not_changed\" id=\"select2\">
     							<label class=\"bg\" for=\"bg\"></label>
-								<input type=\"number\" id=\"lname\" name=\"lname\" onkeydown=\"searchOzm(event)\">
+<<<<<<< HEAD
+								<input type=\"number\" id=\"lname\" name=\"lname\" onkeydown=\"searchOzm(event)\" min=\"111\" max=\"9999999999\">
+=======
+								
+									<input type=\"number\" id=\"lname\" name=\"lname\" onkeydown=\"searchOzm(event)\">
+>>>>>>> a2b9cd80351e538076b19560c952e07b347dac96
 							</label>	
 						</th>
+						
                     	<th class=\"columnName\">Наименование</th>
+						
                     	<th class=\"columnQty\">
-						<div id=\"txtQty\">Количество</div>
-							<label for=\"select1\" class=\"select1\">
+							<label for=\"select1\" class=\"select1\">Количество
     							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"bg\" checked />
     							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"select1\">
     							<label class=\"bg\" for=\"bg\"></label>
@@ -83,13 +89,14 @@ function CreateTable($stmt){
 									
       								<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"3\" id=\"listQty[3]\">
       								<label for=\"listQty[3]\">отсутствует</label>
-    							</div>
-							</label></th>
+    							</div>";
+                    			// Нужно попробовать сделать AJAXom как у меню категорий
+              					echo "
+							</label>
                     	</th>
                         
                     	<th class=\"columnCategory\">
-						<div id=\"txtCategory\">Категория</div>
-							<label for=\"select\" class=\"select\">
+							<label for=\"select\" class=\"select\">Категория
     							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"bg\" checked />
     							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select\">
     							<label class=\"bg\" for=\"bg\"></label>

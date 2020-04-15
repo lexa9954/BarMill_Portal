@@ -1,5 +1,5 @@
 <div class="WareHouse">
-	<div class="WH_right_column">
+	<div class="WH_left_column">
    		<div class="material_img">
    			<img id="imgMatId" class="img_mat" src="sklad/img/587687.jpg">
    		</div>
@@ -7,7 +7,7 @@
    			Здесь информация о min-max категории и другое
    		</div>
    	</div>
-	<div class="WH_left_column">
+	<div class="WH_right_column">
    		<div class="material_chart">
             <div class="chartWrapper">
                 <div class="chartAreaWrapper">
@@ -38,14 +38,16 @@
     function searchOzm(e){
         if (e.keyCode === 13) {
             var searchMat = document.querySelector('#lname').value;
-               $.ajax({
+            if(searchMat.length>9 || searchMat.length<3)
+                return;
+            $.ajax({
                    type: "POST",
                    url: "sklad/tableGeneratorMaterials.php",
                    data: {searchOzm:searchMat},
                    success: function(result,status,xhr){
                        $( "#material_table" ).html( result );
                    }
-               });
+            });
         }
     }
     /*Функция запускается при прогрузке страницы*/

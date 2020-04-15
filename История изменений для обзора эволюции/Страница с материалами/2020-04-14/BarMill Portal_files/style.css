@@ -475,17 +475,14 @@ input, input:hover, input:focus {
     cursor: pointer;
 }
 
-
-
-/*===================== SKLAD =============================*/
-/*Контент-блок окна обзора материалов*/
+/*SKLAD*/
+/*WareHouse*/
 .WareHouse{
     display: flex;
     flex-direction: row;
 	flex-grow: 1;
 }
 
-/*Разделение контент-блока на два столбца*/
 .WH_left_column, .WH_right_column {
 	display: flex;
 	flex-direction: column;
@@ -501,15 +498,14 @@ input, input:hover, input:focus {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-/*Отступы плиток*/
 .material_img, .material_info {
 	margin: 0 0 25px 25px;
 }
+
 .material_chart, .material_table {
 	margin: 0 25px 25px 25px;
 }
 
-/*Плитка с картинкой материала*/
 .material_img {
 	display: flex;
   	align-items: center;	
@@ -518,28 +514,23 @@ input, input:hover, input:focus {
 	height: 300px;
 }
 
-/*Свойство картинок пропорционального заполнения плитки с картинкой*/
 .material_img img {
 	max-width: 220px;
 	max-height: 220px;
 }
 
-/*Плитка с подробной информацией*/
 .material_info {
 	flex-grow: 1;
 	height: auto;
 }
 
-/*Плитка с графиком*/
 .material_chart {
 	height: 300px;
 }
 
-/*Плитка с таблицой*/
 .material_table{
 	padding: 15px;
 	height: 100%;
-	min-height: 200px;
 }
 
 /*Таблица материалов*/
@@ -550,38 +541,36 @@ input, input:hover, input:focus {
 	border-collapse: collapse;
 }
 
-/*Ширина столбцов таблицы*/
 .columnOZM {
 	width: 200px;
-	padding-left: 10px;
 }
+
 .columnName, .itemNameTD {
 	width: 400px;
 }
+
 .columnQty {
 	width: 150px;
 }
+
 .columnCategory {
 	width: 200px;;
 }
+
 .columnDate {
 	width: 200px;
 }
 
-/*Свойства шапки таблицы*/
 .tableMats thead tr {
     background-color: #efefef;
     color: #525252;
   	display: block;
   	position: relative;
-	height: 25px;
-	display: flex;
-  	align-items: center
 }
 
 .tableMats thead th, .tableMats tbody td{
 	text-align: left;
-/*	padding: 5px 10px;*/
+	padding: 5px 10px;
 }
 
 #material_table_head .columnCategory {
@@ -593,39 +582,76 @@ input, input:hover, input:focus {
 #lname {
 	display: none;
 	position: absolute;
-	top: 2px;
-	width: 110px;
+	top: 0;
 	z-index: 100;
 }
 
 
 /* Выпадающий список для Категорий */
 
+#txtCategory, #txtQty {
+	padding: 5px 10px;	
+}
+
 .tableMats input
 {
   display: none;
 }
 
-
 .select, .select1, select2 {
-  	display: flex;
-	flex-direction: row;
+  	display: block;
+  	line-height: 26.4px;
+  	position: absolute;
+	top: 0px;
 }
 
-.select::after, .select1::after
+.select:before
 {
   	content: "▼";
-/*	display: block;*/
+	color: #c6c6c6;
+  	display: inline-block;	
+    padding-right: 20px;
+  	text-align: right;
+ 	position: absolute;
+  	left: 0;
+	top: 0;
+  	z-index: 2;
+  	width: 200px;
+  	height: 26.4px;
+  	line-height: 26px;
  	cursor: pointer;
-	margin-left: 20px;
 }
-
-.select2::after
+.select1:before
+{
+  	content: "▼";
+	color: #c6c6c6;
+  	display: inline-block;	
+    padding-right: 20px;
+  	text-align: right;
+ 	position: absolute;
+  	left: 0;
+	top: 0;
+  	z-index: 2;
+  	width: 150px;
+  	height: 26.4px;
+  	line-height: 26px;
+ 	cursor: pointer;
+}
+.select2:before
 {
   	content: "🔍";
-/*  	display: block;*/
+	color: #c6c6c6;
+  	display: inline-block;	
+    padding-right: 20px;
+  	text-align: right;
+ 	position: absolute;
+  	left: 0;
+	top: 0;
+  	z-index: 2;
+  	width: 150px;
+  	height: 26.4px;
+  	line-height: 26px;
  	cursor: pointer;
-	margin-left: 80px;
 }
 
 .items
@@ -642,18 +668,33 @@ input, input:hover, input:focus {
 
 .items label
 {
-  	display: none;
-  	padding: 3px 0 3px 10px;
-  	background: white;
+  display: none;
+  padding-left: 10px;
+  background: white;
 }
 
 
-#select:checked ~ .items, #select1:checked ~ .items, #select2:checked ~ .lname
+#select:checked ~ .items
 {
-  top: 25px;
+  top: 28px;
 }
 
-#select:checked ~ .items label, #select1:checked ~ .items label
+#select1:checked ~ .items
+{
+  top: 28px;
+}
+
+#select2:checked ~ .lname
+{
+  top: 28px;
+}
+
+#select:checked ~ .items label
+{
+  display: block;
+}
+
+#select1:checked ~ .items label
 {
   display: block;
 }

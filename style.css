@@ -600,12 +600,21 @@ input, input:hover, input:focus {
 #lname {
 	display: none;
 	position: absolute;
-	top: 2px;
+	top: 2.5px;
+	left: 4px;
 	width: 110px;
 	z-index: 100;
+  	border: 1px solid #eee;
 }
-
-
+#lname::-webkit-outer-spin-button,
+#lname::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+#lname:focus {
+  outline: 0;
+}
 /* Drop-down менюшки */
 .tableMats input
 {
@@ -627,8 +636,11 @@ input, input:hover, input:focus {
 .select2::after
 {
   	content: "🔍";
+	top: 2px;
+	position: absolute;
  	cursor: pointer;
-	margin-left: 80px;
+	margin-left: 115px;
+	z-index: 100;
 }
 
 .items
@@ -686,7 +698,7 @@ input, input:hover, input:focus {
   	left: 0;
   	bottom: 0;
   	right: 0;
-  	z-index: 100;
+  	z-index: 90;
   	background: rgba(0,0,0,0.4);
 	transition: background 0.2s linear;
 }

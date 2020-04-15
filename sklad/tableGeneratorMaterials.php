@@ -57,7 +57,7 @@ function CreateTable($stmt){
                 <thead id=\"material_table_head\">
                 	<tr>
                     	<th class=\"columnOZM\"> 
-							<label for=\"select2\" class=\"select2\">ОЗМ
+							<label for=\"select2\" class=\"select2\"><div class=\"columnHeader\">ОЗМ</div>
 								<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"bg\" checked /><input type=\"radio\" name=\"lname\" value=\"not_changed\" id=\"select2\">
     							<label class=\"bg\" for=\"bg\"></label>
 								<input type=\"number\" id=\"lname\" name=\"lname\" onkeydown=\"searchOzm(event)\" min=\"111\" max=\"9999999999\">
@@ -70,7 +70,7 @@ function CreateTable($stmt){
 							<label for=\"select1\" class=\"select1\"><div class=\"columnHeader\">Количество</div>
     							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"bg\" checked />
     							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"select1\">
-    							<div class=\"bg\" for=\"bg\"></div>
+    							<label class=\"bg\" for=\"bg\"></label>
     							
 								<div class=\"items\">
                     				<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"0\" id=\"listQty[0]\">

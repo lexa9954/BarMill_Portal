@@ -550,22 +550,30 @@ input, input:hover, input:focus {
 	border-collapse: collapse;
 }
 
-/*Ширина столбцов таблицы*/
+/*Ширина столбцов таблицы и drop-down менюшек*/
 .columnOZM {
 	width: 200px;
-	padding-left: 10px;
 }
 .columnName, .itemNameTD {
 	width: 400px;
 }
-.columnQty {
+.columnQty, .select1 .items {
 	width: 150px;
 }
-.columnCategory {
+.columnCategory, .select .items {
 	width: 200px;;
 }
 .columnDate {
 	width: 200px;
+}
+
+/*Отступ блока внутри ячейки хидера для смещения по отношению к дроп-даун менюшки*/
+.columnHeader {
+	padding-left: 10px;
+}
+
+.tableMats tbody td {
+	padding-left: 10px;
 }
 
 /*Свойства шапки таблицы*/
@@ -581,7 +589,6 @@ input, input:hover, input:focus {
 
 .tableMats thead th, .tableMats tbody td{
 	text-align: left;
-/*	padding: 5px 10px;*/
 }
 
 #material_table_head .columnCategory {
@@ -599,13 +606,11 @@ input, input:hover, input:focus {
 }
 
 
-/* Выпадающий список для Категорий */
-
+/* Drop-down менюшки */
 .tableMats input
 {
   display: none;
 }
-
 
 .select, .select1, select2 {
   	display: flex;
@@ -615,7 +620,6 @@ input, input:hover, input:focus {
 .select::after, .select1::after
 {
   	content: "▼";
-/*	display: block;*/
  	cursor: pointer;
 	margin-left: 20px;
 }
@@ -623,7 +627,6 @@ input, input:hover, input:focus {
 .select2::after
 {
   	content: "🔍";
-/*  	display: block;*/
  	cursor: pointer;
 	margin-left: 80px;
 }
@@ -636,8 +639,8 @@ input, input:hover, input:focus {
   	position: absolute;
 	top: 0;
   	overflow-y: auto;
-  	width: 200px;
   	cursor: pointer;
+	z-index: 11;
 }
 
 .items label
@@ -647,18 +650,25 @@ input, input:hover, input:focus {
   	background: white;
 }
 
-
-#select:checked ~ .items, #select1:checked ~ .items, #select2:checked ~ .lname
+#select:checked ~ .items
 {
-  top: 25px;
+  	top: 25px;
+	z-index: 101;
 }
 
-#select:checked ~ .items label, #select1:checked ~ .items label
+#select2:checked ~ .lname
 {
-  display: block;
+  	top: 25px;
+	z-index: 101;
 }
 
-#select2:checked ~ #lname
+#select1:checked ~ .items
+{
+  	top: 25px;
+	z-index: 101;
+}
+
+#select:checked ~ .items label, #select1:checked ~ .items label, #select2:checked ~ #lname
 {
   display: block;
 }
@@ -676,11 +686,11 @@ input, input:hover, input:focus {
   	left: 0;
   	bottom: 0;
   	right: 0;
-  	z-index: 0;
+  	z-index: 100;
   	background: rgba(0,0,0,0.4);
 	transition: background 0.2s linear;
 }
-
+/* drop-down менюшки*/
 
 .tableMats tbody {
   	display: block;
@@ -689,6 +699,7 @@ input, input:hover, input:focus {
   	height: inherit;
 }
 
+/*Скролл таблицы*/
 .tableMats tbody::-webkit-scrollbar, #material_table_head .items::-webkit-scrollbar {
     width: 8px;
 }
@@ -724,6 +735,8 @@ input, input:hover, input:focus {
     background-color: #f2f2f2;
     cursor: pointer;
 }
+/*Скролл таблицы*/
+
 
 .tableMats tr{
     background-color: #ffffff;	
@@ -740,26 +753,6 @@ input, input:hover, input:focus {
 }
 .tableMats .zeroItemMatTR{
     background-color: #fdd2d2;
-}
-
-.tableMats .openedItemClose{
-    display: none;
-}
-.tableMats .openedItemOpen{
-    background-color: white;
-}
-
-/*Когда выбрана строка в таблице материалов*/
-.tableMats .selectedMaterialRow{
-    padding: 0px;
-    border: none;
-/*    background-color: #f2f2f2;*/
-	background: linear-gradient(to top, #ffffff, #f2f2f2);
-    border-bottom: none;
-}
-
-.tableMats tbody .selectedMaterialRow td{
-	font-weight: bold;
 }
 
 /*График*/
@@ -783,101 +776,8 @@ input, input:hover, input:focus {
     overflow-x: auto;
 }
 
-/*History выбор транзакций*/
-/*
-.history_bar{
-    overflow-y: scroll;
-    height: 100%;
-    width: 260px;	
-	background-color: #ffffff;
-    min-width: 200px;
-}
-.history_container{
-    padding: 5px;
-    list-style: none;
-}
-*/
-
-/*Кнопка выбора транзакции*/
-/*
-.history_but{
-    width: 100%;
-    background-color: rgba(40, 41, 51, 0.9);
-    outline-width: 1px;
-    color: white;
-    transition-duration: 0.4s;
-}
-.history_but:hover{
-    color: white;
-    background-color: gray;
-}
-.historyTable{
-    table-layout: fixed;
-    border-collapse: collapse;
-    width: 100%;
-}
-.historyTable thead tr{
-    display: block;
-}
-.historyTable tbody{
-    display: block;
-    overflow: hidden;
-}
-*/
-
 .itemNameTD{
     padding:0;
     text-align: left;
     padding: 4px 40px 4px 5px;
-/*    width: 50%;*/
 }
-/*
-.itemOzmTD.itemQtyTD{
-    width: 20%;
-}
-.itemLD_TD{
-    width: 30%;
-}
-*/
-
-/*История транзакций*/
-/*
-.WareHouseHistory{
-    display: block;
-    flex-direction: column;
-}
-.navContainer{
-    display: block;
-    padding: 10px;
-}
-.historyContainer{
-    
-}
-.historyItemTR{
-    width: 500px;
-}
-*/
-
-/**/
-/*
-.notVisibleElements{
-    visibility: hidden;
-    display: none;
-}
-*/
-
-/*Страница подробнее о материале*/
-/*
-.MaterialPage{
-    width: 50%;
-    height: 100%;
-}
-.barMaterial{
-    width: 100%;
-    background-color: white;
-}
-.containerIconAndGraf{
-    display: flex;
-}
-*/
-

@@ -74,13 +74,13 @@ function CreateTable($stmt){
 							</label>	
 						</th>
 						
-                    	<th class=\"columnName\">Наименование</th>
+                    	<th class=\"columnName\"><div class=\"columnHeader\">Наименование</div></th>
 						
                     	<th class=\"columnQty\">
-							<label for=\"select1\" class=\"select1\">Количество
+							<label for=\"select1\" class=\"select1\"><div class=\"columnHeader\">Количество</div>
     							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"bg\" checked />
     							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"select1\">
-    							<label class=\"bg\" for=\"bg\"></label>
+    							<div class=\"bg\" for=\"bg\"></div>
     							
 								<div class=\"items\">
                     				<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"0\" id=\"listQty[0]\">
@@ -101,7 +101,7 @@ function CreateTable($stmt){
                     	</th>
                         
                     	<th class=\"columnCategory\">
-							<label for=\"select\" class=\"select\">Категория
+							<label for=\"select\" class=\"select\"><div class=\"columnHeader\">Категория</div>
     							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"bg\" checked />
     							<input type=\"radio\" name=\"list\" value=\"not_changed\" id=\"select\">
     							<label class=\"bg\" for=\"bg\"></label>
@@ -112,7 +112,7 @@ function CreateTable($stmt){
     							</div>
 							</label>
                     	</th>
-                    	<th class=\"columnDate\" >Последнее поступление</th>
+                    	<th class=\"columnDate\" ><div class=\"columnHeader\">Последнее поступление</div></th>
                 	</tr>
                 </thead>
                 <tbody id=\"containerItems\">";

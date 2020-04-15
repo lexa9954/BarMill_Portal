@@ -52,6 +52,7 @@ function SelectMats($categor,$search,$min){
     
 /* ▼ Создание таблицы ▼ */
 function CreateTable($stmt){
+    include "categoriesGenerator.php";
     echo "
             <table class=\"tableMats\">
                 <thead id=\"material_table_head\">
@@ -60,26 +61,16 @@ function CreateTable($stmt){
 							<label for=\"select2\" class=\"select2\"><div class=\"columnHeader\">ОЗМ</div>
 								<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"bg\" checked /><input type=\"radio\" name=\"lname\" value=\"not_changed\" id=\"select2\">
     							<label class=\"bg\" for=\"bg\"></label>
-								<input type=\"number\" id=\"lname\" name=\"lname\" onkeydown=\"searchOzm(event)\" min=\"111\" max=\"9999999999\">
+								<input type=\"number\" id=\"lname\" name=\"lname\" onkeydown=\"searchOzmEnter(event)\" min=\"111\" max=\"9999999999\">
 							</label>	
 						</th>
 						
                     	<th class=\"columnName\"><div class=\"columnHeader\">Наименование</div></th>
 						
                     	<th class=\"columnQty\">
-							<label for=\"select1\" class=\"select1\"><div class=\"columnHeader\">Количество</div>
-    							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"bg\" checked />
-    							<label class=\"bg\" for=\"bg\"></label>
-    							
-								<div class=\"items\">
-                    				<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"0\" id=\"listQty[0]\">
-      								<label for=\"listQty[0]\">Все</label>
-                                
-                    				<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"1\" id=\"listQty[1]\">
-      								<label for=\"listQty[1]\">> min</label>
-									
-      								<input onclick=\"SelectQty();\" type=\"radio\" name=\"listQty\" value=\"2\" id=\"listQty[2]\">
                         <label for=\"select1\" class=\"select1\"><div class=\"columnHeader\">Количество</div>
+							";
+                                GenerateQty();
               					echo "
 							</label>
                     	</th>

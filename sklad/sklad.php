@@ -18,12 +18,9 @@
    	</div>
 	<div class="WH_right_column">
    		<div class="material_chart">
-            <div class="chartWrapper">
                 <div class="chartAreaWrapper">
                     <canvas id="myChart"></canvas>
                 </div>
-                <canvas id="myChartAxis"></canvas>
-            </div>
    		</div>
 		<div class="material_table" id="material_table">
 		<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
@@ -103,6 +100,7 @@
     }
     /*Выбор материала в таблице*/
     function selectTd(e){
+		// ?? элементов с классом .itemNameTD я не нашел !!
         var selNameMat = e.querySelector('.itemNameTD').innerHTML;
         var imgMat = document.getElementById("imgMatId");
         
@@ -134,8 +132,24 @@
     function createGrafik(selMatInfo){
         var infoMat = selMatInfo;
         var ctx = document.querySelector('#myChart');
-        
-        var res = infoMat.split(";");
+        var chart    = document.getElementById('myChart').getContext('2d'),
+    		gradientSpisanie = chart.createLinearGradient(0, 0, 0, 450),
+    		gradientVnesenie = chart.createLinearGradient(0, 0, 0, 450),
+    		gradientQty = chart.createLinearGradient(0, 0, 0, 450);
+		
+		gradientSpisanie.addColorStop(0, 'rgba(55, 178, 255, 0.5)');
+		gradientSpisanie.addColorStop(0.5, 'rgba(55, 178, 255, 0.2)');
+		gradientSpisanie.addColorStop(1, 'rgba(55, 178, 255, 0)');
+		
+		gradientVnesenie.addColorStop(0, 'rgba(40, 41, 51, 0.5)');
+		gradientVnesenie.addColorStop(0.5, 'rgba(40, 41, 51, 0.2)');
+		gradientVnesenie.addColorStop(1, 'rgba(40, 41, 51, 0)');
+		
+		gradientQty.addColorStop(0, 'rgba(255, 0,0, 0.5)');
+		gradientQty.addColorStop(0.5, 'rgba(255, 0, 0, 0.2)');
+		gradientQty.addColorStop(1, 'rgba(255, 0, 0, 0.2)');
+		
+		var res = infoMat.split(";");
 
         var _sod =new Array();
         var _date = new Array();
@@ -166,74 +180,114 @@
         
         Chart.defaults.global.defaultFontFamily = "Lato";
         Chart.defaults.global.defaultFontSize = 14;
+		
+        var dataQty = {
+            	label: "Наличие",
+				backgroundColor: gradientQty,
+				pointBackgroundColor: 'white',
+				borderWidth: 1,
+          		borderColor: '#ff4f4f',			
+//            	lineTension: 0.3,
+//            	fill: false,
+            	data: _qty,
+          		};
 
         var dataSpisanie = {
-            label: "Списание",
-            data: _qtyS,
-            lineTension: 0.3,
-            fill: false,
-            borderColor: '#FF7373'
-          };
+            	label: "Списание",
+				backgroundColor: gradientSpisanie,
+				pointBackgroundColor: 'white',
+				borderWidth: 1,			
+            	borderColor: '#37b2ff',
+//            	lineTension: 0.3,
+//            	fill: false,
+            	data: _qtyS,
+          		};
+		
         var dataVnesenie = {
-            label: "Внесение",
-            data: _qtyV,
-            lineTension: 0.3,
-            fill: false,
-          borderColor: '#5CCCCC'
-          };
-        var dataQty = {
-            label: "Наличие",
-            data: _qty,
-            lineTension: 0.3,
-            fill: false,
-          borderColor: '#C9F76F'
-          };
+            	label: "Внесение",
+				backgroundColor: gradientVnesenie,
+				pointBackgroundColor: 'white',
+				borderWidth: 1,			
+          		borderColor: '#282933',
+//            	lineTension: 0.3,
+//            	fill: false,
+            	data: _qtyV,
+          		};
 
         var allData = {
-          labels: _date,
-          datasets: [dataSpisanie, dataVnesenie,dataQty]
-        };
+          		labels: _date,
+          		datasets: [dataQty,dataSpisanie, dataVnesenie]
+        		};
 
         var chartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-          legend: {
-            //display: true,
-            position: 'top',
-            labels: {
-              boxWidth: 15,
-              fontColor: 'black'
-            }
-          },
-          scales: {
-            yAxes: [{
-                ticks: {
-                    suggestedMin: _min[0],
-                    suggestedMax: _max[0],
-                    display: false
-                },
-                gridLines: {
-                    color: "rgba(0, 0, 0, 0)",
-                },
-                scaleLabel: {
-                    display: true,
-                    labelString: "Количество",
-                  }
-            }],
-            xAxes: [{
-                gridLines: {
-                color: "rgba(0, 0, 0, 0)",
-            }
-            }]
-        }
-        };
+            	responsive: true,
+            	maintainAspectRatio: false,
+			
+				animation: {				
+					easing: 'easeInOutQuad',
+					duration: 1000
+					},
+			
+				elements: {
+					line: {
+						tension: 0.4
+						}
+					},
+			
+          		legend: {
+            		//display: true,
+            		position: 'top',            
+					labels: {
+              			boxWidth: 15,
+              			fontColor: 'black'
+            			}
+          			},			
+			
+          		scales: {
+            		yAxes: [{
+                		ticks: {
+                    		suggestedMin: _min[0],
+                    		suggestedMax: _max[0],
+                    		display: false
+                			},
+                		gridLines: {
+                    		color: 'rgba(200, 200, 200, 0.08)',
+							lineWidth: 1
+                			},
+                		scaleLabel: {
+                    		display: true,
+                    		labelString: "Количество",
+                  			}
+            			}],
+            		xAxes: [{
+                		gridLines: {
+                			color: "rgba(200, 200, 200, 0.05)",
+							lineWidth: 1
+            				}
+            			}]
+        			},
+			
+				point: {
+					backgroundColor: 'white'
+					},
+			
+				tooltips: {
+					titleFontFamily: 'Open Sans',
+					backgroundColor: 'rgba(0,0,0,0.3)',
+					titleFontColor: 'red',
+					caretSize: 5,
+					cornerRadius: 2,
+					xPadding: 10,
+					yPadding: 10
+					}			
+        		};
         
         var lineChart = new Chart(ctx, {
-          type: 'line',
-          data: allData,
-          options: chartOptions
-        });
-    }
+          		type: 'line',
+          		data: allData,
+          		options: chartOptions
+        		});
+    	}
 	
     /*Применение выбираемой категории полю с id*/
     function SelectCat(){

@@ -706,12 +706,6 @@ input, input:hover, input:focus {
 	z-index: 101;
 }
 
-/*
-#select2:checked ~ .thead-svg path {
-	fill: #ffffff;
-}
-*/
-
 #select1:checked ~ .items {
   	top: 25px;
 	z-index: 101;
@@ -805,20 +799,19 @@ input, input:hover, input:focus {
     width: 100% !important;
     max-height: 300px;
 }
-.chartWrapper {
-    position: relative;
-    padding: 5px;
-    width: 100%;
-}
+/*
 .chartWrapper > canvas {
     position: absolute;
     left: 0;
     top: 0;
     pointer-events:none;
 }
+*/
 .chartAreaWrapper {
     width: 100%;
     overflow-x: auto;
+    position: relative;
+    padding: 5px;
 }
 
 .itemNameTD{

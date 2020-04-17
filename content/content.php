@@ -1,6 +1,7 @@
 <div class="content">
 <?php
 		$page = $_SERVER['REQUEST_URI'];
+    
 	switch($page){
     	case "/Barmill_Portal/index.php?page=profile":
 			require "profile/profile.php";
@@ -30,5 +31,7 @@
 			2012 г. – выполнен запуск нового блока разделения воздуха, построенного ТОО «Линде Газ Казахстан»</div>";
 			break;
 	}
+        require "Push_notifications/MainNotification.php";
+    
 ?>
 </div>

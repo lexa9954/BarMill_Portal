@@ -86,6 +86,10 @@ function CreateTable($stmt){
                 	</tr>
                 </thead>
                 <tbody id=\"containerItems\">";
+                    $rows = sqlsrv_has_rows( $stmt );
+                    if ($rows === false)
+                        echo "<tr><td>материал не найден</td</tr";    
+                        
     				while($row = sqlsrv_fetch_array($stmt)){
         				$classMin = "itemMatTR";
         				if($row['qty']<=$row['min'] && $row['qty']!=0){
@@ -108,8 +112,5 @@ function CreateTable($stmt){
 				</tbody>
             </table>";
 }
-//            				echo "<script>
-//            				notifSet('Материал на исходе',","'",$row['name_mat'],"','sklad/img/",$row['ozm'],".jpg');
-//            				</script>";
 /* ▲ Создание таблицы ▲ */
 ?>

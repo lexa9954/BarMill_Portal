@@ -552,7 +552,7 @@ input, input:hover, input:focus {
 
 /*Ширина столбцов таблицы и drop-down менюшек*/
 .columnOZM {
-	width: 150px;
+	width: 200px;
 }
 .columnName, .itemNameTD {
 	width: 400px;
@@ -574,6 +574,12 @@ input, input:hover, input:focus {
 .columnHeader {
 	padding: 0 10px;
 }
+
+/*
+.columnOZM .columnHeader {
+	padding-left: 50px;
+}
+*/
 
 .tableMats tbody td {
 	padding: 3px 0 3px 10px;
@@ -617,8 +623,8 @@ input, input:hover, input:focus {
 #lname {
 	display: none;
 	position: absolute;
-	top: -2px;
-	left: -110px;
+	top: 2px;
+	left: 48px;
 	width: 110px;
 	z-index: 100;
   	border: 1px solid #eee;
@@ -650,9 +656,11 @@ input, input:hover, input:focus {
 	margin-left: 5px;
 }
 
+/*
 .columnOZM .thead-svg {
 	position: absolute;
 }
+*/
 
 .thead-svg path {
 	fill: #a5afba;
@@ -663,12 +671,9 @@ input, input:hover, input:focus {
 }
 
 .select2
-{  	
-	top: 5px;
-	position: absolute;
+{  
  	cursor: pointer;
-	margin-left: 115px;
-	z-index: 100;
+	display: flex;
 }
 
 .items {
@@ -692,7 +697,12 @@ input, input:hover, input:focus {
 	z-index: 101;
 }
 
-#select2:checked ~ .lname, .columnOZM .thead-svg {
+.resetSort {
+	display: flex;	
+  	align-items: center;
+}
+
+#select2:checked ~ .lname, .columnOZM .resetSort, resetSort-svg, .columnOZM #searchOZM {
 	z-index: 101;
 }
 
@@ -709,6 +719,10 @@ input, input:hover, input:focus {
 
 #select:checked ~ .items label, #select1:checked ~ .items label, #select2:checked ~ #lname {
   display: block;
+}
+
+#resetSort:focus ~ #lname {
+	display: none;
 }
 
 .items label:hover {

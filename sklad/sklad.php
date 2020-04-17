@@ -1,4 +1,13 @@
 <div class="WareHouse">
+
+<!-- Доступ на страницу только после авторизации -->
+<?php
+	if(empty($_COOKIE['name'])){
+    	header('Location:/Barmill_Portal/index.php');
+    }
+?>
+<!-- Доступ на страницу только после авторизации -->
+
 	<div class="WH_left_column">
    		<div class="material_img">
    			<img id="imgMatId" class="img_mat" src="sklad/img/587687.jpg">
@@ -18,11 +27,6 @@
    		</div>
 		<div class="material_table" id="material_table">
 		<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
-            <?php 
-            if(empty($_COOKIE['name'])){
-                header('Location:/Barmill_Portal/index.php');
-            }
-            ?>
 		</div>
    	</div>
 </div>
@@ -102,6 +106,7 @@
         
         selRowNow = selNameMat;
     }
+	
     /*Рисуем график*/
     function createGrafik(selMatInfo){
         var infoMat = selMatInfo;
@@ -154,7 +159,7 @@
           borderColor: '#5CCCCC'
           };
         var dataQty = {
-            label: "Остаток",
+            label: "Наличие",
             data: _qty,
             lineTension: 0.3,
             fill: false,
@@ -206,6 +211,7 @@
           options: chartOptions
         });
     }
+	
     /*Применение выбираемой категории полю с id*/
     function SelectCat(){
         selCatId = document.querySelector('input[name=ListCat]:checked').value;

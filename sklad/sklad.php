@@ -31,11 +31,34 @@
     var selRowNow;
     var selCatId =-1;
     var minQty = "";
+    var sortType = "";
     $(document).ready(function(){
         StartDocument();
     });
     function DocumentReady(){
         select2.addEventListener("click", searchOzm);
+        /*Инициализация кнопок для сортировки*/
+        sortByName.addEventListener("click",function(){sortMats("name_mat");});
+        sortByDate.addEventListener("click",function(){sortMats("mat_date");});
+        sortByCatName.addEventListener("click",function(){sortMats("nameC");});
+        sortByQty.addEventListener("click",function(){sortMats("qty");});
+    }
+    /*Сортировка*/
+    function sortMats(sortName){
+        if (sortType.search("desc") != -1) {//слово не найдено
+            sortType = sortName;
+        }else{
+            sortType = sortName+" desc";
+        }
+           $.ajax({
+               type: "POST",
+               url: "sklad/tableGeneratorMaterials.php",
+               data: {sort:sortType, categor:selCatId, minQty:minQty},
+               success: function(result,status,xhr){
+                   $( "#material_table" ).html( result );
+                   DocumentReady();
+               }
+           });
     }
     /*Поис по ОЗМ*/
     function searchOzmEnter(e){
@@ -213,7 +236,7 @@
            $.ajax({
                type: "POST",
                url: "sklad/tableGeneratorMaterials.php",
-               data: {categor:selCatId, minQty:minQty},
+               data: {sort:sortType,categor:selCatId, minQty:minQty},
                success: function(result,status,xhr){
                    $( "#material_table" ).html( result );
                    DocumentReady();
@@ -228,7 +251,7 @@
            $.ajax({
                type: "POST",
                url: "sklad/tableGeneratorMaterials.php",
-               data: {categor:selCatId, minQty:minQty},
+               data: {sort:sortType,categor:selCatId, minQty:minQty},
                success: function(result,status,xhr){
                    $( "#material_table" ).html( result );
                    console.log("Success "+result+" Status "+status);

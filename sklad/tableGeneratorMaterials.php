@@ -2,22 +2,26 @@
 $selCategor =-1;
 $searchOzm ="";
 $minQty = "";
+$sortMat = "";
 if (!empty($_POST["categor"]))
     $selCategor = $_POST['categor'];
 if (!empty($_POST["searchOzm"]))
     $searchOzm = $_POST['searchOzm'];
 if (!empty($_POST["minQty"]))
     $minQty = $_POST['minQty'];
+if (!empty($_POST["sort"]))
+    $sortMat = $_POST['sort'];
 
-SelectMats($selCategor,$searchOzm,$minQty);
+SelectMats($selCategor,$searchOzm,$minQty,$sortMat);
 
 /*Запрос на получение материалов по фильтру*/
-function SelectMats($categor,$search,$min){
+function SelectMats($categor,$search,$min,$sort){
     require "../sql_connect.php";
     
     $query_select_categor ="";
     $query_search_name ="";
     $query_select_min ="";
+    $query_sort_by = "";
     /*Вывод по категории*/
     if($categor != -1)
         $query_select_categor = "and categor =$categor";
@@ -38,6 +42,10 @@ function SelectMats($categor,$search,$min){
             break;
         }
     }
+    /**/
+    if($sort !=""){
+        $query_sort_by = "order by $sort";
+    }
         
     
     $query_select_mats = "select distinct name_mat,mat_box_polka.qty,min,max,mat_box_polka.id_box,mat_box_polka.id_polka,ozm,ediniciIzmerenija.edinica_izmerenija,nameC,max(mat_date) 'mat_date' from materials join history on history.mat_id = materials.id 
@@ -45,7 +53,8 @@ function SelectMats($categor,$search,$min){
     inner join mat_box_polka on mat_box_polka.id_mat = materials.id 
     inner join categories on categories.id = materials.categor 
     where spisanie_or_dobavlenie=1 and (deleted_mat is null or deleted_mat = 0) $query_select_categor $query_search_name $query_select_min 
-    group by materials.name_mat,mat_box_polka.qty,min,max,mat_box_polka.id_box,mat_box_polka.id_polka,ozm,ediniciIzmerenija.edinica_izmerenija,nameC";
+    group by materials.name_mat,mat_box_polka.qty,min,max,mat_box_polka.id_box,mat_box_polka.id_polka,ozm,ediniciIzmerenija.edinica_izmerenija,nameC
+    $query_sort_by";
     CreateTable(sqlsrv_query($conn,$query_select_mats));
     sqlsrv_close($conn);
 }
@@ -73,7 +82,7 @@ function CreateTable($stmt){
 						
                     	<th class=\"columnName\">
 						<div class=\"columnHeader\">Наименование</div>
-						<svg class=\"thead-svg\" alt=\"SORT\" width=\"15\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1000 1000\" transform=\"rotate(180)\">
+						<svg id=\"sortByName\" class=\"thead-svg\" alt=\"SORT\" width=\"15\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1000 1000\" transform=\"rotate(180)\">
 							<path d=\"M749.8,401.8H248.7c-11.1,0.4-22.2-4.1-30.6-14c-16.2-18.9-16.2-49.7,0-68.7L469.9,24.2c16.2-18.9,42.4-18.9,58.7,0l251.8,294.9c16.2,19,16.2,49.7,0,68.7C772,397.8,760.9,402.2,749.8,401.8z M250.2,598.3h501.1c11.1-0.4,22.2,4.1,30.7,13.9c16.2,18.9,16.2,49.7,0,68.7L530.1,975.8c-16.2,18.9-42.4,18.9-58.7,0L219.6,680.9c-16.2-19-16.2-49.7,0-68.7C228,602.3,239.1,597.9,250.2,598.3z\"/>
 						</svg>
 						</th>
@@ -89,7 +98,7 @@ function CreateTable($stmt){
                     	</th>
                     	<th class=\"columnDate\" >
 							<div class=\"columnHeader\">Последнее поступление</div>
-							<svg class=\"thead-svg\" alt=\"SORT\" width=\"15\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1000 1000\" transform=\"rotate(180)\">
+							<svg id=\"sortByDate\" class=\"thead-svg\" alt=\"SORT\" width=\"15\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1000 1000\" transform=\"rotate(180)\">
 								<path d=\"M749.8,401.8H248.7c-11.1,0.4-22.2-4.1-30.6-14c-16.2-18.9-16.2-49.7,0-68.7L469.9,24.2c16.2-18.9,42.4-18.9,58.7,0l251.8,294.9c16.2,19,16.2,49.7,0,68.7C772,397.8,760.9,402.2,749.8,401.8z M250.2,598.3h501.1c11.1-0.4,22.2,4.1,30.7,13.9c16.2,18.9,16.2,49.7,0,68.7L530.1,975.8c-16.2,18.9-42.4,18.9-58.7,0L219.6,680.9c-16.2-19-16.2-49.7,0-68.7C228,602.3,239.1,597.9,250.2,598.3z\"/>
 							</svg>
 						</th>

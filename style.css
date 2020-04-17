@@ -561,7 +561,7 @@ input, input:hover, input:focus {
 	width: 200px;
 }
 .columnCategory, .select .items {
-	width: 200px;;
+	width: 200px;
 }
 .columnDate {
 	width: 300px;
@@ -572,7 +572,7 @@ input, input:hover, input:focus {
 
 /*Отступ блока внутри ячейки хидера для смещения по отношению к дроп-даун менюшки*/
 .columnHeader {
-	padding-left: 10px;
+	padding: 0 10px;
 }
 
 .tableMats tbody td {
@@ -592,6 +592,8 @@ input, input:hover, input:focus {
 
 .tableMats thead th, .tableMats tbody td{
 	text-align: left;
+	display: flex;
+	flex-direction: row;
 }
 
 .tableMats thead tr, .tableMats tbody tr{
@@ -615,8 +617,8 @@ input, input:hover, input:focus {
 #lname {
 	display: none;
 	position: absolute;
-	top: 2.5px;
-	left: 4px;
+	top: -2px;
+	left: -110px;
 	width: 110px;
 	z-index: 100;
   	border: 1px solid #eee;
@@ -639,29 +641,38 @@ input, input:hover, input:focus {
 .select, .select1, select2 {
   	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 
-.select::after, .select1::after
-{
-  	content: "▼";
- 	cursor: pointer;
-	margin-left: 20px;
+.thead-svg {
+	max-width: 20px;
+	max-height: 20px;
+	margin-left: 5px;
 }
 
-.select2::after
-{
-  	content: "🔍";
-	top: 2px;
+.columnOZM .thead-svg {
+	position: absolute;
+}
+
+.thead-svg path {
+	fill: #a5afba;
+}
+
+.thead-svg:hover path {
+	fill: #bf6f6f;
+}
+
+.select2
+{  	
+	top: 5px;
 	position: absolute;
  	cursor: pointer;
 	margin-left: 115px;
 	z-index: 100;
 }
 
-.items
-{
+.items {
   	display: block;
-  	min-height: 30px;
 	max-height: 100px;
   	position: absolute;
 	top: 0;
@@ -670,38 +681,37 @@ input, input:hover, input:focus {
 	z-index: 11;
 }
 
-.items label
-{
+.items label {
   	display: none;
   	padding: 3px 0 3px 10px;
   	background: white;
 }
 
-#select:checked ~ .items
-{
+#select:checked ~ .items {
   	top: 25px;
 	z-index: 101;
 }
 
-#select2:checked ~ .lname
-{
+#select2:checked ~ .lname, .columnOZM .thead-svg {
+	z-index: 101;
+}
+
+/*
+#select2:checked ~ .thead-svg path {
+	fill: #ffffff;
+}
+*/
+
+#select1:checked ~ .items {
   	top: 25px;
 	z-index: 101;
 }
 
-#select1:checked ~ .items
-{
-  	top: 25px;
-	z-index: 101;
-}
-
-#select:checked ~ .items label, #select1:checked ~ .items label, #select2:checked ~ #lname
-{
+#select:checked ~ .items label, #select1:checked ~ .items label, #select2:checked ~ #lname {
   display: block;
 }
 
-.items label:hover
-{
+.items label:hover {
   background: #eee;
   cursor: pointer;
 }

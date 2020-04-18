@@ -483,6 +483,7 @@ input, input:hover, input:focus {
     display: flex;
     flex-direction: row;
 	flex-grow: 1;
+	width: inherit;
 }
 
 /*Разделение контент-блока на два столбца*/
@@ -491,8 +492,12 @@ input, input:hover, input:focus {
 	flex-direction: column;
 }
 
+.WH_right_column {
+	flex-grow: 1;
+}
+
 /* Цвет плиток и их тени */
-.material_img, .material_info, .material_chart, .material_table {
+.material_img, .material_info, .material_spec, .material_chart, .material_catalog, .material_trans {
 	background-color: #ffffff;
 	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.1);
@@ -502,11 +507,19 @@ input, input:hover, input:focus {
 }
 
 /*Отступы плиток*/
-.material_img, .material_info {
+.material_main_panel, .material_info, .material_spec {
 	margin: 0 0 25px 25px;
+	width: 300px;
 }
-.material_chart, .material_table {
+.material_chart, .material_catalog, .material_trans {
 	margin: 0 25px 25px 25px;
+}
+
+/*Плитка плиткой картинки и навигационной панели*/
+.material_main_panel {
+	display: flex;
+	flex-direction: column;
+	height: auto;	
 }
 
 /*Плитка с картинкой материала*/
@@ -519,7 +532,27 @@ input, input:hover, input:focus {
 	height: 300px;
 }
 
-#imgMatName,.material_img img {
+.material_navigation {
+	display: flex;
+	flex-direction: row;
+	height: 25px;
+	width: 100%;
+}
+
+.material_navigation input {
+	display: none;
+}
+
+.material_nav_btn {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	background-color: #e6e6e6;
+	border: 1px solid #9f9f9f;
+}
+
+#material_name, .material_img img {
 	margin-top: 15px;
 }
 
@@ -531,17 +564,38 @@ input, input:hover, input:focus {
 
 /*Плитка с подробной информацией*/
 .material_info {
+	display: block;
 	flex-grow: 1;
 	height: auto;
+	padding: 15px;
+}
+
+/*Плитка со спецификацией*/
+.material_spec {
+	display: none;
+	flex-grow: 1;
+	height: auto;
+	padding: 15px;
 }
 
 /*Плитка с графиком*/
 .material_chart {
-	height: 300px;
+	display: none;
+	flex-grow: 1;
+	width: auto;
+	max-height: 300px;
+}
+
+/*Плитка с информацией о перемещении*/
+.material_trans {
+	display: none;
+	height: 100%;
+	width: auto;
+	padding: 15px;
 }
 
 /*Плитка с таблицой*/
-.material_table{
+.material_catalog {
 	padding: 15px;
 	height: 100%;
 	min-height: 200px;
@@ -579,12 +633,6 @@ input, input:hover, input:focus {
 .columnHeader {
 	padding: 0 10px;
 }
-
-/*
-.columnOZM .columnHeader {
-	padding-left: 50px;
-}
-*/
 
 .tableMats tbody td {
 	padding: 3px 0 3px 10px;
@@ -633,8 +681,10 @@ input, input:hover, input:focus {
 	width: 110px;
 	z-index: 100;
   	border: 1px solid #eee;
+/*
 	animation: fadeIn 300ms cubic-bezier(.57,.25,.65,1) 1 forwards;
   opacity: 0;
+*/
 }
 #lname::-webkit-outer-spin-button,
 #lname::-webkit-inner-spin-button {
@@ -684,6 +734,7 @@ input, input:hover, input:focus {
 }
 
 .items {
+	animation: fadeOut 1000ms cubic-bezier(0.46, 0.01, 0.65, 0.67) 1 forwards; 
   	display: block;
 	max-height: 100px;
   	position: absolute;
@@ -694,17 +745,18 @@ input, input:hover, input:focus {
 }
 
 .items label {
-	animation: fadeIn 300ms cubic-bezier(.57,.25,.65,1) 1 forwards;
-  opacity: 0;
   	display: none;
   	padding: 3px 0 3px 10px;
   	background: white;
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+@keyframes fadeOut {
+	from {
+		height: 0;
+	}
+  	to {    
+		height: 100px;
+  	}
 }
 
 #select:checked ~ .items {
@@ -815,22 +867,6 @@ input, input:hover, input:focus {
     max-height: 300px;
 	padding: 10px 17px;
 }
-/*
-.chartWrapper > canvas {
-    position: absolute;
-    left: 0;
-    top: 0;
-    pointer-events:none;
-}
-*/
-/*
-.chartAreaWrapper {
-    width: 100%;
-    overflow-x: auto;
-    position: relative;
-    padding: 5px;
-}
-*/
 
 .itemNameTD{
     padding:0;

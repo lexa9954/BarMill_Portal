@@ -45,6 +45,9 @@
         sortByDate.addEventListener("click",function(){sortMats("mat_date");});
         sortByCatName.addEventListener("click",function(){sortMats("nameC");});
         sortByQty.addEventListener("click",function(){sortMats("qty");});
+        sortByOZM.addEventListener("click",function(){sortMats("ozm");});
+        resetSort.addEventListener("click",resetFiltr);
+        
     }
     /*Сортировка*/
     function sortMats(sortName){
@@ -396,5 +399,21 @@
                }
            });
         });
+    }
+    /*Сброс фильтра*/
+    function resetFiltr(){
+        selCatId =-1;
+        minQty = "";
+        sortType = "";
+           $.ajax({
+               type: "POST",
+               url: "sklad/tableGeneratorMaterials.php",
+               data: {searchOzm:"",sort:sortType,categor:selCatId, minQty:minQty},
+               success: function(result,status,xhr){
+                   $( "#material_table" ).html( result );
+                   console.log("Success "+result+" Status "+status);
+                   DocumentReady();
+               }
+           });
     }
 </script>

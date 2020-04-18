@@ -1,3 +1,4 @@
+<!-- WMS Warehouse Management System / Страница о материалах -->
 <div class="WareHouse">
 
 <!-- Доступ на страницу только после авторизации -->

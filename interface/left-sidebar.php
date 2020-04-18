@@ -8,6 +8,7 @@
 			<li><a href="#">Контейнер №1 &#9662;</a>
             <ul class="Sklad1">
                 <li>
+                   <!-- WMS Warehouse Management System / Страница о материалах -->
                     <a href="index.php?page=sklad" onclick="close_all_sidebar()">Обзор материалов</a>
                 </li>
                 <li>

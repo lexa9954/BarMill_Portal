@@ -512,10 +512,15 @@ input, input:hover, input:focus {
 /*Плитка с картинкой материала*/
 .material_img {
 	display: flex;
+	flex-direction: column;
   	align-items: center;	
   	justify-content: center;
 	width: 300px;
 	height: 300px;
+}
+
+#imgMatName,.material_img img {
+	margin-top: 15px;
 }
 
 /*Свойство картинок пропорционального заполнения плитки с картинкой*/
@@ -628,6 +633,8 @@ input, input:hover, input:focus {
 	width: 110px;
 	z-index: 100;
   	border: 1px solid #eee;
+	animation: fadeIn 300ms cubic-bezier(.57,.25,.65,1) 1 forwards;
+  opacity: 0;
 }
 #lname::-webkit-outer-spin-button,
 #lname::-webkit-inner-spin-button {
@@ -687,9 +694,17 @@ input, input:hover, input:focus {
 }
 
 .items label {
+	animation: fadeIn 300ms cubic-bezier(.57,.25,.65,1) 1 forwards;
+  opacity: 0;
   	display: none;
   	padding: 3px 0 3px 10px;
   	background: white;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 #select:checked ~ .items {
@@ -798,6 +813,7 @@ input, input:hover, input:focus {
 #myChart{
     width: 100% !important;
     max-height: 300px;
+	padding: 10px 17px;
 }
 /*
 .chartWrapper > canvas {
@@ -807,12 +823,14 @@ input, input:hover, input:focus {
     pointer-events:none;
 }
 */
+/*
 .chartAreaWrapper {
     width: 100%;
     overflow-x: auto;
     position: relative;
     padding: 5px;
 }
+*/
 
 .itemNameTD{
     padding:0;

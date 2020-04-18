@@ -11,7 +11,8 @@
 
 	<div class="WH_left_column">
    		<div class="material_img">
-   			<img id="imgMatId" class="img_mat" src="sklad/img/587687.jpg">
+   			<img id="imgMatId" class="img_mat" src="sklad/noimg.jpg">
+   			<div id="imgMatName">Выберите материал из таблицы</div> <!-- Сюда выводить имя выбранного материала -->
    		</div>
    		<div class="material_info">
    			Здесь информация о min-max категории и другое
@@ -19,9 +20,9 @@
    	</div>
 	<div class="WH_right_column">
    		<div class="material_chart">
-                <div class="chartAreaWrapper">
+<!--                <div class="chartAreaWrapper">-->
                     <canvas id="myChart"></canvas>
-                </div>
+<!--                </div>-->
    		</div>
 		<div class="material_table" id="material_table">
 		<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
@@ -214,10 +215,10 @@
 //            	fill: false,
             	data: _qtyV,
           		};
-
+		
         var allData = {
           		labels: _date,
-          		datasets: [dataQty,dataSpisanie, dataVnesenie]
+          		datasets: [dataQty, dataSpisanie, dataVnesenie]
         		};
 
         var chartOptions = {
@@ -228,6 +229,15 @@
 					easing: 'easeInOutQuad',
 					duration: 1000
 					},
+			
+				horizontalLine: [{
+                    y: 15,
+                    text: "max" //Сюда нужно подвязать данные из БД
+                    },{
+                    y: 5,
+                    style: "rgba(255, 0, 0, .4)",
+                    text: "min" //Сюда нужно подвязать данные из БД
+                    }],
 			
 				elements: {
 					line: {
@@ -240,16 +250,21 @@
             		position: 'top',            
 					labels: {
               			boxWidth: 15,
-              			fontColor: 'black'
+              			fontColor: '#6c7279',
+						fontFamily: 'Roboto',
+						fontSize: 14
             			}
           			},			
 			
           		scales: {
             		yAxes: [{
                 		ticks: {
+							fontColor: '#6c7279',
+							fontFamily: 'Roboto',
                     		suggestedMin: _min[0],
                     		suggestedMax: _max[0],
-                    		display: false
+//							maxTicksLimit: 1,
+                    		display: true
                 			},
                 		gridLines: {
                     		color: 'rgba(200, 200, 200, 0.08)',
@@ -257,14 +272,21 @@
                 			},
                 		scaleLabel: {
                     		display: true,
+              				fontColor: '#6c7279',
+							fontFamily: 'Roboto',
                     		labelString: "Количество",
                   			}
             			}],
             		xAxes: [{
+                		ticks: {
+              				fontColor: '#6c7279',
+							fontFamily: 'Roboto',							
+                    		display: true
+                			},
                 		gridLines: {
                 			color: "rgba(200, 200, 200, 0.05)",
 							lineWidth: 1
-            				}
+            				},
             			}]
         			},
 			
@@ -282,6 +304,60 @@
 					yPadding: 10
 					}			
         		};
+		
+		var horizonalLinePlugin = {
+                afterDraw: function (chartInstance) {
+                    var yScale = chartInstance.scales["y-axis-0"];
+                    var canvas = chartInstance.chart;
+                    var ctx = canvas.ctx;
+                    var index;
+                    var line;
+                    var style;
+					var labelSize;
+
+                    if (chartInstance.options.horizontalLine) {
+                        for (index = 0; index < chartInstance.options.horizontalLine.length; index++) {
+                            line = chartInstance.options.horizontalLine[index];
+
+                            if (!line.style) {
+                                style = "rgba(169,169,169, .6)";
+                            } else {
+                                style = line.style;
+                            }
+
+                            if (line.y) {
+                                yValue = yScale.getPixelForValue(line.y);
+                            } else {
+                                yValue = 0;
+                            }
+
+                            ctx.lineWidth = 1;
+
+                            if (yValue) {
+          						ctx.beginPath();
+          						ctx.moveTo(yScale.width, yValue);
+          						ctx.lineTo(canvas.width-35, yValue);
+          						ctx.strokeStyle = style;
+          						ctx.stroke();
+        						}
+          
+          					if (chartInstance.options.scales.yAxes[0].ticks.fontSize != undefined){
+              					labelSize = parseInt(chartInstance.options.scales.yAxes[0].ticks.fontSize);
+          					} else {
+          					    labelSize = parseInt(chartInstance.config.options.defaultFontSize);
+          					}
+
+        					if (line.text) {
+          					ctx.fillStyle = style;
+          					ctx.textBaseline = 'hanging'; //<-- set this
+          					ctx.fillText(line.text, 70, yValue-labelSize-4);
+        					}
+                        }
+                        return;
+                    };
+                }
+            };
+            Chart.pluginService.register(horizonalLinePlugin);
         
         var lineChart = new Chart(ctx, {
           		type: 'line',

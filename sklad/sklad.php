@@ -49,7 +49,7 @@
    	</div>
 	<div class="WH_right_column">
    		<div class="material_chart">
-                    <canvas id="myChart"></canvas>
+                <canvas id="myChart"></canvas>
    		</div>
 		<div class="material_catalog" id="material_table">
 		<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
@@ -61,59 +61,7 @@
 </div>
 
 <script type="text/javascript">
-//	 Здесь скрипт скрытие/открытие плиток кнопками навигационной панели под картинкой
-	// Управление отображением плитки с каталогом (таблица материалов)
-	var catalog = document.querySelector('.material_catalog');
-	var catalog_btn = document.getElementById('mat_catalog_btn');
-			catalog_btn.addEventListener('change', function() {
-  			if (catalog_btn.checked) {
-    			catalog.style.display = 'block';
-  			} else {
-    			catalog.style.display = 'none';
-  			}
-			});
-	// Управление отображением плитки с информацией о материале
-	var info = document.querySelector('.material_info');
-	var info_btn = document.getElementById('mat_info_btn');
-			info_btn.addEventListener('change', function() {
-  			if (info_btn.checked) {
-    			info.style.display = 'block';
-  			} else {
-    			info.style.display = 'none';
-  			}
-			});
-	// Управление отображением плитки с характеристиками материала
-	var spec = document.querySelector('.material_spec');
-	var spec_btn = document.getElementById('mat_spec_btn');
-			spec_btn.addEventListener('change', function() {
-  			if (spec_btn.checked) {
-    			spec.style.display = 'block';
-  			} else {
-    			spec.style.display = 'none';
-  			}
-			});
-	// Управление отображением плитки с графиком
-	var material_chart = document.querySelector('.material_chart');
-	var material_chart_btn = document.getElementById('mat_chart_btn');
-			material_chart_btn.addEventListener('change', function() {
-  			if (material_chart_btn.checked) {
-    			material_chart.style.display = 'block';
-  			} else {
-    			material_chart.style.display = 'none';
-  			}
-			});
-	// Управление отображением плитки с информацией о перемещении материала
-	var trans = document.querySelector('.material_trans');
-	var trans_btn = document.getElementById('mat_trans_btn');
-			trans_btn.addEventListener('change', function() {
-  			if (trans_btn.checked) {
-    			trans.style.display = 'block';
-  			} else {
-    			trans.style.display = 'none';
-  			}
-			});
-	
-	
+
     var selRowNow;
     var selCatId =-1;
     var minQty = "";
@@ -131,8 +79,30 @@
         sortByOZM.addEventListener("click",function(){sortMats("ozm");});
         resetSort.addEventListener("click",resetFiltr);
         
+        // Управление отображением плитки с каталогом (таблица материалов)
+        var catalog = document.querySelector('.material_catalog');
+        mat_catalog_btn.addEventListener("change",function(){displayBlockOrNone(mat_catalog_btn,catalog);});
+        // Управление отображением плитки с информацией о материале
+        var info = document.querySelector('.material_info');
+        mat_info_btn.addEventListener("change",function(){displayBlockOrNone(mat_info_btn,info);});
+        // Управление отображением плитки с характеристиками материала
+        var spec = document.querySelector('.material_spec');
+        mat_spec_btn.addEventListener("change",function(){displayBlockOrNone(mat_spec_btn,spec);});
+        // Управление отображением плитки с графиком
+        var material_chart = document.querySelector('.material_chart');
+        mat_chart_btn.addEventListener("change",function(){displayBlockOrNone(mat_chart_btn,material_chart);});
+        // Управление отображением плитки с информацией о перемещении материала
+        var trans = document.querySelector('.material_trans');
+        mat_trans_btn.addEventListener("change",function(){displayBlockOrNone(mat_trans_btn,trans);});
     }
-	
+	//Здесь функция скрытие/открытие плиток кнопками навигационной панели под картинкой
+    function displayBlockOrNone(_btn,_block){
+  			if (_btn.checked) {
+    			_block.style.display = 'block';
+  			} else {
+    			_block.style.display = 'none';
+  			}
+    }
     /*Сортировка*/
     function sortMats(sortName){
         if (sortType.search("desc") != -1) {//слово не найдено
@@ -225,7 +195,6 @@
     		gradientSpisanie = chart.createLinearGradient(0, 0, 0, 450),
     		gradientVnesenie = chart.createLinearGradient(0, 0, 0, 450),
     		gradientQty = chart.createLinearGradient(0, 0, 0, 450);
-		
 		gradientSpisanie.addColorStop(0, 'rgba(55, 178, 255, 0.5)');
 		gradientSpisanie.addColorStop(0.5, 'rgba(55, 178, 255, 0.2)');
 		gradientSpisanie.addColorStop(1, 'rgba(55, 178, 255, 0)');
@@ -318,12 +287,12 @@
 					},
 			
 				horizontalLine: [{
-                    y: 15,
-                    text: "max" //Сюда нужно подвязать данные из БД
+                    y: _max[0],
+                    text: _max[0] //Сюда нужно подвязать данные из БД
                     },{
-                    y: 5,
+                    y: _min[0],
                     style: "rgba(255, 0, 0, .4)",
-                    text: "min" //Сюда нужно подвязать данные из БД
+                    text: _min[0] //Сюда нужно подвязать данные из БД
                     }],
 			
 				elements: {

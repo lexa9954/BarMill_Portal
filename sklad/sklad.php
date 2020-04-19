@@ -11,34 +11,40 @@
 
 	<div class="WH_left_column">
    		<div class="material_main_panel">
+   		<!-- Навигационная панель под картинкой -->
+   			<form class="material_navigation" action="">
+   			<!-- Кнопка отображения каталога -->
+  				<label for="catalog_chkBox" id="catalog_btn" class="material_nav_btn openTab">
+  					<input type="checkbox" id="catalog_chkBox" checked>
+  					<?php	require "sklad/sys_img/Catalog1.svg";?>
+				</label>
+   			<!-- Кнопка отображения информации о материале -->
+  				<label for="info_chkBox" id="info_btn" class="material_nav_btn openTab">
+   					<input type="checkbox" id="info_chkBox" checked>
+  					<?php	require "sklad/sys_img/Info.svg";?>
+					</label>
+   			<!-- Кнопка отображения характеристики материала --> 
+  				<label for="spec_chkBox" id="spec_btn" class="material_nav_btn closeTab">
+   					<input type="checkbox" id="spec_chkBox">
+  					<?php	require "sklad/sys_img/Spec.svg";?>
+					</label>
+   			<!-- Кнопка отображения графика перемещения материала -->
+  				<label for="chart_chkBox" id="chart_btn" class="material_nav_btn closeTab">
+   					<input type="checkbox" id="chart_chkBox">
+  					<?php	require "sklad/sys_img/Chart1.svg";?>
+					</label>
+   			<!-- Кнопка отображения таблицы перемещения материала --> 
+  				<label for="trans_chkBox" id="trans_btn" class="material_nav_btn closeTab">
+   					<input type="checkbox" id="trans_chkBox">
+  					<?php	require "sklad/sys_img/Trans1.svg";?>
+					</label>
+			</form>
   			<div class="material_img">
-   				<img id="material_image" src="sklad/noimg.jpg">
+   				<img id="material_image" src="sklad/sys_img/noimg.jpg">
    				<div id="material_name">Выберите материал из таблицы</div> <!-- Сюда выводить имя выбранного материала -->
 			</div>
 			
-  		<!-- Навигационная панель под картинкой -->
-   			<form class="material_navigation" action="">
-   			<!-- Кнопка отображения каталога -->
-  				<label for="mat_catalog_btn" class="material_nav_btn" title="Каталог">
-  					<input type="checkbox" id="mat_catalog_btn" checked>1
-				</label>
-   			<!-- Кнопка отображения информации о материале -->
-  				<label for="mat_info_btn" class="material_nav_btn" title="Информация">
-   					<input type="checkbox" id="mat_info_btn" checked>2
-					</label>
-   			<!-- Кнопка отображения характеристики материала --> 
-  				<label for="mat_spec_btn" class="material_nav_btn" title="Характеристики">
-   					<input type="checkbox" id="mat_spec_btn">3
-					</label>
-   			<!-- Кнопка отображения графика перемещения материала -->
-  				<label for="mat_chart_btn" class="material_nav_btn" title="График">
-   					<input type="checkbox" id="mat_chart_btn">4
-					</label>
-   			<!-- Кнопка отображения таблицы перемещения материала --> 
-  				<label for="mat_trans_btn" class="material_nav_btn" title="Перемещения">
-   					<input type="checkbox" id="mat_trans_btn">5
-					</label>
-			</form>  			
+  		  			
    		</div>
    		<div class="material_info">
    			Здесь информация о min-max категории и другое
@@ -64,52 +70,82 @@
 //	 Здесь скрипт скрытие/открытие плиток кнопками навигационной панели под картинкой
 	// Управление отображением плитки с каталогом (таблица материалов)
 	var catalog = document.querySelector('.material_catalog');
-	var catalog_btn = document.getElementById('mat_catalog_btn');
-			catalog_btn.addEventListener('change', function() {
-  			if (catalog_btn.checked) {
+	var catalog_btn = document.getElementById('catalog_btn');
+	var catalog_chkBox = document.getElementById('catalog_chkBox');
+	
+			catalog_chkBox.addEventListener('change', function() {
+  			if (catalog_chkBox.checked) {
     			catalog.style.display = 'block';
+				catalog_btn.classList.add ('openTab');
+				catalog_btn.classList.remove ('closeTab');
   			} else {
-    			catalog.style.display = 'none';
+    			catalog.style.display = 'none';				
+				catalog_btn.classList.remove ('openTab');
+				catalog_btn.classList.add ('closeTab');
   			}
 			});
+	
 	// Управление отображением плитки с информацией о материале
 	var info = document.querySelector('.material_info');
-	var info_btn = document.getElementById('mat_info_btn');
-			info_btn.addEventListener('change', function() {
-  			if (info_btn.checked) {
+	var info_btn = document.getElementById('info_btn');
+	var info_chkBox = document.getElementById('info_chkBox');
+			info_chkBox.addEventListener('change', function() {
+  			if (info_chkBox.checked) {
     			info.style.display = 'block';
+				info_btn.classList.add ('openTab');
+				info_btn.classList.remove ('closeTab');
   			} else {
     			info.style.display = 'none';
+				info_btn.classList.remove ('openTab');
+				info_btn.classList.add ('closeTab');
   			}
 			});
+	
 	// Управление отображением плитки с характеристиками материала
 	var spec = document.querySelector('.material_spec');
-	var spec_btn = document.getElementById('mat_spec_btn');
-			spec_btn.addEventListener('change', function() {
-  			if (spec_btn.checked) {
+	var spec_btn = document.getElementById('spec_btn');
+	var spec_chkBox = document.getElementById('spec_chkBox');
+			spec_chkBox.addEventListener('change', function() {
+  			if (spec_chkBox.checked) {
     			spec.style.display = 'block';
+				spec_btn.classList.add ('openTab');
+				spec_btn.classList.remove ('closeTab');
   			} else {
     			spec.style.display = 'none';
+				spec_btn.classList.remove ('openTab');
+				spec_btn.classList.add ('closeTab');
   			}
 			});
+	
 	// Управление отображением плитки с графиком
 	var material_chart = document.querySelector('.material_chart');
-	var material_chart_btn = document.getElementById('mat_chart_btn');
-			material_chart_btn.addEventListener('change', function() {
-  			if (material_chart_btn.checked) {
-    			material_chart.style.display = 'block';
+	var material_chart_btn = document.getElementById('chart_btn');
+	var material_chart_chkBox = document.getElementById('chart_chkBox');
+			material_chart_chkBox.addEventListener('change', function() {
+  			if (material_chart_chkBox.checked) {
+    			material_chart.style.display = 'flex';
+				material_chart_btn.classList.add ('openTab');
+				material_chart_btn.classList.remove ('closeTab');
   			} else {
     			material_chart.style.display = 'none';
+				material_chart_btn.classList.remove ('openTab');
+				material_chart_btn.classList.add ('closeTab');
   			}
 			});
+	
 	// Управление отображением плитки с информацией о перемещении материала
 	var trans = document.querySelector('.material_trans');
-	var trans_btn = document.getElementById('mat_trans_btn');
-			trans_btn.addEventListener('change', function() {
-  			if (trans_btn.checked) {
-    			trans.style.display = 'block';
+	var trans_btn = document.getElementById('trans_btn');
+	var trans_chkBox = document.getElementById('trans_chkBox');
+			trans_chkBox.addEventListener('change', function() {
+  			if (trans_chkBox.checked) {
+    			trans.style.display = 'flex';
+				trans_btn.classList.add ('openTab');
+				trans_btn.classList.remove ('closeTab');
   			} else {
     			trans.style.display = 'none';
+				trans_btn.classList.remove ('openTab');
+				trans_btn.classList.add ('closeTab');
   			}
 			});
 	

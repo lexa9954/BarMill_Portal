@@ -551,7 +551,7 @@ input, input:hover, input:focus {
 
 .svg-navigation {
 	max-height: 18px;
-	width: 100%;
+	width: 40px;
 	height: 100%;
 }
 
@@ -749,7 +749,7 @@ input, input:hover, input:focus {
 
 /*Свойства шапки таблицы*/
 .tableMats thead tr {
-    background-color: #efefef;
+    background-color: #f7f7f7;
     color: #525252;
   	display: block;
   	position: relative;
@@ -974,6 +974,7 @@ input, input:hover, input:focus {
 #myChart{
     width: 100% !important;
     max-height: 300px;
+    min-height: 300px;
 	padding: 10px 17px;
     height: 300px;
 }

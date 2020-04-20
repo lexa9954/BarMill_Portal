@@ -16,27 +16,27 @@
    			<!-- Кнопка отображения каталога -->
   				<label for="catalog_chkBox" id="catalog_btn" class="material_nav_btn openTab">
   					<input type="checkbox" id="catalog_chkBox" checked>
-  					<?php	require "sklad/sys_img/Catalog1.svg";?>
+  					<?php	require "sklad/sys_img/catalog1.svg";?>
 				</label>
    			<!-- Кнопка отображения информации о материале -->
   				<label for="info_chkBox" id="info_btn" class="material_nav_btn openTab">
    					<input type="checkbox" id="info_chkBox" checked>
-  					<?php	require "sklad/sys_img/Info.svg";?>
+  					<?php	require "sklad/sys_img/info1.svg";?>
 					</label>
    			<!-- Кнопка отображения характеристики материала --> 
   				<label for="spec_chkBox" id="spec_btn" class="material_nav_btn closeTab">
    					<input type="checkbox" id="spec_chkBox">
-  					<?php	require "sklad/sys_img/Spec.svg";?>
+  					<?php	require "sklad/sys_img/spec.svg";?>
 					</label>
    			<!-- Кнопка отображения графика перемещения материала -->
   				<label for="chart_chkBox" id="chart_btn" class="material_nav_btn closeTab">
    					<input type="checkbox" id="chart_chkBox">
-  					<?php	require "sklad/sys_img/Chart1.svg";?>
+  					<?php	require "sklad/sys_img/chart1.svg";?>
 					</label>
    			<!-- Кнопка отображения таблицы перемещения материала --> 
   				<label for="trans_chkBox" id="trans_btn" class="material_nav_btn closeTab">
    					<input type="checkbox" id="trans_chkBox">
-  					<?php	require "sklad/sys_img/Trans1.svg";?>
+  					<?php	require "sklad/sys_img/trans1.svg";?>
 					</label>
 			</form>
   			

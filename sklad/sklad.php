@@ -39,29 +39,34 @@
   					<?php	require "sklad/sys_img/Trans1.svg";?>
 					</label>
 			</form>
+  			
   			<div class="material_img">
    				<img id="material_image" src="sklad/sys_img/noimg.jpg">
-   				<div id="material_name">Выберите материал из таблицы</div> <!-- Сюда выводить имя выбранного материала -->
-			</div>
-			
-  		  			
+   				<div id="material_name">
+   					Выберите материал из таблицы
+   				</div> <!-- Сюда выводить имя выбранного материала -->
+			</div>  		  			
    		</div>
    		<div class="material_info">
-   			Здесь информация о min-max категории и другое
+   			<div class="test">
+   				Здесь информация о min-max категории и другое
+   			</div>
    		</div>
-   		<div class="material_spec">
-   			Здесь будет спецификация материала в зависимости от категории (мощность, кол-во оборотов, рабочее напряжение для электродвигателей; длина, количество жил, сечение для кабеля и т.д.)
+   		<div class="material_spec slide hidden">
+   			<div class="test">
+   				Здесь будет спецификация материала в зависимости от категории (мощность, кол-во оборотов, рабочее напряжение для электродвигателей; длина, количество жил, сечение для кабеля и т.д.)
+   			</div>
    		</div>
    	</div>
 	<div class="WH_right_column">
-   		<div class="material_chart">
+   		<div class="material_chart slide hidden">
                 <canvas id="myChart"></canvas>
    		</div>
 		<div class="material_catalog" id="material_table">
 		<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
 		</div>
-  		<div class="material_trans" id="transactions_table">
-  			
+  		<div class="material_trans slide hidden" id="transactions_table">
+  		<!-- В данный блок интегрируется "selectedMaterial.php" посредством AJAX -->
   		</div>
    	</div>
 </div>
@@ -87,32 +92,43 @@
         // Управление отображением плитки с каталогом (таблица материалов)
         var catalog = document.querySelector('.material_catalog');
         var catalog_btn = document.getElementById('catalog_btn');
-        catalog_chkBox.addEventListener("change",function(){displayBlockOrNone(catalog_btn,catalog,this,'block');});
+        catalog_chkBox.addEventListener("change",function(){displayBlockOrNone(catalog_btn,catalog,this);});
         // Управление отображением плитки с информацией о материале
         var info = document.querySelector('.material_info');
         var info_btn = document.getElementById('info_btn');
-        info_chkBox.addEventListener("change",function(){displayBlockOrNone(info_btn,info,this,'block');});
+        info_chkBox.addEventListener("change",function(){displayBlockOrNone(info_btn,info,this);});
         // Управление отображением плитки с характеристиками материала
         var spec = document.querySelector('.material_spec');
         var spec_btn = document.getElementById('spec_btn');
-        spec_chkBox.addEventListener("change",function(){displayBlockOrNone(spec_btn,spec,this,'block');});
+        spec_chkBox.addEventListener("change",function(){displayBlockOrNone(spec_btn,spec,this);});
         // Управление отображением плитки с графиком
         var material_chart = document.querySelector('.material_chart');
         var material_chart_btn = document.getElementById('chart_btn');
-        chart_chkBox.addEventListener("change",function(){displayBlockOrNone(material_chart_btn,material_chart,this,'flex');});
+        chart_chkBox.addEventListener("change",function(){displayBlockOrNone(material_chart_btn,material_chart,this);});
         // Управление отображением плитки с информацией о перемещении материала
         var trans = document.querySelector('.material_trans');
         var trans_btn = document.getElementById('trans_btn');
-        trans_chkBox.addEventListener("change",function(){displayBlockOrNone(trans_btn,trans,this,'flex');});
+        trans_chkBox.addEventListener("change",function(){displayBlockOrNone(trans_btn,trans,this);});
     }
 	//Здесь функция скрытие/открытие плиток кнопками навигационной панели под картинкой
-    function displayBlockOrNone(_btn,_block,_chk,_displayType){
+    function displayBlockOrNone(_btn,_block,_chk){
   			if (_chk.checked) {
-    			 _block.style.display = _displayType;
+    			 _block.classList.remove ('hidden');
+				setTimeout(function () {
+      				_block.classList.remove('slide');
+    				}, 
+					20);
                  _btn.classList.add ('openTab');
 			     _btn.classList.remove ('closeTab');
   			} else {
-    			_block.style.display = 'none';
+    			_block.classList.add ('slide');
+				_block.addEventListener('transitionend', function(e) {
+      				_block.classList.add('hidden');
+   				 	}, {
+     				 capture: false,
+    				  once: true,
+     				 passive: false
+    				});
 				_btn.classList.remove ('openTab');
 				_btn.classList.add ('closeTab');
   			}

@@ -667,45 +667,47 @@ input, input:hover, input:focus {
 	max-height: 220px;
 }
 
-/*Плитка с подробной информацией*/
-.material_info {
+/*Плитки с подробной информацией и спецификацией*/
+.material_info, .material_spec {
 	display: block;
-	flex-grow: 1;
-	height: auto;
-	padding: 15px;
-}
-
-/*Плитка со спецификацией*/
-.material_spec {
-	display: none;
-	flex-grow: 1;
-	height: auto;
-	padding: 15px;
+	height: 100%;
+	padding: 15px;	
+  	transition: all 200ms cubic-bezier(.35, .09, .91, .69);
 }
 
 /*Плитка с графиком*/
 .material_chart {
-	display: none;
-	flex-grow: 1;
+	display: block;
 	width: auto;
-	max-height: 300px;
-	min-height: 300px;
     height: 300px;
+	max-height: 300px;
+	min-height: 300px;	
+  	transition: all 200ms cubic-bezier(.35, .09, .91, .69);
 }
 
-/*Плитка с информацией о перемещении*/
-.material_trans {
+/*Плиткb с каталогом и информацией о перемещении*/
+.material_catalog, .material_trans {
+	display: block;
+	height: 100%;
+	min-height: 50px; /* Костыль! нужно смотреть таблицу по перемещениям*/
+	padding: 15px;	
+  	transition: all 200ms cubic-bezier(.35, .09, .91, .69);
+}
+
+.test {
+	height: 100%;
+	overflow: hidden;
+}
+
+.hidden {
 	display: none;
-	height: 100%;
-	width: auto;
-	padding: 15px;
 }
 
-/*Плитка с таблицой*/
-.material_catalog {
-	padding: 15px;
-	height: 100%;
-	min-height: 200px;
+.slide {
+	overflow: hidden;
+	padding: 0 auto;
+	min-height: 50px;
+	height: 0;	
 }
 
 /*Таблица материалов*/

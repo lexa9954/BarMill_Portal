@@ -689,6 +689,7 @@ input, input:hover, input:focus {
 	flex-grow: 1;
 	width: auto;
 	max-height: 300px;
+	min-height: 300px;
     height: 300px;
 }
 

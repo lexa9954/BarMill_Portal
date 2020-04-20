@@ -60,12 +60,10 @@ function CreateTableTransactions($stmt){
     echo "<table class=\"tableMats\">
                 <thead id=\"material_table_head\">
                 	<tr>
-                        <th>Фамилия</th>
-                        <th>Имя</th>
-                        <th>Отчество</th>
-                        <th>Когда</th>
-                        <th>В количестве</th>
+                        <th>Дата</th>
                         <th>Действие</th>
+                        <th>Количество</th>
+                        <th>ФИО</th>
                 	</tr>
                 </thead>
                 <tbody id=\"containerItems\">";
@@ -82,12 +80,10 @@ function CreateTableTransactions($stmt){
   
         				echo "
                 		<tr class=\"transactionRow\" onclick=\"selectTd(this)\">
-                    		<td class=\"colSN\">",$row['Second_name'],"</td>	
-                    		<td class=\"colFN\">",$row['First_name'],"</td>
-                    		<td class=\"colLN\">",$row['Last_name'],"</td>
-                    		<td class=\"colDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
+                            <td class=\"colDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
+                            <td class=\"colSod\">",$sod,"</td>
                             <td class=\"colQty\">",$row['mat_qty'],"</td>
-                    		<td class=\"colSod\">",$sod,"</td>
+                    		<td class=\"colFio\">",$row['Second_name']," ",$row['First_name']," ",$row['Last_name'],"</td>	
                	 		</tr>
         				";
     				}

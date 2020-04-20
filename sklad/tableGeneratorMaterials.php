@@ -55,12 +55,12 @@ function SelectMats($categor,$search,$min,$sort){
     where spisanie_or_dobavlenie=1 and (deleted_mat is null or deleted_mat = 0) $query_select_categor $query_search_name $query_select_min 
     group by materials.name_mat,mat_box_polka.qty,min,max,mat_box_polka.id_box,mat_box_polka.id_polka,ozm,ediniciIzmerenija.edinica_izmerenija,nameC
     $query_sort_by";
-    CreateTable(sqlsrv_query($conn,$query_select_mats));
+    CreateTableAllMaterials(sqlsrv_query($conn,$query_select_mats));
     sqlsrv_close($conn);
 }
     
 /* ▼ Создание таблицы ▼ */
-function CreateTable($stmt){
+function CreateTableAllMaterials($stmt){
     include "categoriesGenerator.php";
     echo "
             <table class=\"tableMats\">
@@ -147,4 +147,6 @@ function CreateTable($stmt){
             </table>";
 }
 /* ▲ Создание таблицы ▲ */
+
+
 ?>

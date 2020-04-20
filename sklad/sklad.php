@@ -60,7 +60,7 @@
 		<div class="material_catalog" id="material_table">
 		<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
 		</div>
-  		<div class="material_trans">
+  		<div class="material_trans" id="transactions_table">
   			
   		</div>
    	</div>
@@ -197,10 +197,18 @@
                     imgMat.src = "img/error_pictures/noImg.jpg";
                }
            });
+            $.ajax({
+               type: "POST",
+               url: "sklad/selectedMaterial.php",
+               data: {action:'CreateTableTransaction', nameMat:selNameMat},
+               success: function(result){
+                   $( "#transactions_table" ).html( result );
+               }
+           });
         
         selRowNow = selNameMat;
     }
-	
+    
     /*Рисуем график*/
     function createGrafik(selMatInfo){
         var infoMat = selMatInfo;
@@ -302,11 +310,11 @@
 			
 				horizontalLine: [{
                     y: _max[0],
-                    text: _max[0] //Сюда нужно подвязать данные из БД
+                    text: "Макс "+_max[0] //данные из БД
                     },{
                     y: _min[0],
                     style: "rgba(255, 0, 0, .4)",
-                    text: _min[0] //Сюда нужно подвязать данные из БД
+                    text: "Мин "+_min[0] //данные из БД
                     }],
 			
 				elements: {
@@ -435,7 +443,7 @@
           		options: chartOptions
         		});
     	}
-	
+    
     /*Применение выбираемой категории полю с id*/
     function SelectCat(){
         selCatId = document.querySelector('input[name=ListCat]:checked').value;

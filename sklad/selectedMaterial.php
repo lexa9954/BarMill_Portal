@@ -8,6 +8,9 @@ switch($action){
     case 'imgSelMat':
         imgSelMat($_POST['nameMat']);
     break;
+    case 'CreateTableTransaction':
+        SelectedMatTransactions($_POST['nameMat']);
+    break;
 }
 
 function SelectMatVariables($name){
@@ -43,5 +46,53 @@ function imgSelMat($name){
         echo $row['ozm'];
     }
     sqlsrv_close($conn);
+}
+
+function SelectedMatTransactions($name){
+    include   "../sql_connect.php";
+    $query_ = "select peoples.Second_name,peoples.First_name,peoples.Last_name,mat_date,mat_qty,spisanie_or_dobavlenie 
+    from history join peoples on history.people = peoples.id join materials on history.mat_id = materials.id where name_mat='$name'";
+    
+    CreateTableTransactions(sqlsrv_query($conn,$query_));
+    sqlsrv_close($conn);
+}
+function CreateTableTransactions($stmt){
+    echo "<table class=\"tableMats\">
+                <thead id=\"material_table_head\">
+                	<tr>
+                        <th>Фамилия</th>
+                        <th>Имя</th>
+                        <th>Отчество</th>
+                        <th>Когда</th>
+                        <th>В количестве</th>
+                        <th>Действие</th>
+                	</tr>
+                </thead>
+                <tbody id=\"containerItems\">";
+                    $rows = sqlsrv_has_rows( $stmt );
+                    if ($rows === false)
+                        echo "<tr><td>Транзакций не обнаружено</td</tr";    
+                        
+    				while($row = sqlsrv_fetch_array($stmt)){
+                        $sod = "";
+                        if($row['spisanie_or_dobavlenie'])
+                            $sod="Внёс"; 
+                        else
+                            $sod="Забрал";
+  
+        				echo "
+                		<tr class=\"transactionRow\" onclick=\"selectTd(this)\">
+                    		<td class=\"colSN\">",$row['Second_name'],"</td>	
+                    		<td class=\"colFN\">",$row['First_name'],"</td>
+                    		<td class=\"colLN\">",$row['Last_name'],"</td>
+                    		<td class=\"colDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
+                            <td class=\"colQty\">",$row['mat_qty'],"</td>
+                    		<td class=\"colSod\">",$sod,"</td>
+               	 		</tr>
+        				";
+    				}
+    				echo "
+				</tbody>
+            </table>";
 }
 ?>

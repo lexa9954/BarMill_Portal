@@ -692,9 +692,10 @@ input, input:hover, input:focus {
 	height: 100%;
 	min-height: 50px; /* Костыль! нужно смотреть таблицу по перемещениям*/
 	padding: 15px;
-    transition: all var(--chartAnim) cubic-bezier(.35, .09, .91, .69);
+    transition: all var(--transAnim) cubic-bezier(.35, .09, .91, .69);
 /*  	transition: all 200ms cubic-bezier(.35, .09, .91, .69);*/
 }
+
 
 .hidden {
 	display: none;

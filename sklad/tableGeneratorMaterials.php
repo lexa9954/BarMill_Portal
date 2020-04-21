@@ -69,15 +69,13 @@ function CreateTableAllMaterials($stmt){
                     	<th class=\"columnOZM\">
 							<input type=\"radio\" name=\"lname\" value=\"not_changed\" id=\"resetSort\">
 							
-							<label for=\"resetSort\" class=\"resetSort\"  id=\"resetSort-svg\">";
+							<label for=\"resetSort\" class=\"resetSort\" onclick=\"close_all_sidebar()\" id=\"resetSort-svg\">";
   								require dirname(__FILE__) . '/../sklad/sys_img/resetSort.svg';	echo "							
 							</label>
 							
-							<label for=\"select2\" class=\"select2\"  id=\"searchOZM\">";							
-  								require dirname(__FILE__) . '/../sklad/sys_img/searchOZM.svg';	echo "						
-							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"bg\" checked />
+							<label for=\"select2\" class=\"select2\"  onclick=\"show_overlay()\" id=\"searchOZM\">";				
+  								require dirname(__FILE__) . '/../sklad/sys_img/searchOZM.svg';	echo "
 							<input type=\"radio\" name=\"lname\" value=\"not_changed\" id=\"select2\">
-    						<label class=\"bg\" for=\"bg\"></label>
 							<input type=\"number\" id=\"lname\" name=\"lname\" onkeydown=\"searchOzmEnter(event)\" min=\"111\" max=\"9999999999\">
 							</label> 
 							

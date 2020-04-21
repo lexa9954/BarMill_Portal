@@ -3,12 +3,10 @@
 function GenerateCategories(){ 
     require "../sql_connect.php";
     echo "
-    <label for=\"select\" class=\"select\">";  								
-		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "		
-		<input type=\"radio\" name=\"ListCat\" value=\"not_changed\" id=\"bg\" checked />
-    	<input type=\"radio\" name=\"ListCat\" value=\"not_changed\" id=\"select\">
-    	<label class=\"bg\" for=\"bg\"></label>";
-    		echo "<div class=\"items\">";
+    <label for=\"select\" class=\"select\" onclick=\"show_overlay()\" id=\"select_btn\">";  								
+		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
+    	<input type=\"radio\" name=\"ListCat\" value=\"not_changed\" id=\"select\">";
+    		echo "<div class=\"items\" onclick=\"close_all_sidebar()\">";
     		$query_select_categor ="select  id,nameC from categories";
     		$stmt = sqlsrv_query($conn,$query_select_categor);
     		$counter = 0;
@@ -34,11 +32,9 @@ function createListItem($id,$name,$count,$functionName,$listName){
 // Фильтр по количеству
 function GenerateQty(){
     echo "
-    <label for=\"select1\" class=\"select1\">";  								
-		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "	
-    	<input type=\"radio\" name=\"ListQty\" value=\"not_changed\" id=\"bg\" checked />
-    	<input type=\"radio\" name=\"ListQty\" value=\"not_changed\" id=\"select1\">
-    	<label class=\"bg\" for=\"bg\"></label>";
+    <label for=\"select1\" class=\"select1\" onclick=\"show_overlay()\"  id=\"select1_btn\">";  								
+		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
+    	<input type=\"radio\" name=\"ListQty\" value=\"not_changed\" id=\"select1\">";
     		echo "<div class=\"items\">";
     		createListItem(0,"Все",0,"SelectQty();","ListQty");
     		createListItem(1,"> min",1,"SelectQty();","ListQty");

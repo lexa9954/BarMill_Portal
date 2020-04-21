@@ -69,11 +69,11 @@ function CreateTableAllMaterials($stmt){
                     	<th class=\"columnOZM\">
 							<input type=\"radio\" name=\"lname\" value=\"not_changed\" id=\"resetSort\">
 							
-							<label class=\"resetSort\" for=\"resetSort\">";
+							<label for=\"resetSort\" class=\"resetSort\"  id=\"resetSort-svg\">";
   								require dirname(__FILE__) . '/../sklad/sys_img/resetSort.svg';	echo "							
 							</label>
 							
-							<label for=\"select2\" class=\"select2\">";							
+							<label for=\"select2\" class=\"select2\"  id=\"searchOZM\">";							
   								require dirname(__FILE__) . '/../sklad/sys_img/searchOZM.svg';	echo "						
 							<input type=\"radio\" name=\"listQty\" value=\"not_changed\" id=\"bg\" checked />
 							<input type=\"radio\" name=\"lname\" value=\"not_changed\" id=\"select2\">
@@ -81,13 +81,17 @@ function CreateTableAllMaterials($stmt){
 							<input type=\"number\" id=\"lname\" name=\"lname\" onkeydown=\"searchOzmEnter(event)\" min=\"111\" max=\"9999999999\">
 							</label> 
 							
-							<div class=\"columnHeader\">ОЗМ</div>";							
-  								require dirname(__FILE__) . '/../sklad/sys_img/sortByOZM.svg';	echo "						
+							<div class=\"columnHeader\">ОЗМ</div>	
+							<label  id=\"sortByOZM\">";
+  								require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "
+							</label>
 						</th>
 						
                     	<th class=\"columnName\">
-						<div class=\"columnHeader\">Наименование</div>";							
-  								require dirname(__FILE__) . '/../sklad/sys_img/sortByName.svg';	echo "
+							<div class=\"columnHeader\">Наименование</div>	
+							<label  id=\"sortByName\">";
+  								require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "
+							</label>
 						</th>
 						
                     	<th class=\"columnQty\">";
@@ -99,9 +103,12 @@ function CreateTableAllMaterials($stmt){
                     				GenerateCategories();
               						echo "							
                     	</th>
+						
                     	<th class=\"columnDate\" >
-							<div class=\"columnHeader\">Последнее поступление</div>";						
-  								require dirname(__FILE__) . '/../sklad/sys_img/sortByDate.svg';	echo "
+							<div class=\"columnHeader\">Последнее поступление</div>	
+							<label  id=\"sortByDate\">";
+  								require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "
+							</label>
 						</th>
                 	</tr>
                 </thead>

@@ -681,8 +681,8 @@ input, input:hover, input:focus {
 	width: auto;
     height: 300px;
 	max-height: 300px;
-	min-height: 300px;	
-  	transition: all 200ms cubic-bezier(.35, .09, .91, .69);
+	min-height: 300px;
+    transition: all 300ms cubic-bezier(.35, .09, .91, .69);
 }
 
 /*Плиткb с каталогом и информацией о перемещении*/
@@ -690,8 +690,9 @@ input, input:hover, input:focus {
 	display: block;
 	height: 100%;
 	min-height: 50px; /* Костыль! нужно смотреть таблицу по перемещениям*/
-	padding: 15px;	
-  	transition: all 200ms cubic-bezier(.35, .09, .91, .69);
+	padding: 15px;
+    transition: all var(--chartAnim) cubic-bezier(.35, .09, .91, .69);
+/*  	transition: all 200ms cubic-bezier(.35, .09, .91, .69);*/
 }
 
 .test {

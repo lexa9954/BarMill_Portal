@@ -48,12 +48,12 @@ function SelectMats($categor,$search,$min,$sort){
     }
         
     
-    $query_select_mats = "select distinct name_mat,mat_box_polka.qty,min,max,mat_box_polka.id_box,mat_box_polka.id_polka,ozm,ediniciIzmerenija.edinica_izmerenija,nameC,max(mat_date) 'mat_date' from materials join history on history.mat_id = materials.id 
+    $query_select_mats = "select distinct name_mat,mat_box_polka.qty,min,max,mat_box_polka.id_box,mat_box_polka.id_polka,ozm,ediniciIzmerenija.edinica_izmerenija,nameC,max(mat_date) 'mat_date',ediniciIzmerenija.edinica_izmerenija  from materials join history on history.mat_id = materials.id 
     inner join ediniciIzmerenija on ediniciIzmerenija.id = materials.edinica_izmerenija 
     inner join mat_box_polka on mat_box_polka.id_mat = materials.id 
     inner join categories on categories.id = materials.categor 
     where spisanie_or_dobavlenie=1 and (deleted_mat is null or deleted_mat = 0) $query_select_categor $query_search_name $query_select_min 
-    group by materials.name_mat,mat_box_polka.qty,min,max,mat_box_polka.id_box,mat_box_polka.id_polka,ozm,ediniciIzmerenija.edinica_izmerenija,nameC
+    group by materials.name_mat,mat_box_polka.qty,min,max,mat_box_polka.id_box,mat_box_polka.id_polka,ozm,ediniciIzmerenija.edinica_izmerenija,nameC,ediniciIzmerenija.edinica_izmerenija 
     $query_sort_by";
     CreateTableAllMaterials(sqlsrv_query($conn,$query_select_mats));
     sqlsrv_close($conn);
@@ -121,7 +121,7 @@ function CreateTableAllMaterials($stmt){
                 		<tr class=\"$classMin\" onclick=\"selectTd(this)\">
                     		<td class=\"columnOZM\">",$row['ozm'],"</td>					
                     		<td class=\"itemNameTD\">",$row['name_mat'],"</td>
-                    		<td class=\"columnQty\">",$row['qty'],"</td>
+                    		<td class=\"columnQty\">",$row['qty'],$row['edinica_izmerenija'],"</td>
                     		<td class=\"columnCategory\">",$row['nameC'],"</td>
                     		<td class=\"columnDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                	 		</tr>

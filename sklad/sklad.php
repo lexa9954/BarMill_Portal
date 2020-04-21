@@ -48,14 +48,10 @@
 			</div>  		  			
    		</div>
    		<div class="material_info">
-   			<div class="test">
    				Здесь информация о min-max категории и другое
-   			</div>
    		</div>
    		<div class="material_spec slide hidden">
-   			<div class="test">
    				Здесь будет спецификация материала в зависимости от категории (мощность, кол-во оборотов, рабочее напряжение для электродвигателей; длина, количество жил, сечение для кабеля и т.д.)
-   			</div>
    		</div>
    	</div>
 	<div class="WH_right_column">

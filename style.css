@@ -673,6 +673,7 @@ input, input:hover, input:focus {
 	height: 100%;
 	padding: 15px;	
   	transition: all 200ms cubic-bezier(.35, .09, .91, .69);
+	overflow: hidden;
 }
 
 /*Плитка с графиком*/
@@ -692,11 +693,6 @@ input, input:hover, input:focus {
 	min-height: 50px; /* Костыль! нужно смотреть таблицу по перемещениям*/
 	padding: 15px;	
   	transition: all 200ms cubic-bezier(.35, .09, .91, .69);
-}
-
-.test {
-	height: 100%;
-	overflow: hidden;
 }
 
 .hidden {
@@ -822,12 +818,6 @@ input, input:hover, input:focus {
 	margin-left: 5px;
 }
 
-/*
-.columnOZM .thead-svg {
-	position: absolute;
-}
-*/
-
 .thead-svg path {
 	fill: #a5afba;
 }
@@ -843,11 +833,10 @@ input, input:hover, input:focus {
 }
 
 .items {
-	animation: fadeOut 1000ms cubic-bezier(0.46, 0.01, 0.65, 0.67) 1 forwards; 
-  	display: block;
-	max-height: 100px;
+	animation: fadeOut 300ms cubic-bezier(0.46, 0.01, 0.65, 0.67) 1 forwards; 
+  	display: none;
   	position: absolute;
-	top: 0;
+	top: 25px;
   	overflow-y: auto;
   	cursor: pointer;
 	z-index: 11;
@@ -869,8 +858,9 @@ input, input:hover, input:focus {
 }
 
 #select:checked ~ .items {
-  	top: 25px;
+	display: block;
 	z-index: 101;
+	max-height: 100px;
 }
 
 .resetSort {
@@ -883,8 +873,9 @@ input, input:hover, input:focus {
 }
 
 #select1:checked ~ .items {
-  	top: 25px;
+	display: block;
 	z-index: 101;
+	max-height: 100px;
 }
 
 #select:checked ~ .items label, #select1:checked ~ .items label, #select2:checked ~ #lname {

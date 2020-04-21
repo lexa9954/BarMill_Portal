@@ -111,6 +111,13 @@
         var trans = document.querySelector('.material_trans');
         var trans_btn = document.getElementById('trans_btn');
         trans_chkBox.addEventListener("change",function(){displayBlockOrNone(trans_btn,trans,this);});
+        
+        window.addEventListener("resize", displayWindowSize);
+    }
+    function displayWindowSize(){
+        let rootCss = document.documentElement;
+        var heightMatTable = document.querySelector('#material_table').offsetHeight;
+        rootCss.style.setProperty('--transAnim', (heightMatTable/1.5)+"ms");
     }
 	//Здесь функция скрытие/открытие плиток кнопками навигационной панели под картинкой
     function displayBlockOrNone(_btn,_block,_chk){
@@ -187,9 +194,6 @@
                 console.log("Error "+e);
             }
         });
-        
-        let rootCss = document.documentElement;
-        rootCss.style.setProperty('--chartAnim', (300/1.5)+"ms");
     }
     /*Выбор материала в таблице*/
     function selectTd(e){

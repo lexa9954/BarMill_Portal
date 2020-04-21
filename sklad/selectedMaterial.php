@@ -50,8 +50,10 @@ function imgSelMat($name){
 
 function SelectedMatTransactions($name){
     include   "../sql_connect.php";
-    $query_ = "select peoples.Second_name,peoples.First_name,peoples.Last_name,mat_date,mat_qty,spisanie_or_dobavlenie 
-    from history join peoples on history.people = peoples.id join materials on history.mat_id = materials.id where name_mat='$name'";
+    $query_ = "select peoples.Second_name,peoples.First_name,peoples.Last_name,mat_date,mat_qty,spisanie_or_dobavlenie,ediniciIzmerenija.edinica_izmerenija  
+    from history join peoples on history.people = peoples.id join materials on history.mat_id = materials.id 
+    join ediniciIzmerenija on materials.edinica_izmerenija=ediniciIzmerenija.id 
+    where name_mat='$name'";
     
     CreateTableTransactions(sqlsrv_query($conn,$query_));
     sqlsrv_close($conn);
@@ -82,7 +84,7 @@ function CreateTableTransactions($stmt){
                 		<tr class=\"transactionRow\" onclick=\"selectTd(this)\">
                             <td class=\"colDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                             <td class=\"colSod\">",$sod,"</td>
-                            <td class=\"colQty\">",$row['mat_qty'],"</td>
+                            <td class=\"colQty\">",$row['mat_qty'],$row['edinica_izmerenija'],"</td>
                     		<td class=\"colFio\">",$row['Second_name']," ",$row['First_name']," ",$row['Last_name'],"</td>	
                	 		</tr>
         				";

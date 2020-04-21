@@ -25,17 +25,17 @@
 					</label>
    			<!-- Кнопка отображения характеристики материала --> 
   				<label for="spec_chkBox" id="spec_btn" class="material_nav_btn closeTab">
-   					<input type="checkbox" id="spec_chkBox">
+   					<input type="checkbox" id="spec_chkBox" disabled>
   					<?php	require "sklad/sys_img/spec.svg";?>
 					</label>
    			<!-- Кнопка отображения графика перемещения материала -->
   				<label for="chart_chkBox" id="chart_btn" class="material_nav_btn closeTab">
-   					<input type="checkbox" id="chart_chkBox">
+   					<input type="checkbox" id="chart_chkBox" disabled>
   					<?php	require "sklad/sys_img/chart1.svg";?>
 					</label>
    			<!-- Кнопка отображения таблицы перемещения материала --> 
   				<label for="trans_chkBox" id="trans_btn" class="material_nav_btn closeTab">
-   					<input type="checkbox" id="trans_chkBox">
+   					<input type="checkbox" id="trans_chkBox" disabled>
   					<?php	require "sklad/sys_img/trans1.svg";?>
 					</label>
 			</form>
@@ -55,7 +55,7 @@
    		</div>
    	</div>
 	<div class="WH_right_column">
-   		<div class="material_chart slide hidden">
+   		<div id="myChartParent" class="material_chart slide hidden">
                 <canvas id="myChart"></canvas>
    		</div>
 		<div class="material_catalog" id="material_table">
@@ -72,6 +72,8 @@
     var selCatId =-1;
     var minQty = "";
     var sortType = "";
+    var matInfoForGrafic;
+    
     $(document).ready(function(){
         StartDocument();
     });
@@ -100,7 +102,11 @@
         // Управление отображением плитки с графиком
         var material_chart = document.querySelector('.material_chart');
         var material_chart_btn = document.getElementById('chart_btn');
-        chart_chkBox.addEventListener("change",function(){displayBlockOrNone(material_chart_btn,material_chart,this);});
+        chart_chkBox.addEventListener("change",function(){displayBlockOrNone(material_chart_btn,material_chart,this);
+            myChartParent.innerHTML = '<canvas id="myChart"></canvas>';
+            if(this.checked)
+                setTimeout(() => { createGrafik(matInfoForGrafic); }, 350);                             
+        });
         // Управление отображением плитки с информацией о перемещении материала
         var trans = document.querySelector('.material_trans');
         var trans_btn = document.getElementById('trans_btn');
@@ -182,6 +188,8 @@
             }
         });
         
+        let rootCss = document.documentElement;
+        rootCss.style.setProperty('--chartAnim', (300/1.5)+"ms");
     }
     /*Выбор материала в таблице*/
     function selectTd(e){
@@ -194,7 +202,8 @@
                url: "sklad/selectedMaterial.php",
                data: {action:'infoMatGrafic', nameMat:selNameMat},
                success: function(result){
-                   createGrafik(result);
+                   matInfoForGrafic = result;
+                    createGrafik(result);
                    DocumentReady();
                }
            });
@@ -217,12 +226,15 @@
                    $( "#transactions_table" ).html( result );
                }
            });
-        
+        trans_chkBox.disabled  = false;
+        chart_chkBox.disabled  = false;
+        spec_chkBox.disabled  = false;
         selRowNow = selNameMat;
     }
     
     /*Рисуем график*/
     function createGrafik(selMatInfo){
+        myChartParent.innerHTML = '<canvas id="myChart"></canvas>';
         var infoMat = selMatInfo;
         var ctx = document.querySelector('#myChart');
         var chart    = document.getElementById('myChart').getContext('2d'),

@@ -4,15 +4,24 @@
 	<script>	
 		
 		//скрипт движения левой менюшки
-		function move_left_sidebar() {		document.getElementById("interface").classList.toggle('move_left_sidebar');
+		function move_left_sidebar() {
+			document.getElementById("interface").classList.toggle('move_left_sidebar');
 		}
 		
 		//скрипт движения менюшки		
-		function move_right_sidebar() {		document.getElementById("interface").classList.toggle('move_right_sidebar');
+		function move_right_sidebar() {
+			document.getElementById("interface").classList.toggle('move_right_sidebar');
 		}
 		
 		//скрипт скрывания менюшек	
-		function close_all_sidebar() {		document.getElementById("interface").classList.remove('move_left_sidebar', 'move_right_sidebar');
+		function close_all_sidebar() {
+			document.getElementById("interface").classList.remove('move_left_sidebar', 'move_right_sidebar', 'show_overlay');
+		}
+		
+		//если в контенте нажата кнопка с вызовом меню, затемняет фон	
+		function show_overlay() {
+			document.getElementById("interface").classList.remove('move_left_sidebar', 'move_right_sidebar');
+			document.getElementById("interface").classList.add('show_overlay');
 		}
 		
 	</script>

@@ -557,8 +557,7 @@ input, input:hover, input:focus {
 }
 
 .svg-navigation {
-	max-height: 18px;
-	width: 40px;
+	max-height: 20px;
 	height: 100%;
 }
 
@@ -630,13 +629,13 @@ input, input:hover, input:focus {
   	}
 }
 
-.material_nav_btn.closeTab:hover .svg-navigation path{
+.tableMats label:hover .svg-navigation path, .material_nav_btn.closeTab:hover .svg-navigation path{
 	animation: svg-openTab 200ms cubic-bezier(0.06, 0.4, 0.71, 0.63) 1 forwards;
 	fill: #282933;
 	opacity: 1;
 }
 
-.material_nav_btn.closeTab .svg-navigation path {
+.tableMats label .svg-navigation path, .material_nav_btn.closeTab .svg-navigation path {
 	animation: svg-closeTab 200ms cubic-bezier(0.06, 0.4, 0.71, 0.63) 1 forwards;
 	fill: #282933;
 	opacity: 0.3;
@@ -784,6 +783,10 @@ input, input:hover, input:focus {
 	padding: 0;
 }
 
+#material_table_head label {
+	margin-left: 5px;
+}
+
 /* Поиск по ОЗМ */
 
 #lname {
@@ -818,20 +821,6 @@ input, input:hover, input:focus {
   	display: flex;
 	flex-direction: row;
 	align-items: center;
-}
-
-.thead-svg {
-	max-width: 20px;
-	max-height: 20px;
-	margin-left: 5px;
-}
-
-.thead-svg path {
-	fill: #a5afba;
-}
-
-.thead-svg:hover path {
-	fill: #bf6f6f;
 }
 
 .select2
@@ -872,13 +861,13 @@ input, input:hover, input:focus {
 }
 
 .resetSort {
-	z-index: 2;
+	z-index: 7;
 	display: flex;	
   	align-items: center;
 }
 
 #select2:checked ~ .lname, .columnOZM .resetSort, resetSort-svg, .columnOZM #searchOZM {
-	z-index: 4;
+	z-index: 7;
 }
 
 #select1:checked ~ .items {

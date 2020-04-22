@@ -544,7 +544,7 @@ input, input:hover, input:focus {
 	display: flex;
 	flex-direction: column;
   	align-items: center;	
-  	justify-content: center;
+  	justify-content: flex-end;
 	width: 300px;
 	height: 300px;
 }
@@ -585,7 +585,7 @@ input, input:hover, input:focus {
 	animation: closeTab 200ms cubic-bezier(0.06, 0.4, 0.71, 0.63) 1 forwards;
 }
 
-.material_nav_btn.closeTab:hover {
+.material_nav_btn.closeTab:hover{
 	animation: openTab 200ms cubic-bezier(0.06, 0.4, 0.71, 0.63) 1 forwards;
 	background-color: #ffffff;
 }
@@ -629,16 +629,16 @@ input, input:hover, input:focus {
   	}
 }
 
-.tableMats label:hover .svg-navigation path, .material_nav_btn.closeTab:hover .svg-navigation path{
-	animation: svg-openTab 200ms cubic-bezier(0.06, 0.4, 0.71, 0.63) 1 forwards;
-	fill: #282933;
-	opacity: 1;
-}
-
 .tableMats label .svg-navigation path, .material_nav_btn.closeTab .svg-navigation path {
 	animation: svg-closeTab 200ms cubic-bezier(0.06, 0.4, 0.71, 0.63) 1 forwards;
 	fill: #282933;
 	opacity: 0.3;
+}
+
+.tableMats label:hover .svg-navigation path {
+	animation: svg-openTab 200ms cubic-bezier(0.06, 0.4, 0.71, 0.63) 1 forwards;
+	fill: #282933;
+	opacity: 1;
 }
 
 @keyframes svg-openTab {
@@ -663,14 +663,15 @@ input, input:hover, input:focus {
   	}
 }
 
-#material_name, .material_img img {
-	margin-top: 15px;
+#material_name {
+	margin-bottom: 10px;
 }
 
 /*Свойство картинок пропорционального заполнения плитки с картинкой*/
 .material_img img {
-	max-width: 220px;
-	max-height: 220px;
+	max-width: 70%;
+	max-height: 70%;
+	margin: auto;
 }
 
 /*Плитки с подробной информацией и спецификацией*/
@@ -696,10 +697,9 @@ input, input:hover, input:focus {
 .material_catalog, .material_trans {
 	display: block;
 	height: 100%;
-	min-height: 50px; /* Костыль! нужно смотреть таблицу по перемещениям*/
+	overflow: hidden;
 	padding: 15px;
-    transition: all var(--transAnim) cubic-bezier(.35, .09, .91, .69);
-/*  	transition: all 200ms cubic-bezier(.35, .09, .91, .69);*/
+  	transition: all 300ms cubic-bezier(.35, .09, .91, .69);
 }
 
 
@@ -710,7 +710,7 @@ input, input:hover, input:focus {
 .slide {
 	overflow: hidden;
 	padding: 0 auto;
-	min-height: 50px;
+/*	min-height: 50px;*/
 	height: 0;	
 }
 
@@ -805,22 +805,16 @@ input, input:hover, input:focus {
 	top: 2px;
 	left: 48px;
 	width: 110px;
-	z-index: 4;
   	border: 1px solid #eee;
-/*
-	animation: fadeIn 300ms cubic-bezier(.57,.25,.65,1) 1 forwards;
-  opacity: 0;
-*/
 }
+
 #lname::-webkit-outer-spin-button,
 #lname::-webkit-inner-spin-button {
     display: none;
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
-#lname:focus {
-  outline: 0;
-}
+
 /* Drop-down менюшки */
 .tableMats input
 {
@@ -831,12 +825,7 @@ input, input:hover, input:focus {
   	display: flex;
 	flex-direction: row;
 	align-items: center;
-}
-
-.select2
-{  
- 	cursor: pointer;
-	display: flex;
+	cursor: pointer;
 }
 
 .items {
@@ -849,12 +838,6 @@ input, input:hover, input:focus {
 	z-index: 4;
 }
 
-.items label {
-  	display: none;
-  	padding: 3px 0 3px 10px;
-  	background: white;
-}
-
 @keyframes fadeOut {
 	from {
 		height: 0;
@@ -864,23 +847,15 @@ input, input:hover, input:focus {
   	}
 }
 
-#select:checked ~ .items {
-	display: block;
+#lname, #resetSort, .columnOZM #searchOZM {
+	z-index: 2;
+}
+
+#select2:checked ~ #lname, #resetSort, .columnOZM #searchOZM {
 	z-index: 4;
-	max-height: 100px;
 }
 
-.resetSort {
-	z-index: 7;
-	display: flex;	
-  	align-items: center;
-}
-
-#select2:checked ~ .lname, .columnOZM .resetSort, resetSort-svg, .columnOZM #searchOZM {
-	z-index: 7;
-}
-
-#select1:checked ~ .items {
+#select:checked ~ .items, #select1:checked ~ .items {
 	display: block;
 	z-index: 4;
 	max-height: 100px;
@@ -890,8 +865,10 @@ input, input:hover, input:focus {
   display: block;
 }
 
-#resetSort:focus ~ #lname {
-	display: none;
+.items label {
+  	display: none;
+  	padding: 3px 0 3px 10px;
+  	background: white;
 }
 
 .items label:hover {
@@ -971,5 +948,3 @@ input, input:hover, input:focus {
     text-align: left;
 /*    padding: 4px 40px 4px 5px;*/
 }
-
-

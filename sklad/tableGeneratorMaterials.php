@@ -64,7 +64,7 @@ function CreateTableAllMaterials($stmt){
     include "categoriesGenerator.php";
     echo "
             <table class=\"tableMats\">
-                <thead id=\"material_table_head\">
+                <thead id=\"material_table_head\" class=\"material_table_head\">
                 	<tr>
                     	<th class=\"columnOZM\">
 							<input type=\"radio\" name=\"lname\" value=\"not_changed\" id=\"resetSort\">
@@ -123,7 +123,7 @@ function CreateTableAllMaterials($stmt){
             				$classMin = "zeroItemMatTR";
                         }
         				echo "
-                		<tr class=\"$classMin\" onclick=\"selectTd(this)\">
+                		<tr class=\"tableRow $classMin\" onclick=\"selectTd(this)\">
                     		<td class=\"columnOZM\">",$row['ozm'],"</td>					
                     		<td class=\"itemNameTD\">",$row['name_mat'],"</td>
                     		<td class=\"columnQty\">",$row['qty'],$row['edinica_izmerenija'],"</td>
@@ -135,7 +135,7 @@ function CreateTableAllMaterials($stmt){
     				}
     				echo "
 				</tbody>
-            </table>";
+            </table>";	
 }
 /* ▲ Создание таблицы ▲ */
 

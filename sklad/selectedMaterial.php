@@ -62,10 +62,18 @@ function CreateTableTransactions($stmt){
     echo "<table class=\"tableMats\">
                 <thead id=\"material_table_head\">
                 	<tr>
-                        <th>Дата</th>
-                        <th>Действие</th>
-                        <th>Количество</th>
-                        <th>ФИО</th>
+                        <th class=\"columnDate\">
+							<div class=\"columnHeader\">Дата</div>
+							</th>
+                        <th class=\"colSod\">
+							<div class=\"columnHeader\">Действие</div>
+							</th>
+                        <th class=\"columnQty\">
+							<div class=\"columnHeader\">Количество</div>
+							</th>
+                        <th class=\"colFio\">
+							<div class=\"columnHeader\">ФИО</div>
+							</th>
                 	</tr>
                 </thead>
                 <tbody id=\"containerItems\">";
@@ -82,9 +90,9 @@ function CreateTableTransactions($stmt){
   
         				echo "
                 		<tr class=\"transactionRow\" onclick=\"selectTd(this)\">
-                            <td class=\"colDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
+                            <td class=\"columnDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                             <td class=\"colSod\">",$sod,"</td>
-                            <td class=\"colQty\">",$row['mat_qty'],$row['edinica_izmerenija'],"</td>
+                            <td class=\"columnQty\">",$row['mat_qty'],$row['edinica_izmerenija'],"</td>
                     		<td class=\"colFio\">",$row['Second_name']," ",$row['First_name']," ",$row['Last_name'],"</td>	
                	 		</tr>
         				";

@@ -732,6 +732,12 @@ input, input:hover, input:focus {
 .columnQty, .select1 .items {
 	width: 200px;
 }
+.colSod {
+	width: 200px;
+}
+.colFio {
+	width: 300px;
+}
 .columnCategory, .select .items {
 	width: 200px;
 }
@@ -739,6 +745,9 @@ input, input:hover, input:focus {
 	width: 300px;
 }
 .tableMats thead th:last-child {
+	margin-right: 8px;
+}
+.tableMats tbody td:last-child {
 	margin-right: 8px;
 }
 
@@ -775,7 +784,7 @@ input, input:hover, input:focus {
 
 .tableMats tbody {
   	display: block;
-  	overflow: auto;
+  	overflow-y: auto;
   	width: 100%;
   	height: inherit;
 }
@@ -962,3 +971,5 @@ input, input:hover, input:focus {
     text-align: left;
 /*    padding: 4px 40px 4px 5px;*/
 }
+
+

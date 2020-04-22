@@ -239,12 +239,14 @@
     /*Рисуем график*/
     function createGrafik(selMatInfo){
         myChartParent.innerHTML = '<canvas id="myChart"></canvas>';
+        
         var infoMat = selMatInfo;
         var ctx = document.querySelector('#myChart');
         var chart    = document.getElementById('myChart').getContext('2d'),
     		gradientSpisanie = chart.createLinearGradient(0, 0, 0, 450),
     		gradientVnesenie = chart.createLinearGradient(0, 0, 0, 450),
     		gradientQty = chart.createLinearGradient(0, 0, 0, 450);
+        
 		gradientSpisanie.addColorStop(0, 'rgba(55, 178, 255, 0.5)');
 		gradientSpisanie.addColorStop(0.5, 'rgba(55, 178, 255, 0.2)');
 		gradientSpisanie.addColorStop(1, 'rgba(55, 178, 255, 0)');
@@ -410,7 +412,7 @@
 					yPadding: 10
 					}			
         		};
-		
+		/*
 		var horizonalLinePlugin = {
                 afterDraw: function (chartInstance) {
                     var yScale = chartInstance.scales["y-axis-0"];
@@ -464,7 +466,7 @@
                 }
             };
             Chart.pluginService.register(horizonalLinePlugin);
-        
+        */
         var lineChart = new Chart(ctx, {
           		type: 'line',
           		data: allData,

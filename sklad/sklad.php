@@ -471,7 +471,8 @@
     	}
     
     /*Применение выбираемой категории полю с id*/
-    function SelectCat(){
+    function SelectCat(id){
+        //selCatId = id;
         selCatId = document.querySelector('input[name=ListCat]:checked').value;
         $(document).ready(function(){
            $.ajax({
@@ -486,8 +487,9 @@
         });
     }
     /*Выбор отображения по количеству*/
-    function SelectQty(){
-        minQty = document.querySelector('input[name=ListQty]:checked').value;
+    function SelectQty(id){
+        minQty = id;
+        //minQty = document.querySelector('input[name=ListQty]:checked').value;
         $(document).ready(function(){
            $.ajax({
                type: "POST",

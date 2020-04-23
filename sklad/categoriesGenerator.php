@@ -30,21 +30,47 @@ function createListItem($id,$name,$count,$functionName,$listName){
      <label for=\"",$listName,"[",$count,"]\">$name</label>";
 }
 // Фильтр по количеству
+//function GenerateQty(){
+//    echo "
+//    <label for=\"select1\" class=\"filtr\" onclick=\"show_overlay()\"  id=\"select1_btn\">";  								
+//		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
+//    	<input type=\"radio\" name=\"ListQty\" value=\"not_changed\" id=\"select1\">";
+//    		echo "<div id=\"itemsDD\" onclick=\"close_all_sidebar()\" class=\"items\">";
+//    		createListItem(0,"Все",0,"SelectQty();","ListQty");
+//    		createListItem(1,"> min",1,"SelectQty();","ListQty");
+//    		createListItem(2,"⩽ min",2,"SelectQty();","ListQty");
+//    		createListItem(3,"отсутствует",3,"SelectQty();","ListQty");
+//    		echo "</div>
+//	</label>	
+//	<div class=\"columnHeader\">Количество</div>	
+//	<label id=\"sortByQty\">";
+//  		require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "
+//	</label>";
+//}
+
 function GenerateQty(){
     echo "
-    <label for=\"select1\" class=\"filtr\" onclick=\"show_overlay()\"  id=\"select1_btn\">";  								
-		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
-    	<input type=\"radio\" name=\"ListQty\" value=\"not_changed\" id=\"select1\">";
-    		echo "<div id=\"itemsDD\" onclick=\"close_all_sidebar()\" class=\"items\">";
-    		createListItem(0,"Все",0,"SelectQty();","ListQty");
-    		createListItem(1,"> min",1,"SelectQty();","ListQty");
-    		createListItem(2,"⩽ min",2,"SelectQty();","ListQty");
-    		createListItem(3,"отсутствует",3,"SelectQty();","ListQty");
-    		echo "</div>
-	</label>	
-	<div class=\"columnHeader\">Количество</div>	
-	<label id=\"sortByQty\">";
-  		require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "
-	</label>";
+    <div class=\"filtr\" onclick=\"show_overlay()\">";
+        require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';
+    
+    echo "<div style=\"background:red; position\">";
+        CreateItem("Все","SelectQty(0);");
+        CreateItem("> min","SelectQty(1);");
+        CreateItem("⩽ min","SelectQty(2);");
+        CreateItem("отсутствует","SelectQty(3);");
+    echo "</div>";
+    
+    echo "<div class=\"columnHeader\">Количество</div>";
+    echo "<label id=\"sortByQty\">";
+  		require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	
+    echo "</label>";
+    echo"</div>";
 }
+
+function CreateItem($name,$funcName){
+    echo "<div onclick=\"$funcName\">";
+        echo $name;
+    echo "</div>";
+}
+
 ?>

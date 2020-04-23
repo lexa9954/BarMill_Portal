@@ -78,6 +78,7 @@
         StartDocument();
     });
     function DocumentReady(){
+        close_all_sidebar();
         select2.addEventListener("click", searchOzm);
         /*Инициализация кнопок для сортировки*/
         sortByName.addEventListener("click",function(){sortMats("name_mat");});
@@ -113,6 +114,7 @@
         trans_chkBox.addEventListener("change",function(){displayBlockOrNone(trans_btn,trans,this);});
         
         window.addEventListener("resize", displayWindowSize);
+        displayWindowSize();
     }
     function displayWindowSize(){
         let rootCss = document.documentElement;
@@ -297,8 +299,6 @@
 				pointBackgroundColor: 'white',
 				borderWidth: 1,
           		borderColor: '#ff4f4f',			
-//            	lineTension: 0.3,
-//            	fill: false,
             	data: _qty,
           		};
 
@@ -308,8 +308,6 @@
 				pointBackgroundColor: 'white',
 				borderWidth: 1,			
             	borderColor: '#37b2ff',
-//            	lineTension: 0.3,
-//            	fill: false,
             	data: _qtyS,
           		};
 		
@@ -319,8 +317,6 @@
 				pointBackgroundColor: 'white',
 				borderWidth: 1,			
           		borderColor: '#282933',
-//            	lineTension: 0.3,
-//            	fill: false,
             	data: _qtyV,
           		};
 		
@@ -412,7 +408,7 @@
 					yPadding: 10
 					}			
         		};
-		/*
+		
 		var horizonalLinePlugin = {
                 afterDraw: function (chartInstance) {
                     var yScale = chartInstance.scales["y-axis-0"];
@@ -466,7 +462,7 @@
                 }
             };
             Chart.pluginService.register(horizonalLinePlugin);
-        */
+        
         var lineChart = new Chart(ctx, {
           		type: 'line',
           		data: allData,

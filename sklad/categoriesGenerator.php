@@ -35,7 +35,7 @@ function GenerateQty(){
     <label for=\"select1\" class=\"select1\" onclick=\"show_overlay()\"  id=\"select1_btn\">";  								
 		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
     	<input type=\"radio\" name=\"ListQty\" value=\"not_changed\" id=\"select1\">";
-    		echo "<div class=\"items\">";
+    		echo "<div id=\"itemsDD\" onclick=\"close_all_sidebar()\" class=\"items\">";
     		createListItem(0,"Все",0,"SelectQty();","ListQty");
     		createListItem(1,"> min",1,"SelectQty();","ListQty");
     		createListItem(2,"⩽ min",2,"SelectQty();","ListQty");

@@ -16,12 +16,16 @@
 		//скрипт скрывания менюшек	
 		function close_all_sidebar() {
 			document.getElementById("interface").classList.remove('move_left_sidebar', 'move_right_sidebar', 'show_overlay');
+            select.checked = false;
+            select1.checked = false;
+            select2.checked = false;
 		}
 		
 		//если в контенте нажата кнопка с вызовом меню, затемняет фон	
 		function show_overlay() {
 			document.getElementById("interface").classList.remove('move_left_sidebar', 'move_right_sidebar');
 			document.getElementById("interface").classList.add('show_overlay');
+            
 		}
 		
 	</script>

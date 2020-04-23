@@ -66,6 +66,7 @@ function CreateTableTransactions($stmt){
 							<div class=\"columnHeader\">Дата</div>
 							</th>
                         <th class=\"colSod\">
+							</label>
 							<div class=\"columnHeader\">Действие</div>
 							</th>
                         <th class=\"columnQty\">

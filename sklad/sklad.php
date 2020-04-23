@@ -113,8 +113,26 @@
         var trans_btn = document.getElementById('trans_btn');
         trans_chkBox.addEventListener("change",function(){displayBlockOrNone(trans_btn,trans,this);});
         
+        //
+        filtrUnselectSelect(0);
+        //
+        if($('#material_table').hasScrollBar())
+            material_table.style.margin = "0 8 0 0";
+        //
         window.addEventListener("resize", displayWindowSize);
         displayWindowSize();
+    }
+    function filtrUnselectSelect(U_S){
+        var allDropDowns = document.getElementsByClassName("filtr");
+        for(var i=0;i<allDropDowns.length;i++){
+            if(U_S==0){
+                allDropDowns[i].addEventListener("click",function(){this.classList.add('selected');});
+            }else{
+                allDropDowns[i].classList.remove('selected');
+            }
+        }
+
+
     }
     function displayWindowSize(){
         let rootCss = document.documentElement;

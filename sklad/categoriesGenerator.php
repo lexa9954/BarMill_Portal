@@ -1,34 +1,34 @@
 <?php
 //Фильтр категорий / Генератор для создания категорий в выпадающем списке
-function GenerateCategories(){ 
-    require "../sql_connect.php";
-    echo "
-    <label for=\"select\" class=\"filtr\" onclick=\"show_overlay()\" id=\"select_btn\">";  								
-		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
-    	<input type=\"radio\" name=\"ListCat\" value=\"not_changed\" id=\"select\">";
-    		echo "<div class=\"items\" onclick=\"close_all_sidebar()\">";
-    		$query_select_categor ="select  id,nameC from categories";
-    		$stmt = sqlsrv_query($conn,$query_select_categor);
-    		$counter = 0;
-    		/*Генерация кнопок категорий*/
-    		createListItem(-1,"Все",0,"SelectCat();","ListCat");
-    		while($row = sqlsrv_fetch_array($stmt)){
-    		    $counter++;
-				createListItem($row['id'],$row['nameC'],$counter,"SelectCat();		","ListCat");
-    		}
-    		sqlsrv_close($conn);
-       		echo "</div>
-	</label>	
-	<div class=\"columnHeader\">Категория</div>	
-	<label  id=\"sortByCatName\">";
-  		require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "
-	</label>";
-}
+//function GenerateCategories(){ 
+//    require "../sql_connect.php";
+//    echo "
+//    <label for=\"select\" class=\"filtr\" onclick=\"show_overlay()\" id=\"select_btn\">";  								
+//		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
+//    	<input type=\"radio\" name=\"ListCat\" value=\"not_changed\" id=\"select\">";
+//    		echo "<div class=\"items\" onclick=\"close_all_sidebar()\">";
+//    		$query_select_categor ="select  id,nameC from categories";
+//    		$stmt = sqlsrv_query($conn,$query_select_categor);
+//    		$counter = 0;
+//    		/*Генерация кнопок категорий*/
+//    		createListItem(-1,"Все",0,"SelectCat();","ListCat");
+//    		while($row = sqlsrv_fetch_array($stmt)){
+//    		    $counter++;
+//				createListItem($row['id'],$row['nameC'],$counter,"SelectCat();		","ListCat");
+//    		}
+//    		sqlsrv_close($conn);
+//       		echo "</div>
+//	</label>	
+//	<div class=\"columnHeader\">Категория</div>	
+//	<label  id=\"sortByCatName\">";
+//  		require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "
+//	</label>";
+//}
 //Создание одного экземпляра Option
-function createListItem($id,$name,$count,$functionName,$listName){ 
-    echo "<input onclick=\"$functionName\" type=\"radio\" name=\"$listName\" value=\"",$id,"\" id=\"",$listName,"[",$count,"]\">
-     <label for=\"",$listName,"[",$count,"]\">$name</label>";
-}
+//function createListItem($id,$name,$count,$functionName,$listName){ 
+//    echo "<input onclick=\"$functionName\" type=\"radio\" name=\"$listName\" value=\"",$id,"\" id=\"",$listName,"[",$count,"]\">
+//     <label for=\"",$listName,"[",$count,"]\">$name</label>";
+//}
 // Фильтр по количеству
 //function GenerateQty(){
 //    echo "
@@ -47,6 +47,29 @@ function createListItem($id,$name,$count,$functionName,$listName){
 //  		require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "
 //	</label>";
 //}
+
+function GenerateCategories(){ 
+    require "../sql_connect.php";
+    echo "
+    <div class=\"filtr\" onclick=\"show_overlay()\">";					
+		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';
+        echo "<div style=\"background:red; position\">";
+    		$query_select_categor ="select  id,nameC from categories";
+    		$stmt = sqlsrv_query($conn,$query_select_categor);
+    		/*Генерация кнопок категорий*/
+            CreateItem("Все","SelectCat(-1);");
+    		while($row = sqlsrv_fetch_array($stmt)){
+				CreateItem($row['nameC'],"SelectCat(",$row['id'],");");
+    		}
+    		sqlsrv_close($conn);
+        echo "</div>";
+
+        echo "<div class=\"columnHeader\">Категория</div>";
+        echo "<label id=\"sortByCatName\">";
+            require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	
+        echo "</label>";
+        echo"</div>";
+}
 
 function GenerateQty(){
     echo "

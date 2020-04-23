@@ -3,7 +3,7 @@
 function GenerateCategories(){ 
     require "../sql_connect.php";
     echo "
-    <label for=\"select\" class=\"select\" onclick=\"show_overlay()\" id=\"select_btn\">";  								
+    <label for=\"select\" class=\"filtr\" onclick=\"show_overlay()\" id=\"select_btn\">";  								
 		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
     	<input type=\"radio\" name=\"ListCat\" value=\"not_changed\" id=\"select\">";
     		echo "<div class=\"items\" onclick=\"close_all_sidebar()\">";
@@ -32,7 +32,7 @@ function createListItem($id,$name,$count,$functionName,$listName){
 // Фильтр по количеству
 function GenerateQty(){
     echo "
-    <label for=\"select1\" class=\"select1\" onclick=\"show_overlay()\"  id=\"select1_btn\">";  								
+    <label for=\"select1\" class=\"filtr\" onclick=\"show_overlay()\"  id=\"select1_btn\">";  								
 		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
     	<input type=\"radio\" name=\"ListQty\" value=\"not_changed\" id=\"select1\">";
     		echo "<div id=\"itemsDD\" onclick=\"close_all_sidebar()\" class=\"items\">";

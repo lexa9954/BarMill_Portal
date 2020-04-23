@@ -729,7 +729,7 @@ input, input:hover, input:focus {
 .columnName, .itemNameTD {
 	width: 400px;
 }
-.columnQty, .select1 .items {
+.columnQty, #select_btn .items {
 	width: 200px;
 }
 .colSod {
@@ -738,7 +738,7 @@ input, input:hover, input:focus {
 .colFio {
 	width: 300px;
 }
-.columnCategory, .select .items {
+.columnCategory, #select1_btn .items {
 	width: 200px;
 }
 .columnDate {
@@ -821,7 +821,7 @@ input, input:hover, input:focus {
   display: none;
 }
 
-.select, .select1, select2 {
+.filtr {
   	display: flex;
 	flex-direction: row;
 	align-items: center;

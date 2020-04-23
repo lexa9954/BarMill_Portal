@@ -732,6 +732,9 @@ input, input:hover, input:focus {
 .columnQty, #select_btn .items {
 	width: 200px;
 }
+.columnEdIzm {
+	width: 100px;
+}
 .colSod {
 	width: 200px;
 }

@@ -96,10 +96,10 @@ function CreateTableAllMaterials($stmt){
                     	<th class=\"columnQty\">";
                                 	GenerateQty();
               						echo "							
-                    	</th class=\"columnEdIzm\">
-                        <th>
-                            Ед.Изм.
-                        </th>
+                    	</th>
+                        <th class=\"columnEdIzm\">
+							<div class=\"columnHeader\">Ед.Изм.</div
+						</th>
                     	<th class=\"columnCategory\">";
                     				GenerateCategories();
               						echo "							
@@ -130,7 +130,7 @@ function CreateTableAllMaterials($stmt){
                     		<td class=\"columnOZM\">",$row['ozm'],"</td>					
                     		<td class=\"itemNameTD\">",$row['name_mat'],"</td>
                     		<td class=\"columnQty\">",$row['qty'],"</td>
-                            <td>",$row['edinica_izmerenija'],"</td>
+                            <td class=\"columnEdIzm\">",$row['edinica_izmerenija'],"</td>
                     		<td class=\"columnCategory\">",$row['nameC'],"</td>
                     		<td class=\"columnDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                	 		</tr>

@@ -96,8 +96,10 @@ function CreateTableAllMaterials($stmt){
                     	<th class=\"columnQty\">";
                                 	GenerateQty();
               						echo "							
-                    	</th>
-                        
+                    	</th class=\"columnEdIzm\">
+                        <th>
+                            Ед.Изм.
+                        </th>
                     	<th class=\"columnCategory\">";
                     				GenerateCategories();
               						echo "							
@@ -127,7 +129,8 @@ function CreateTableAllMaterials($stmt){
                 		<tr class=\"tableRow $classMin\" onclick=\"selectTd(this)\">
                     		<td class=\"columnOZM\">",$row['ozm'],"</td>					
                     		<td class=\"itemNameTD\">",$row['name_mat'],"</td>
-                    		<td class=\"columnQty\">",$row['qty'],$row['edinica_izmerenija'],"</td>
+                    		<td class=\"columnQty\">",$row['qty'],"</td>
+                            <td>",$row['edinica_izmerenija'],"</td>
                     		<td class=\"columnCategory\">",$row['nameC'],"</td>
                     		<td class=\"columnDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                	 		</tr>

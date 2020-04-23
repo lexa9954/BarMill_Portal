@@ -71,6 +71,9 @@ function CreateTableTransactions($stmt){
                         <th class=\"columnQty\">
 							<div class=\"columnHeader\">Количество</div>
 							</th>
+                        <th class=\"columnEdIzm\">
+							<div class=\"columnHeader\">Ед.Изм.</div>
+							</th>
                         <th class=\"colFio\">
 							<div class=\"columnHeader\">ФИО</div>
 							</th>
@@ -92,7 +95,8 @@ function CreateTableTransactions($stmt){
                 		<tr class=\"tableRow\" onclick=\"selectTd(this)\">
                             <td class=\"columnDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                             <td class=\"colSod\">",$sod,"</td>
-                            <td class=\"columnQty\">",$row['mat_qty'],$row['edinica_izmerenija'],"</td>
+                            <td class=\"columnQty\">",$row['mat_qty'],"</td>
+                            <td class=\"colSod\">",$row['edinica_izmerenija'],"</td>
                     		<td class=\"colFio\">",$row['Second_name']," ",$row['First_name']," ",$row['Last_name'],"</td>	
                	 		</tr>
         				";

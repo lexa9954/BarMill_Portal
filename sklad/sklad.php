@@ -58,12 +58,12 @@
    		<div id="myChartParent" class="material_chart slide hidden">
                 <canvas id="myChart"></canvas>
    		</div>
-		<div class="material_catalog" id="material_table">
-		<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
-		</div>
   		<div class="material_trans slide hidden" id="transactions_table">
   		<!-- В данный блок интегрируется "selectedMaterial.php" посредством AJAX -->
   		</div>
+		<div class="material_catalog" id="material_table">
+		<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
+		</div>
    	</div>
 </div>
 
@@ -87,7 +87,7 @@
         sortByQty.addEventListener("click",function(){sortMats("qty");});
         sortByOZM.addEventListener("click",function(){sortMats("ozm");});
         resetSort.addEventListener("click",resetFiltr);
-        
+		
         // Управление отображением плитки с каталогом (таблица материалов)
         var catalog = document.querySelector('.material_catalog');
         var catalog_btn = document.getElementById('catalog_btn');

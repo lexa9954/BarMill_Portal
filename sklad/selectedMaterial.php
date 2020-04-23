@@ -60,7 +60,7 @@ function SelectedMatTransactions($name){
 }
 function CreateTableTransactions($stmt){
     echo "<table class=\"tableMats\">
-                <thead id=\"material_table_head\">
+                <thead id=\"material_table_head\" class=\"material_table_head\">
                 	<tr>
                         <th class=\"columnDate\">
 							<div class=\"columnHeader\">Дата</div>
@@ -89,7 +89,7 @@ function CreateTableTransactions($stmt){
                             $sod="Забрал";
   
         				echo "
-                		<tr class=\"transactionRow\" onclick=\"selectTd(this)\">
+                		<tr class=\"tableRow\" onclick=\"selectTd(this)\">
                             <td class=\"columnDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                             <td class=\"colSod\">",$sod,"</td>
                             <td class=\"columnQty\">",$row['mat_qty'],$row['edinica_izmerenija'],"</td>

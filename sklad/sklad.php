@@ -157,10 +157,10 @@
         filtrUnselectSelect(0);
         //
         var vs = containerItems.scrollHeight > containerItems.clientHeight; 
-        if(vs){
-            var items = containerItems.querySelectorAll("#containerItems #item");
+        if(!vs){
+            var items = containerItems.querySelectorAll("#containerItems .columnDate");
             for(var i=0;i<items.length;i++){
-                items[i].style.margin = "0 -8px 0 0";
+                items[i].style.marginRight = "8px";
             }
         }
             

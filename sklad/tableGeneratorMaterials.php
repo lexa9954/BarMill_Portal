@@ -93,16 +93,36 @@ function CreateTableAllMaterials($stmt){
 							</label>
 						</th>
 						
-                    	<th class=\"columnQty\">";
+                    	<th class=\"columnQty\">
+							<div class=\"filtr\" onclick=\"show_overlay()\">
+    							<label>";
+									require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
+								</label>";
                                 	GenerateQty();
-              						echo "							
+              						echo "
+							</div>
+							<div class=\"columnHeader\">Количество</div>
+							<label id=\"sortByQty\">";
+  								require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "
+							</label>							
                     	</th>
+						
                         <th class=\"columnEdIzm\">
 							<div class=\"columnHeader\">Ед.Изм.</div
 						</th>
-                    	<th class=\"columnCategory\">";
+						
+                    	<th class=\"columnCategory\">
+    						<div class=\"filtr\" onclick=\"show_overlay()\">					
+								<label>";
+									require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
+								</label>";
                     				GenerateCategories();
-              						echo "							
+              						echo "
+							</div>
+							<div class=\"columnHeader\">Категория</div>
+							<label id=\"sortByCatName\">";
+        					    require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "    
+							</label>							
                     	</th>
 						
                     	<th class=\"columnDate\" >

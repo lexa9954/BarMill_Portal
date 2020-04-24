@@ -1,4 +1,4 @@
-
+<!--
 <div class="MaterialPage">
     <div class="barMaterial">
         <Label id="nameMat" class="preview">Материал</Label>
@@ -146,3 +146,4 @@ function createGrafik(){
         });
     }
 </script>
+-->

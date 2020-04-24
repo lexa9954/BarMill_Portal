@@ -9,19 +9,22 @@
 ?>
 <!-- Доступ на страницу только после авторизации -->
 
+	<!-- Левая колонка с плитками -->
 	<div class="WH_left_column">
+  		   		
+   		<!-- Плитка с фотографией и навигационной панелью -->
    		<div class="material_main_panel">
    		<!-- Навигационная панель под картинкой -->
    			<form class="material_navigation" action="">
    			<!-- Кнопка отображения каталога -->
   				<label for="catalog_chkBox" id="catalog_btn" class="material_nav_btn openTab">
   					<input type="checkbox" id="catalog_chkBox" checked>
-  					<?php	require "sklad/sys_img/catalog1.svg";?>
+  					<?php	require "sklad/sys_img/catalog.svg";?>
 				</label>
    			<!-- Кнопка отображения информации о материале -->
   				<label for="info_chkBox" id="info_btn" class="material_nav_btn openTab">
    					<input type="checkbox" id="info_chkBox" checked>
-  					<?php	require "sklad/sys_img/info1.svg";?>
+  					<?php	require "sklad/sys_img/info.svg";?>
 					</label>
    			<!-- Кнопка отображения характеристики материала --> 
   				<label for="spec_chkBox" id="spec_btn" class="material_nav_btn closeTab">
@@ -31,12 +34,12 @@
    			<!-- Кнопка отображения графика перемещения материала -->
   				<label for="chart_chkBox" id="chart_btn" class="material_nav_btn closeTab">
    					<input type="checkbox" id="chart_chkBox" disabled>
-  					<?php	require "sklad/sys_img/chart1.svg";?>
+  					<?php	require "sklad/sys_img/chart.svg";?>
 					</label>
    			<!-- Кнопка отображения таблицы перемещения материала --> 
   				<label for="trans_chkBox" id="trans_btn" class="material_nav_btn closeTab">
    					<input type="checkbox" id="trans_chkBox" disabled>
-  					<?php	require "sklad/sys_img/trans1.svg";?>
+  					<?php	require "sklad/sys_img/trans.svg";?>
 					</label>
 			</form>
   			
@@ -47,10 +50,12 @@
    				</div> <!-- Сюда выводить имя выбранного материала -->
 			</div>  		  			
    		</div>
-   		<div class="material_info">
+   		
+   		<!-- Плитка с подробной информацией -->
+   		<div class="bar" id="info">
 			<div class="barHeader">
 				<div class="barLogo">
-  					<?php	require "sklad/sys_img/info1.svg";?>
+  					<?php	require "sklad/sys_img/info.svg";?>
 				</div>
 				<div class="barTitle">Подробная информация</div>
 				<div class="barClose">
@@ -61,7 +66,9 @@
    				Здесь информация о min-max категории и другое				
 			</div>
    		</div>
-   		<div class="material_spec slide hidden">
+   		
+   		<!-- Плитка с характеристиками -->
+   		<div class="bar slide hidden" id="spec">
 			<div class="barHeader">
 				<div class="barLogo">
   					<?php	require "sklad/sys_img/spec.svg";?>
@@ -72,15 +79,19 @@
 				</div>
 			</div>
 			<div class="barContent">
-   				Здесь будет спецификация материала в зависимости от категории (мощность, кол-во оборотов, рабочее напряжение для электродвигателей; длина, количество жил, сечение для кабеля и т.д.)				
-			</div>
+   				Здесь будет спецификация материала в зависимости от категории (мощность, кол-во оборотов, рабочее напряжение для электродвигателей; длина, количество жил, сечение для кабеля и т.д.)
+   			</div>
    		</div>
    	</div>
+   	
+   	<!-- Правая колонка с плитками -->
 	<div class="WH_right_column">
+  		
+   		<!-- Плитка с графиком -->
    		<div class="material_chart slide hidden">
 			<div class="barHeader">
 				<div class="barLogo">
-  					<?php	require "sklad/sys_img/chart1.svg";?>
+  					<?php	require "sklad/sys_img/chart.svg";?>
 				</div>
 				<div class="barTitle">График</div>
 				<div class="barClose">
@@ -91,10 +102,12 @@
                 <canvas id="myChart"></canvas>
             </div>
    		</div>
+   		
+   		<!-- Плитка с транзакциями (инф. о перемещении материалов) -->
   		<div class="material_trans slide hidden">
   			<div class="barHeader">
 				<div class="barLogo">
-  					<?php	require "sklad/sys_img/trans1.svg";?>
+  					<?php	require "sklad/sys_img/trans.svg";?>
 				</div>
 				<div class="barTitle">История перемещений</div>
 				<div class="barClose">
@@ -105,10 +118,12 @@
   				<!-- В данный блок интегрируется "selectedMaterial.php" посредством AJAX -->			
 			</div>
   		</div>
+  		
+  		<!-- Плитка с каталогом -->
 		<div class="material_catalog">
 			<div class="barHeader">
 				<div class="barLogo">
-  					<?php	require "sklad/sys_img/catalog1.svg";?>
+  					<?php	require "sklad/sys_img/catalog.svg";?>
 				</div>
 				<div class="barTitle">Каталог</div>
 				<div class="barClose">
@@ -119,6 +134,7 @@
 				<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->		
 			</div>
 		</div>
+  	
    	</div>
 </div>
 
@@ -148,11 +164,11 @@
         var catalog_btn = document.getElementById('catalog_btn');
         catalog_chkBox.addEventListener("change",function(){displayBlockOrNone(catalog_btn,catalog,this);});
         // Управление отображением плитки с информацией о материале
-        var info = document.querySelector('.material_info');
+        var info = document.getElementById('info');
         var info_btn = document.getElementById('info_btn');
         info_chkBox.addEventListener("change",function(){displayBlockOrNone(info_btn,info,this);});
         // Управление отображением плитки с характеристиками материала
-        var spec = document.querySelector('.material_spec');
+        var spec = document.getElementById('spec');
         var spec_btn = document.getElementById('spec_btn');
         spec_chkBox.addEventListener("change",function(){displayBlockOrNone(spec_btn,spec,this);});
         // Управление отображением плитки с графиком

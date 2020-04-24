@@ -96,8 +96,8 @@ function CreateTableTransactions($stmt){
                 		<tr class=\"tableRow\" onclick=\"selectTd(this)\">
                             <td class=\"columnDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                             <td class=\"colSod\">",$sod,"</td>
-                            <td class=\"columnQty\">",$row['mat_qty'],"</td>
-                            <td class=\"colSod\">",$row['edinica_izmerenija'],"</td>
+                            <td class=\"columnQty value\">",$row['mat_qty'],"</td>
+                            <td class=\"columnEdIzm\">",$row['edinica_izmerenija'],"</td>
                     		<td class=\"colFio\">",$row['Second_name']," ",$row['First_name']," ",$row['Last_name'],"</td>	
                	 		</tr>
         				";

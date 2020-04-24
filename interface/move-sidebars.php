@@ -23,6 +23,7 @@
 		function show_overlay() {
 			document.getElementById("interface").classList.remove('move_left_sidebar', 'move_right_sidebar');
 			document.getElementById("interface").classList.add('show_overlay');
+            
             filtrUnselectSelect(0);
 		}
 		

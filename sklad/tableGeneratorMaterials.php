@@ -126,7 +126,7 @@ function CreateTableAllMaterials($stmt){
             				$classMin = "zeroItemMatTR";
                         }
         				echo "
-                		<tr class=\"tableRow $classMin\" onclick=\"selectTd(this)\">
+                		<tr id=\"item\" class=\"tableRow $classMin\" onclick=\"selectTd(this)\">
                     		<td class=\"columnOZM value\">",$row['ozm'],"</td>					
                     		<td class=\"itemNameTD value\">",$row['name_mat'],"</td>
                     		<td class=\"columnQty value\">",$row['qty'],"</td>

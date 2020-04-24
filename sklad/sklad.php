@@ -298,6 +298,7 @@
         chart_chkBox.disabled  = false;
         spec_chkBox.disabled  = false;
         selRowNow = selNameMat;
+        material_name.innerHTML = selNameMat;
     }
     
     /*Рисуем график*/

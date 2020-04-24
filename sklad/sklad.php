@@ -53,6 +53,9 @@
   					<?php	require "sklad/sys_img/info1.svg";?>
 				</div>
 				<div class="barTitle">Подробная информация</div>
+				<div class="barClose">
+  					<?php	require "sklad/sys_img/close.svg";?>					
+				</div>
 			</div>
 			<div class="barContent">
    				Здесь информация о min-max категории и другое				
@@ -64,6 +67,9 @@
   					<?php	require "sklad/sys_img/spec.svg";?>
 				</div>
 				<div class="barTitle">Характеристики</div>
+				<div class="barClose">
+  					<?php	require "sklad/sys_img/close.svg";?>					
+				</div>
 			</div>
 			<div class="barContent">
    				Здесь будет спецификация материала в зависимости от категории (мощность, кол-во оборотов, рабочее напряжение для электродвигателей; длина, количество жил, сечение для кабеля и т.д.)				
@@ -77,6 +83,9 @@
   					<?php	require "sklad/sys_img/chart1.svg";?>
 				</div>
 				<div class="barTitle">График</div>
+				<div class="barClose">
+  					<?php	require "sklad/sys_img/close.svg";?>					
+				</div>
 			</div>
 			<div class="barContent" id="myChartParent">
                 <canvas id="myChart"></canvas>
@@ -88,9 +97,12 @@
   					<?php	require "sklad/sys_img/trans1.svg";?>
 				</div>
 				<div class="barTitle">История перемещений</div>
+				<div class="barClose">
+  					<?php	require "sklad/sys_img/close.svg";?>					
+				</div>
 			</div>
 			<div class="barContent" id="transactions_table">
-  				<!-- В данный блок интегрируется "selectedMaterial.php" посредством AJAX -->						
+  				<!-- В данный блок интегрируется "selectedMaterial.php" посредством AJAX -->			
 			</div>
   		</div>
 		<div class="material_catalog">
@@ -99,9 +111,12 @@
   					<?php	require "sklad/sys_img/catalog1.svg";?>
 				</div>
 				<div class="barTitle">Каталог</div>
+				<div class="barClose">
+  					<?php	require "sklad/sys_img/close.svg";?>					
+				</div>
 			</div>
 			<div class="barContent" id="material_table">
-			<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->						
+				<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->		
 			</div>
 		</div>
    	</div>

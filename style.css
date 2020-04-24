@@ -526,7 +526,7 @@ input, input:hover, input:focus {
 /*Отступы плиток*/
 .material_main_panel, .material_info, .material_spec {
 	margin: 0 0 25px 25px;
-	width: 300px;
+	width: 320px;
 }
 .material_chart, .material_catalog, .material_trans {
 	margin: 0 25px 25px 25px;
@@ -545,7 +545,6 @@ input, input:hover, input:focus {
 	flex-direction: column;
   	align-items: center;	
   	justify-content: flex-end;
-	width: 300px;
 	height: 300px;
 }
 
@@ -665,6 +664,8 @@ input, input:hover, input:focus {
 
 #material_name {
 	margin-bottom: 10px;
+	font-weight: 700;
+	text-align: center;
 }
 
 /*Свойство картинок пропорционального заполнения плитки с картинкой*/
@@ -678,7 +679,7 @@ input, input:hover, input:focus {
 .material_info, .material_spec {
 	display: block;
 	height: 100%;
-	padding: 15px;	
+	padding: 10px 15px 15px 15px;
   	transition: all 200ms cubic-bezier(.35, .09, .91, .69);
 	overflow: hidden;
 }
@@ -730,6 +731,20 @@ input, input:hover, input:focus {
 	font-weight: 700;
 }
 
+.barClose {
+	margin: auto 0 auto auto;
+	opacity: 50%;
+	cursor: pointer;
+}
+
+.barClose:hover {
+	opacity: 1;
+}
+
+.barClose .svg-navigation {
+	height: 12px;
+}
+
 .barContent {
 	height: calc(100% - 9px);
 }
@@ -762,7 +777,7 @@ input, input:hover, input:focus {
 	width: 150px;
 }
 .columnEdIzm {
-	width: 100px;
+	width: 80px;
 }
 .colSod {
 	width: 200px;
@@ -771,7 +786,7 @@ input, input:hover, input:focus {
 	width: 300px;
 }
 .columnCategory {
-	width: 150px;
+	width: 140px;
 }
 .columnDate {
 	width: 200px;

@@ -116,8 +116,14 @@
         //
         filtrUnselectSelect(0);
         //
-        if($('#material_table').hasScrollBar)
-            material_table.style.margin = "0 80 0 0";
+        var vs = containerItems.scrollHeight > containerItems.clientHeight; 
+        if(vs){
+            var items = containerItems.querySelectorAll("#containerItems #item");
+            for(var i=0;i<items.length;i++){
+                items[i].style.margin = "0 -8px 0 0";
+            }
+        }
+            
         //
         window.addEventListener("resize", displayWindowSize);
         displayWindowSize();

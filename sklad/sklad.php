@@ -43,7 +43,7 @@
   			<div class="material_img">
    				<img id="material_image" src="sklad/sys_img/noimg.jpg">
    				<div id="material_name">
-   					Выберите материал из таблицы
+   					Выберите материал из каталога
    				</div> <!-- Сюда выводить имя выбранного материала -->
 			</div>  		  			
    		</div>
@@ -262,7 +262,7 @@
     /*Выбор материала в таблице*/
     function selectTd(e){
 		// ?? элементов с классом .itemNameTD я не нашел !!
-        var selNameMat = e.querySelector('.itemNameTD').innerHTML;
+        var selNameMat = e.querySelector('.columnName').innerHTML;
         var imgMat = document.getElementById("material_image");
         
             $.ajax({

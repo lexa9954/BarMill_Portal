@@ -710,7 +710,6 @@ input, input:hover, input:focus {
 .slide {
 	overflow: hidden;
 	padding: 0 auto;
-/*	min-height: 50px;*/
 	height: 0;	
 }
 
@@ -756,7 +755,7 @@ input, input:hover, input:focus {
 .columnOZM {
 	width: 120px;
 }
-.columnName, .itemNameTD {
+.columnName {
 	width: 400px;
 }
 .columnQty {
@@ -780,11 +779,6 @@ input, input:hover, input:focus {
 .tableMats thead th:last-child {
 	margin-right: 8px;
 }
-/*
-.tableMats tbody td:last-child {
-	margin-right: 8px;
-}
-*/
 
 /*Отступ блока внутри ячейки хидера для смещения по отношению к дроп-даун менюшки*/
 .columnHeader {
@@ -816,13 +810,13 @@ input, input:hover, input:focus {
   	align-items: center;
 }
 
-.tableMats thead th, .tableMats tbody td{
+.tableMats thead th, .tableMats tbody td {
 	text-align: left;
 	display: flex;
 	flex-direction: row;
 }
 
-.tableMats thead tr, .tableMats tbody tr{
+.tableMats thead tr, .tableMats tbody tr {
 	display: flex;
 	justify-content: space-between;
 }
@@ -861,8 +855,7 @@ input, input:hover, input:focus {
 }
 
 /* Drop-down менюшки */
-.tableMats input
-{
+.tableMats input {
   display: none;
 }
 
@@ -984,8 +977,9 @@ input, input:hover, input:focus {
     height: 270px;
 }
 
+/*
 .itemNameTD{
     padding:0;
     text-align: left;
-/*    padding: 4px 40px 4px 5px;*/
 }
+*/

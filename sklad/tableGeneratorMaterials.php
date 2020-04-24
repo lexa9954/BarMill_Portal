@@ -128,20 +128,17 @@ function CreateTableAllMaterials($stmt){
         				echo "
                 		<tr id=\"item\" class=\"tableRow $classMin\" onclick=\"selectTd(this)\">
                     		<td class=\"columnOZM value\">",$row['ozm'],"</td>					
-                    		<td class=\"itemNameTD value\">",$row['name_mat'],"</td>
+                    		<td class=\"columnName value\">",$row['name_mat'],"</td>
                     		<td class=\"columnQty value\">",$row['qty'],"</td>
                             <td class=\"columnEdIzm\">",$row['edinica_izmerenija'],"</td>
                     		<td class=\"columnCategory\">",$row['nameC'],"</td>
                     		<td class=\"columnDate value\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                	 		</tr>
         				";
-        				/* Нужно вместо itemNameTD установить columnName */
     				}
     				echo "
 				</tbody>
             </table>";	
 }
 /* ▲ Создание таблицы ▲ */
-
-
 ?>

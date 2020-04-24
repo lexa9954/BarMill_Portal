@@ -780,9 +780,11 @@ input, input:hover, input:focus {
 .tableMats thead th:last-child {
 	margin-right: 8px;
 }
+/*
 .tableMats tbody td:last-child {
 	margin-right: 8px;
 }
+*/
 
 /*Отступ блока внутри ячейки хидера для смещения по отношению к дроп-даун менюшки*/
 .columnHeader {

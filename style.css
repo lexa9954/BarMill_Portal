@@ -698,7 +698,7 @@ input, input:hover, input:focus {
 	display: block;
 	height: 100%;
 	overflow: hidden;
-	padding: 15px;
+	padding: 10px 15px 15px 15px;
   	transition: all 300ms cubic-bezier(.35, .09, .91, .69);
 }
 
@@ -714,9 +714,39 @@ input, input:hover, input:focus {
 	height: 0;	
 }
 
+.barHeader {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 5px;
+}
+
+.barHeader .svg-navigation {
+	height: 18px;
+	opacity: 50%;
+}
+
+.barTitle {
+	margin-left: 5px;
+	color: #525252;
+	font-weight: 700;
+}
+
+.barContent {
+	height: calc(100% - 9px);
+}
+
+.material_chart .barHeader{
+	margin: 10px 15px 0 15px;
+}
+
+.material_chart .barContent {
+	display: block;
+}
+
 /*Таблица материалов*/
 .tableMats {
 	width: 100%;
+	overflow: auto;
 	height: inherit;
 	table-layout: fixed;
 	border-collapse: collapse;
@@ -741,7 +771,7 @@ input, input:hover, input:focus {
 .colFio {
 	width: 300px;
 }
-.columnCategory, selected .items {
+.columnCategory {
 	width: 150px;
 }
 .columnDate {
@@ -853,13 +883,15 @@ input, input:hover, input:focus {
 
 @keyframes fadeOut {
 	from {max-height: 0;}
-	to 	 {max-height: 100px;}
+	to 	 {max-height: 115px;}
 }
 
 .filtr.selected .items {
 	display: block;
 	z-index: 4;
-	max-height: 100px;
+	min-width: 150px;
+	max-width: 200px;
+	max-height: 115px;
 }
 
 .items div {
@@ -944,10 +976,10 @@ input, input:hover, input:focus {
 /*График*/
 #myChart{
     width: 100% !important;
-    max-height: 300px;
-    min-height: 300px;
-	padding: 10px 17px;
-    height: 300px;
+    max-height: 270px;
+    min-height: 200px;
+	padding: 0 17px 10px 17px;
+    height: 270px;
 }
 
 .itemNameTD{

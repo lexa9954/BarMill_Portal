@@ -48,21 +48,61 @@
 			</div>  		  			
    		</div>
    		<div class="material_info">
-   				Здесь информация о min-max категории и другое
+			<div class="barHeader">
+				<div class="barLogo">
+  					<?php	require "sklad/sys_img/info1.svg";?>
+				</div>
+				<div class="barTitle">Подробная информация</div>
+			</div>
+			<div class="barContent">
+   				Здесь информация о min-max категории и другое				
+			</div>
    		</div>
    		<div class="material_spec slide hidden">
-   				Здесь будет спецификация материала в зависимости от категории (мощность, кол-во оборотов, рабочее напряжение для электродвигателей; длина, количество жил, сечение для кабеля и т.д.)
+			<div class="barHeader">
+				<div class="barLogo">
+  					<?php	require "sklad/sys_img/spec.svg";?>
+				</div>
+				<div class="barTitle">Характеристики</div>
+			</div>
+			<div class="barContent">
+   				Здесь будет спецификация материала в зависимости от категории (мощность, кол-во оборотов, рабочее напряжение для электродвигателей; длина, количество жил, сечение для кабеля и т.д.)				
+			</div>
    		</div>
    	</div>
 	<div class="WH_right_column">
-   		<div id="myChartParent" class="material_chart slide hidden">
+   		<div class="material_chart slide hidden">
+			<div class="barHeader">
+				<div class="barLogo">
+  					<?php	require "sklad/sys_img/chart1.svg";?>
+				</div>
+				<div class="barTitle">График</div>
+			</div>
+			<div class="barContent" id="myChartParent">
                 <canvas id="myChart"></canvas>
+            </div>
    		</div>
-  		<div class="material_trans slide hidden" id="transactions_table">
-  		<!-- В данный блок интегрируется "selectedMaterial.php" посредством AJAX -->
+  		<div class="material_trans slide hidden">
+  			<div class="barHeader">
+				<div class="barLogo">
+  					<?php	require "sklad/sys_img/trans1.svg";?>
+				</div>
+				<div class="barTitle">История перемещений</div>
+			</div>
+			<div class="barContent" id="transactions_table">
+  				<!-- В данный блок интегрируется "selectedMaterial.php" посредством AJAX -->						
+			</div>
   		</div>
-		<div class="material_catalog" id="material_table">
-		<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->
+		<div class="material_catalog">
+			<div class="barHeader">
+				<div class="barLogo">
+  					<?php	require "sklad/sys_img/catalog1.svg";?>
+				</div>
+				<div class="barTitle">Каталог</div>
+			</div>
+			<div class="barContent" id="material_table">
+			<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->						
+			</div>
 		</div>
    	</div>
 </div>

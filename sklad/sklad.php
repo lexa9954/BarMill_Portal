@@ -116,8 +116,8 @@
         //
         filtrUnselectSelect(0);
         //
-        if($('#material_table').hasScrollBar())
-            material_table.style.margin = "0 8 0 0";
+        if($('#material_table').hasScrollBar)
+            material_table.style.margin = "0 80 0 0";
         //
         window.addEventListener("resize", displayWindowSize);
         displayWindowSize();

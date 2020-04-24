@@ -59,7 +59,9 @@ function GenerateCategories(){
     		/*Генерация кнопок категорий*/
             CreateItem("Все","SelectCat(-1);");
     		while($row = sqlsrv_fetch_array($stmt)){
-				CreateItem($row['nameC'],"SelectCat(",$row['id'],");");
+                $id = $row['id'];
+                $func = "SelectCat($id);";
+				CreateItem($row['nameC'],$func);
     		}
     		sqlsrv_close($conn);
         echo "</div>";

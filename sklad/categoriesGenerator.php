@@ -51,9 +51,11 @@
 function GenerateCategories(){ 
     require "../sql_connect.php";
     echo "
-    <div class=\"filtr\" onclick=\"show_overlay()\">";					
-		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';
-        echo "<div style=\"background:red; position\">";
+    <div class=\"filtr\" onclick=\"show_overlay()\">					
+		<label>";
+		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
+		</label>
+		<div class=\"items\">";
     		$query_select_categor ="select  id,nameC from categories";
     		$stmt = sqlsrv_query($conn,$query_select_categor);
     		/*Генерация кнопок категорий*/
@@ -64,32 +66,33 @@ function GenerateCategories(){
 				CreateItem($row['nameC'],$func);
     		}
     		sqlsrv_close($conn);
-        echo "</div>";
-
-        echo "<div class=\"columnHeader\">Категория</div>";
-        echo "<label id=\"sortByCatName\">";
-            require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	
-        echo "</label>";
-        echo"</div>";
+        echo "
+		</div>
+	</div>
+	<div class=\"columnHeader\">Категория</div>
+	<label id=\"sortByCatName\">";
+            require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "    
+	</label>";
 }
 
 function GenerateQty(){
     echo "
-    <div class=\"filtr\" onclick=\"show_overlay()\">";
-        require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';
-    
-    echo "<div style=\"background:red; position\">";
-        CreateItem("Все","SelectQty(0);");
-        CreateItem("> min","SelectQty(1);");
-        CreateItem("⩽ min","SelectQty(2);");
-        CreateItem("отсутствует","SelectQty(3);");
-    echo "</div>";
-    
-    echo "<div class=\"columnHeader\">Количество</div>";
-    echo "<label id=\"sortByQty\">";
-  		require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	
-    echo "</label>";
-    echo"</div>";
+    <div class=\"filtr\" onclick=\"show_overlay()\">
+    	<label>";
+			require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
+		</label>
+    	<div class=\"items\">";
+        	CreateItem("Все","SelectQty(0);");
+        	CreateItem("> min","SelectQty(1);");
+        	CreateItem("⩽ min","SelectQty(2);");
+        	CreateItem("отсутствует","SelectQty(3);");
+    	echo "
+		</div>
+	</div>
+	<div class=\"columnHeader\">Количество</div>
+	<label id=\"sortByQty\">";
+  		require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "
+	</label>";
 }
 
 function CreateItem($name,$funcName){

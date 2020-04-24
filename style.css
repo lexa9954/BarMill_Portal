@@ -724,13 +724,13 @@ input, input:hover, input:focus {
 
 /*Ширина столбцов таблицы и drop-down менюшек*/
 .columnOZM {
-	width: 200px;
+	width: 120px;
 }
 .columnName, .itemNameTD {
 	width: 400px;
 }
-.columnQty, #select_btn .items {
-	width: 200px;
+.columnQty {
+	width: 150px;
 }
 .columnEdIzm {
 	width: 100px;
@@ -741,11 +741,11 @@ input, input:hover, input:focus {
 .colFio {
 	width: 300px;
 }
-.columnCategory, #select1_btn .items {
-	width: 200px;
+.columnCategory, selected .items {
+	width: 150px;
 }
 .columnDate {
-	width: 300px;
+	width: 200px;
 }
 .tableMats thead th:last-child {
 	margin-right: 8px;
@@ -761,6 +761,16 @@ input, input:hover, input:focus {
 
 .tableMats tbody td {
 	padding: 3px 0 3px 10px;
+}
+
+.columnOZM.value, .columnDate.value {
+	padding-left: 30px;
+}
+
+.columnQty.value {
+	display: flex;
+	padding-left: 70px;
+	text-align:right;
 }
 
 /*Свойства шапки таблицы*/
@@ -827,28 +837,41 @@ input, input:hover, input:focus {
 .filtr {
   	display: flex;
 	flex-direction: row;
-	align-items: center;
 	cursor: pointer;
 }
 
 .items {
-	animation: fadeOut 300ms cubic-bezier(0.46, 0.01, 0.65, 0.67) 1 forwards; 
   	display: none;
   	position: absolute;
 	top: 25px;
   	overflow-y: auto;
   	cursor: pointer;
-	z-index: 4;
+	background-color: #ffffff;
+  	max-height: 0;
+	animation: fadeOut 300ms cubic-bezier(0.46, 0.01, 0.65, 0.67) 1 forwards; 
 }
 
 @keyframes fadeOut {
-	from {
-		height: 0;
-	}
-  	to {    
-		height: 100px;
-  	}
+	from {max-height: 0;}
+	to 	 {max-height: 100px;}
 }
+
+.filtr.selected .items {
+	display: block;
+	z-index: 4;
+	max-height: 100px;
+}
+
+.items div {
+  	padding: 3px 0 3px 10px;
+  	background: white;
+}
+
+.items div:hover {
+  background: #eee;
+  cursor: pointer;
+}
+/* drop-down менюшки*/
 
 #lname, #resetSort, .columnOZM #searchOZM {
 	z-index: 2;
@@ -857,28 +880,9 @@ input, input:hover, input:focus {
 #select2:checked ~ #lname, #resetSort, .columnOZM #searchOZM {
 	z-index: 4;
 }
-
-#select:checked ~ .items, #select1:checked ~ .items {
-	display: block;
-	z-index: 4;
-	max-height: 100px;
-}
-
-#select:checked ~ .items label, #select1:checked ~ .items label, #select2:checked ~ #lname {
+#select2:checked ~ #lname {
   display: block;
 }
-
-.items label {
-  	display: none;
-  	padding: 3px 0 3px 10px;
-  	background: white;
-}
-
-.items label:hover {
-  background: #eee;
-  cursor: pointer;
-}
-/* drop-down менюшки*/
 
 
 /*Скролл таблицы*/

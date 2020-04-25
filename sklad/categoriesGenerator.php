@@ -50,16 +50,14 @@
 
 function GenerateCategories(){ 
     require "../sql_connect.php";
-    echo "
-    <div class=\"filtr\" onclick=\"show_overlay()\">					
-		<label>";
-		require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
-		</label>
+		echo "	
 		<div class=\"items\">";
     		$query_select_categor ="select  id,nameC from categories";
     		$stmt = sqlsrv_query($conn,$query_select_categor);
+	
     		/*Генерация кнопок категорий*/
             CreateItem("Все","SelectCat(-1);");
+	
     		while($row = sqlsrv_fetch_array($stmt)){
                 $id = $row['id'];
                 $func = "SelectCat($id);";
@@ -67,32 +65,18 @@ function GenerateCategories(){
     		}
     		sqlsrv_close($conn);
         echo "
-		</div>
-	</div>
-	<div class=\"columnHeader\">Категория</div>
-	<label id=\"sortByCatName\">";
-            require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "    
-	</label>";
+		</div>";
 }
 
 function GenerateQty(){
     echo "
-    <div class=\"filtr\" onclick=\"show_overlay()\">
-    	<label>";
-			require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
-		</label>
     	<div class=\"items\">";
         	CreateItem("Все","SelectQty(0);");
         	CreateItem("> min","SelectQty(1);");
         	CreateItem("⩽ min","SelectQty(2);");
         	CreateItem("отсутствует","SelectQty(3);");
     	echo "
-		</div>
-	</div>
-	<div class=\"columnHeader\">Количество</div>
-	<label id=\"sortByQty\">";
-  		require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "
-	</label>";
+		</div>";
 }
 
 function CreateItem($name,$funcName){

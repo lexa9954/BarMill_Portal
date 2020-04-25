@@ -93,16 +93,36 @@ function CreateTableAllMaterials($stmt){
 							</label>
 						</th>
 						
-                    	<th class=\"columnQty\">";
+                    	<th class=\"columnQty\">
+							<div class=\"filtr\" onclick=\"show_overlay()\">
+    							<label>";
+									require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
+								</label>";
                                 	GenerateQty();
-              						echo "							
+              						echo "
+							</div>
+							<div class=\"columnHeader\">Количество</div>
+							<label id=\"sortByQty\">";
+  								require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "
+							</label>							
                     	</th>
+						
                         <th class=\"columnEdIzm\">
 							<div class=\"columnHeader\">Ед.Изм.</div
 						</th>
-                    	<th class=\"columnCategory\">";
+						
+                    	<th class=\"columnCategory\">
+    						<div class=\"filtr\" onclick=\"show_overlay()\">					
+								<label>";
+									require dirname(__FILE__) . '/../sklad/sys_img/filtr.svg';	echo "
+								</label>";
                     				GenerateCategories();
-              						echo "							
+              						echo "
+							</div>
+							<div class=\"columnHeader\">Категория</div>
+							<label id=\"sortByCatName\">";
+        					    require dirname(__FILE__) . '/../sklad/sys_img/sort.svg';	echo "    
+							</label>							
                     	</th>
 						
                     	<th class=\"columnDate\" >
@@ -128,20 +148,17 @@ function CreateTableAllMaterials($stmt){
         				echo "
                 		<tr id=\"item\" class=\"tableRow $classMin\" onclick=\"selectTd(this)\">
                     		<td class=\"columnOZM value\">",$row['ozm'],"</td>					
-                    		<td class=\"itemNameTD value\">",$row['name_mat'],"</td>
+                    		<td class=\"columnName value\">",$row['name_mat'],"</td>
                     		<td class=\"columnQty value\">",$row['qty'],"</td>
                             <td class=\"columnEdIzm\">",$row['edinica_izmerenija'],"</td>
                     		<td class=\"columnCategory\">",$row['nameC'],"</td>
                     		<td class=\"columnDate value\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                	 		</tr>
         				";
-        				/* Нужно вместо itemNameTD установить columnName */
     				}
     				echo "
 				</tbody>
             </table>";	
 }
 /* ▲ Создание таблицы ▲ */
-
-
 ?>

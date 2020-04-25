@@ -1,8 +1,10 @@
-<!-- WMS Warehouse Management System / Страница о материалах -->
+<?php
+	// WMS Warehouse Management System / Страница о материалах
+?>
 <div class="WareHouse">
 
-<!-- Доступ на страницу только после авторизации -->
 <?php
+	// Доступ на страницу только после авторизации
 	if(empty($_COOKIE['name'])){
     	header('Location:/Barmill_Portal/index.php');
     }
@@ -62,10 +64,38 @@
   					<?php	require "sklad/sys_img/close.svg";?>					
 				</div>
 			</div>
-			<div class="barContent">
+			<div class="barContent" id="infoContent">
    				Здесь информация о min-max категории и другое				
 			</div>
    		</div>
+   		
+   		
+<?php
+	// В barTemplate - шаблон для плиток идентичный для всех, создание плиток нужно сделать вызовом функции с передачей переменных из sklad.php.
+		//Это сократит код в sklad.php и снизит риск некорректной правки кода
+
+//	$bar1_id = "info";
+//	$bar1_content_id = "infoContent";
+//	$bar1_hide = false;
+//
+//	$bar2_id = "spec";
+//	$bar2_content_id = "specContent";
+//	$bar2_hide = true;
+//
+//	$bar3_id = "chart";
+//	$bar3_content_id = "chartContent";
+//	$bar3_hide = false;
+//
+//	$bar4_id = "trans";
+//	$bar4_content_id = "transContent";
+//	$bar4_hide = true;
+//
+//	$bar5_id = "spec";
+//	$bar5_content_id = "catalogContent";
+//	$bar5_hide = true;
+
+	// !не нужно весь код в php переводить это лишит подсветки html синтаксиса и лишит быстрой ориентации, в php только переменные
+?>
    		
    		<!-- Плитка с характеристиками -->
    		<div class="bar slide hidden" id="spec">
@@ -78,7 +108,7 @@
   					<?php	require "sklad/sys_img/close.svg";?>					
 				</div>
 			</div>
-			<div class="barContent">
+			<div class="barContent" id="specContent">
    				Здесь будет спецификация материала в зависимости от категории (мощность, кол-во оборотов, рабочее напряжение для электродвигателей; длина, количество жил, сечение для кабеля и т.д.)
    			</div>
    		</div>
@@ -88,7 +118,7 @@
 	<div class="WH_right_column">
   		
    		<!-- Плитка с графиком -->
-   		<div class="material_chart slide hidden">
+   		<div class="bar slide hidden" id="chart">
 			<div class="barHeader">
 				<div class="barLogo">
   					<?php	require "sklad/sys_img/chart.svg";?>
@@ -98,13 +128,13 @@
   					<?php	require "sklad/sys_img/close.svg";?>					
 				</div>
 			</div>
-			<div class="barContent" id="myChartParent">
+			<div class="barContent" id="chartContent">
                 <canvas id="myChart"></canvas>
             </div>
    		</div>
    		
    		<!-- Плитка с транзакциями (инф. о перемещении материалов) -->
-  		<div class="material_trans slide hidden">
+  		<div class="bar slide hidden" id="trans">
   			<div class="barHeader">
 				<div class="barLogo">
   					<?php	require "sklad/sys_img/trans.svg";?>
@@ -114,13 +144,13 @@
   					<?php	require "sklad/sys_img/close.svg";?>					
 				</div>
 			</div>
-			<div class="barContent" id="transactions_table">
+			<div class="barContent" id="transContent">
   				<!-- В данный блок интегрируется "selectedMaterial.php" посредством AJAX -->			
 			</div>
   		</div>
   		
   		<!-- Плитка с каталогом -->
-		<div class="material_catalog">
+		<div class="bar" id="catalog">
 			<div class="barHeader">
 				<div class="barLogo">
   					<?php	require "sklad/sys_img/catalog.svg";?>
@@ -130,7 +160,7 @@
   					<?php	require "sklad/sys_img/close.svg";?>					
 				</div>
 			</div>
-			<div class="barContent" id="material_table">
+			<div class="barContent" id="catalogContent">
 				<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->		
 			</div>
 		</div>
@@ -160,7 +190,7 @@
         resetSort.addEventListener("click",resetFiltr);
 		
         // Управление отображением плитки с каталогом (таблица материалов)
-        var catalog = document.querySelector('.material_catalog');
+        var catalog = document.getElementById('catalog');
         var catalog_btn = document.getElementById('catalog_btn');
         catalog_chkBox.addEventListener("change",function(){displayBlockOrNone(catalog_btn,catalog,this);});
         // Управление отображением плитки с информацией о материале
@@ -172,15 +202,15 @@
         var spec_btn = document.getElementById('spec_btn');
         spec_chkBox.addEventListener("change",function(){displayBlockOrNone(spec_btn,spec,this);});
         // Управление отображением плитки с графиком
-        var material_chart = document.querySelector('.material_chart');
+        var material_chart = document.getElementById('chart');
         var material_chart_btn = document.getElementById('chart_btn');
         chart_chkBox.addEventListener("change",function(){displayBlockOrNone(material_chart_btn,material_chart,this);
-            myChartParent.innerHTML = '<canvas id="myChart"></canvas>';
+            chartContent.innerHTML = '<canvas id="myChart"></canvas>';
             if(this.checked)
                 setTimeout(() => { createGrafik(matInfoForGrafic); }, 350);                             
         });
         // Управление отображением плитки с информацией о перемещении материала
-        var trans = document.querySelector('.material_trans');
+        var trans = document.getElementById('trans');
         var trans_btn = document.getElementById('trans_btn');
         trans_chkBox.addEventListener("change",function(){displayBlockOrNone(trans_btn,trans,this);});
         
@@ -211,7 +241,7 @@
     }
     function displayWindowSize(){
         let rootCss = document.documentElement;
-        var heightMatTable = document.querySelector('#material_table').offsetHeight;
+        var heightMatTable = document.querySelector('#catalogContent').offsetHeight;
         rootCss.style.setProperty('--transAnim', (heightMatTable/1.5)+"ms");
     }
 	//Здесь функция скрытие/открытие плиток кнопками навигационной панели под картинкой
@@ -249,7 +279,7 @@
                url: "sklad/tableGeneratorMaterials.php",
                data: {sort:sortType, categor:selCatId, minQty:minQty},
                success: function(result,status,xhr){
-                   $( "#material_table" ).html( result );
+                   $( "#catalogContent" ).html( result );
                    DocumentReady();
                }
            });
@@ -269,7 +299,7 @@
                    url: "sklad/tableGeneratorMaterials.php",
                    data: {searchOzm:searchMat},
                    success: function(result,status,xhr){
-                       $( "#material_table" ).html( result );
+                       $( "#catalogContent" ).html( result );
                        DocumentReady();
                    }
             });
@@ -281,7 +311,7 @@
             url: "sklad/tableGeneratorMaterials.php",
             data: {categor:-1, searchName:"", minQty:""},
             success: function(result,status,xhr){
-            $( "#material_table" ).html( result );
+            $( "#catalogContent" ).html( result );
                 console.log("Success "+result+" Status "+status);
                 DocumentReady();
             },
@@ -322,7 +352,7 @@
                url: "sklad/selectedMaterial.php",
                data: {action:'CreateTableTransaction', nameMat:selNameMat},
                success: function(result){
-                   $( "#transactions_table" ).html( result );
+                   $( "#transContent" ).html( result );
                }
            });
         trans_chkBox.disabled  = false;
@@ -334,7 +364,7 @@
     
     /*Рисуем график*/
     function createGrafik(selMatInfo){
-        myChartParent.innerHTML = '<canvas id="myChart"></canvas>';
+        chartContent.innerHTML = '<canvas id="myChart"></canvas>';
         
         var infoMat = selMatInfo;
         var ctx = document.querySelector('#myChart');
@@ -573,7 +603,7 @@
                url: "sklad/tableGeneratorMaterials.php",
                data: {sort:sortType,categor:selCatId, minQty:minQty},
                success: function(result,status,xhr){
-                   $( "#material_table" ).html( result );
+                   $( "#catalogContent" ).html( result );
                    DocumentReady();
                }
            });
@@ -588,7 +618,7 @@
                url: "sklad/tableGeneratorMaterials.php",
                data: {sort:sortType,categor:selCatId, minQty:minQty},
                success: function(result,status,xhr){
-                   $( "#material_table" ).html( result );
+                   $( "#catalogContent" ).html( result );
                    console.log("Success "+result+" Status "+status);
                    DocumentReady();
                }
@@ -605,7 +635,7 @@
                url: "sklad/tableGeneratorMaterials.php",
                data: {searchOzm:"",sort:sortType,categor:selCatId, minQty:minQty},
                success: function(result,status,xhr){
-                   $( "#material_table" ).html( result );
+                   $( "#catalogContent" ).html( result );
                    console.log("Success "+result+" Status "+status);
                    DocumentReady();
                }

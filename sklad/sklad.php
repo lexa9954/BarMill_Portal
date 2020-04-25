@@ -156,18 +156,22 @@
         //
         filtrUnselectSelect(0);
         //
-        var vs = containerItems.scrollHeight > containerItems.clientHeight; 
-        if(!vs){
-            var items = containerItems.querySelectorAll("#containerItems .columnDate");
-            for(var i=0;i<items.length;i++){
-                items[i].style.marginRight = "8px";
-            }
-        }
+        DynamicMargin(containerItems,"columnDate");
             
         //
         window.addEventListener("resize", displayWindowSize);
         displayWindowSize();
     }
+    function DynamicMargin(parentTableId,lastColumnClass){
+        var vs = parentTableId.scrollHeight > parentTableId.clientHeight; 
+        if(!vs){
+            var items = parentTableId.querySelectorAll("."+lastColumnClass);
+            for(var i=0;i<items.length;i++){
+                items[i].style.marginRight = "8px";
+            }
+        }
+    }
+    //Штука для выпадающего списка
     function filtrUnselectSelect(U_S){
         var allDropDowns = document.getElementsByClassName("filtr");
         for(var i=0;i<allDropDowns.length;i++){
@@ -178,6 +182,7 @@
             }
         }
     }
+    //При изменении окна браузера
     function displayWindowSize(){
         let rootCss = document.documentElement;
         var heightMatTable = document.querySelector('#material_table').offsetHeight;

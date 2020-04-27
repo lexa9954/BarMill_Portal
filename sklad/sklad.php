@@ -60,7 +60,7 @@
   					<?php	require "sklad/sys_img/info.svg";?>
 				</div>
 				<div class="barTitle">Подробная информация</div>
-				<div class="barClose">
+				<div id="infoCloseId" class="barClose">
   					<?php	require "sklad/sys_img/close.svg";?>					
 				</div>
 			</div>
@@ -104,7 +104,7 @@
   					<?php	require "sklad/sys_img/spec.svg";?>
 				</div>
 				<div class="barTitle">Характеристики</div>
-				<div class="barClose">
+				<div id="specCloseId" class="barClose">
   					<?php	require "sklad/sys_img/close.svg";?>					
 				</div>
 			</div>
@@ -124,7 +124,7 @@
   					<?php	require "sklad/sys_img/chart.svg";?>
 				</div>
 				<div class="barTitle">График</div>
-				<div class="barClose">
+				<div id="chartCloseId" class="barClose">
   					<?php	require "sklad/sys_img/close.svg";?>					
 				</div>
 			</div>
@@ -140,7 +140,7 @@
   					<?php	require "sklad/sys_img/trans.svg";?>
 				</div>
 				<div class="barTitle">История перемещений</div>
-				<div class="barClose">
+				<div id="transCloseId" class="barClose">
   					<?php	require "sklad/sys_img/close.svg";?>					
 				</div>
 			</div>
@@ -156,7 +156,7 @@
   					<?php	require "sklad/sys_img/catalog.svg";?>
 				</div>
 				<div class="barTitle">Каталог</div>
-				<div class="barClose">
+				<div id="catalogCloseId" class="barClose">
   					<?php	require "sklad/sys_img/close.svg";?>					
 				</div>
 			</div>
@@ -188,19 +188,28 @@
         sortByQty.addEventListener("click",function(){sortMats("qty");});
         sortByOZM.addEventListener("click",function(){sortMats("ozm");});
         resetSort.addEventListener("click",resetFiltr);
-		
+        
         // Управление отображением плитки с каталогом (таблица материалов)
         var catalog = document.getElementById('catalog');
         var catalog_btn = document.getElementById('catalog_btn');
         catalog_chkBox.addEventListener("change",function(){displayBlockOrNone(catalog_btn,catalog,this);});
+        
+        catalogCloseId.addEventListener("click",function(){CloseBar(catalog_btn,catalog,catalog_chkBox);});
+        
         // Управление отображением плитки с информацией о материале
         var info = document.getElementById('info');
         var info_btn = document.getElementById('info_btn');
         info_chkBox.addEventListener("change",function(){displayBlockOrNone(info_btn,info,this);});
+        
+        infoCloseId.addEventListener("click",function(){CloseBar(info_btn,info,info_chkBox);});
+        
         // Управление отображением плитки с характеристиками материала
         var spec = document.getElementById('spec');
         var spec_btn = document.getElementById('spec_btn');
         spec_chkBox.addEventListener("change",function(){displayBlockOrNone(spec_btn,spec,this);});
+        
+        specCloseId.addEventListener("click",function(){CloseBar(spec_btn,spec,spec_chkBox);});
+        
         // Управление отображением плитки с графиком
         var material_chart = document.getElementById('chart');
         var material_chart_btn = document.getElementById('chart_btn');
@@ -209,16 +218,24 @@
             if(this.checked)
                 setTimeout(() => { createGrafik(matInfoForGrafic); }, 350);                             
         });
+        
+        chartCloseId.addEventListener("click",function(){CloseBar(material_chart_btn,material_chart,chart_chkBox);
+            chartContent.innerHTML = '<canvas id="myChart"></canvas>';
+            if(this.checked)
+                setTimeout(() => { createGrafik(matInfoForGrafic); }, 350);                             
+        });
+        
         // Управление отображением плитки с информацией о перемещении материала
         var trans = document.getElementById('trans');
         var trans_btn = document.getElementById('trans_btn');
         trans_chkBox.addEventListener("change",function(){displayBlockOrNone(trans_btn,trans,this);});
         
+        transCloseId.addEventListener("click",function(){CloseBar(trans_btn,trans,trans_chkBox);});
+        
         //
         filtrUnselectSelect(0);
         //
         DynamicMargin(containerItems,"columnDate");
-            
         //
         window.addEventListener("resize", displayWindowSize);
         displayWindowSize();
@@ -271,6 +288,20 @@
 				_btn.classList.remove ('openTab');
 				_btn.classList.add ('closeTab');
   			}
+    }
+    function CloseBar(_btn,_block,_chk){
+    			_block.classList.add ('slide');
+				_block.addEventListener('transitionend', function(e) {
+      				_block.classList.add('hidden');
+   				 	}, {
+     				 capture: false,
+    				  once: true,
+     				 passive: false
+    				});
+				_btn.classList.remove ('openTab');
+				_btn.classList.add ('closeTab');
+        _chk.checked = false;
+        
     }
     /*Сортировка*/
     function sortMats(sortName){
@@ -599,37 +630,6 @@
         		});
     	}
     
-    /*Применение выбираемой категории полю с id*/
-    function SelectCat(id){
-        selCatId = id;
-        $(document).ready(function(){
-           $.ajax({
-               type: "POST",
-               url: "sklad/tableGeneratorMaterials.php",
-               data: {sort:sortType,categor:selCatId, minQty:minQty},
-               success: function(result,status,xhr){
-                   $( "#catalogContent" ).html( result );
-                   DocumentReady();
-               }
-           });
-        });
-    }
-    /*Выбор отображения по количеству*/
-    function SelectQty(id){
-        minQty = id;
-        $(document).ready(function(){
-           $.ajax({
-               type: "POST",
-               url: "sklad/tableGeneratorMaterials.php",
-               data: {sort:sortType,categor:selCatId, minQty:minQty},
-               success: function(result,status,xhr){
-                   $( "#catalogContent" ).html( result );
-                   console.log("Success "+result+" Status "+status);
-                   DocumentReady();
-               }
-           });
-        });
-    }
     /*Сброс фильтра*/
     function resetFiltr(){
         selCatId =-1;

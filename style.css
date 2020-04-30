@@ -962,13 +962,5 @@ input, input:hover, input:focus {
     width: 100% !important;
     max-height: 270px;
     min-height: 120px;
-/*	padding: 0 17px 10px 17px;*/
     height: 270px;
 }
-
-/*
-.itemNameTD{
-    padding:0;
-    text-align: left;
-}
-*/

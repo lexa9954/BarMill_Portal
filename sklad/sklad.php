@@ -100,7 +100,7 @@
   					<?php	require "sklad/sys_img/close.svg";?>					
 				</div>
 			</div>
-			<div class="barContent" id="chartContent">
+			<div class="barContent" id="chartContent">                
                 <canvas id="myChart"></canvas>
             </div>
    		</div>

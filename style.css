@@ -42,6 +42,7 @@ p {
     position: fixed;
     left: 75px;
     top: 14px;
+	cursor: pointer;
 }
 
 .svg-logo {

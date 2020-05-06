@@ -13,9 +13,9 @@ function AllMaterials(){
     $allNotifications = sqlsrv_query($conn,$query_select_notifications);
     
     
-    while($row = sqlsrv_fetch_array($allMats)){
-//    echo $row['name_mat'];
-    }
+//    while($row = sqlsrv_fetch_array($allMats)){
+////    echo $row['name_mat'];
+//    }
     
     sqlsrv_close($conn);
 }

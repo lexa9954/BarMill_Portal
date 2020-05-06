@@ -141,26 +141,50 @@
 </div>
 
 <script type="text/javascript">
-    var selRowNow;
     var selCatId =-1;
     var minQty = "";
     var sortType = "";
+    var searchMatOzm = "";
+    var selRowNow;
     var matInfoForGrafic;
+    var pageUrl ="";
     
     $(document).ready(function(){
         StartDocument();
     });
     function DocumentReady(){
         close_all_sidebar();
+        switch(pageUrl){
+            case "http://localhost/Barmill_Portal/index.php?page=AllMaterials":
+                searchElementsAllMaterialsTable();
+            break;
+            case "http://localhost/Barmill_Portal/index.php?page=AllEngines":
+                SelectEngines($selCategor,$searchOzm,$minQty,$sortMat);
+            break;
+        }
+            
+        searchPlitkiAndAddEvents();
+        //
+        filtrUnselectSelect(0);
+        //
+        //DynamicMargin(containerItems,"columnDate");
+        //
+        window.addEventListener("resize", displayWindowSize);
+        displayWindowSize();
+    }
+    //Поиск элементов в таблице всех материалов
+    function searchElementsAllMaterialsTable(){
         select2.addEventListener("click", searchOzm);
         /*Инициализация кнопок для сортировки*/
         sortByName.addEventListener("click",function(){sortMats("name_mat");});
         sortByDate.addEventListener("click",function(){sortMats("mat_date");});
-        sortByCatName.addEventListener("click",function(){sortMats("nameC");});
+        sortByCatName.addEventListener("click",function(){sortMats("cg_name");});
         sortByQty.addEventListener("click",function(){sortMats("qty");});
         sortByOZM.addEventListener("click",function(){sortMats("ozm");});
         resetSort.addEventListener("click",resetFiltr);
-        
+    }
+    //Поиск и применение действий для кнопок снизу картинки
+    function searchPlitkiAndAddEvents(){
         // Управление отображением плитки с каталогом (таблица материалов)
         var catalog = document.getElementById('catalog');
         var catalog_btn = document.getElementById('catalog_btn');
@@ -192,10 +216,7 @@
         });
         
         chartCloseId.addEventListener("click",function(){CloseBar(material_chart_btn,material_chart,chart_chkBox);
-            chartContent.innerHTML = '<canvas id="myChart"></canvas>';
-            if(this.checked)
-                setTimeout(() => { createGrafik(matInfoForGrafic); }, 350);                             
-        });
+            chartContent.innerHTML = '<canvas id="myChart"></canvas>';});
         
         // Управление отображением плитки с информацией о перемещении материала
         var trans = document.getElementById('trans');
@@ -203,15 +224,8 @@
         trans_chkBox.addEventListener("change",function(){displayBlockOrNone(trans_btn,trans,this);});
         
         transCloseId.addEventListener("click",function(){CloseBar(trans_btn,trans,trans_chkBox);});
-        
-        //
-        filtrUnselectSelect(0);
-        //
-        DynamicMargin(containerItems,"columnDate");
-        //
-        window.addEventListener("resize", displayWindowSize);
-        displayWindowSize();
     }
+    
     function DynamicMargin(parentTableId,lastColumnClass){
         var vs = parentTableId.scrollHeight > parentTableId.clientHeight; 
         if(!vs){
@@ -273,71 +287,17 @@
 				_btn.classList.remove ('openTab');
 				_btn.classList.add ('closeTab');
         _chk.checked = false;
-        
-    }
-    /*Сортировка*/
-    function sortMats(sortName){
-        if (sortType.search("desc") != -1) {//слово не найдено
-            sortType = sortName;
-        }else{
-            sortType = sortName+" desc";
-        }
-           $.ajax({
-               type: "POST",
-               url: "sklad/tableGeneratorMaterials.php",
-               data: {sort:sortType, categor:selCatId, minQty:minQty},
-               success: function(result,status,xhr){
-                   $( "#catalogContent" ).html( result );
-                   DocumentReady();
-               }
-           });
-    }
-    /*Поис по ОЗМ*/
-    function searchOzmEnter(e){
-        if (e.keyCode === 13) {
-            searchOzm();
-        }
-    }
-    function searchOzm(){
-            var searchMat = document.querySelector('#lname').value;
-            if(searchMat.length>9 || searchMat.length<3)
-                return;
-            $.ajax({
-                   type: "POST",
-                   url: "sklad/tableGeneratorMaterials.php",
-                   data: {searchOzm:searchMat},
-                   success: function(result,status,xhr){
-                       $( "#catalogContent" ).html( result );
-                       DocumentReady();
-                   }
-            });
-    }
-    /*Функция запускается при прогрузке страницы*/
-    function StartDocument(){
-        $.ajax({
-            type: "POST",
-            url: "sklad/tableGeneratorMaterials.php",
-            data: {categor:-1, searchName:"", minQty:""},
-            success: function(result,status,xhr){
-            $( "#catalogContent" ).html( result );
-                console.log("Success "+result+" Status "+status);
-                DocumentReady();
-            },
-            error: function(e){
-                console.log("Error "+e);
-            }
-        });
     }
     /*Выбор материала в таблице*/
     function selectTd(e){
 		// ?? элементов с классом .itemNameTD я не нашел !!
         var selNameMat = e.querySelector('.columnName').innerHTML;
+        var selIdMat = e.querySelector('#id_mat').innerHTML;
         var imgMat = document.getElementById("material_image");
-        
             $.ajax({
                type: "POST",
                url: "sklad/selectedMaterial.php",
-               data: {action:'infoMatGrafic', nameMat:selNameMat},
+               data: {action:'infoMatGrafic', idMat:selIdMat},
                success: function(result){
                    matInfoForGrafic = result;
                     createGrafik(result);
@@ -347,7 +307,7 @@
             $.ajax({
                type: "POST",
                url: "sklad/selectedMaterial.php",
-               data: {action:'imgSelMat', nameMat:selNameMat},
+               data: {action:'imgSelMat', idMat:selIdMat},
                success: function(result){
                    if(result != "")
                     imgMat.src = "sklad/img/"+result+".jpg";
@@ -358,7 +318,7 @@
             $.ajax({
                type: "POST",
                url: "sklad/selectedMaterial.php",
-               data: {action:'CreateTableTransaction', nameMat:selNameMat},
+               data: {action:'CreateTableTransaction', idMat:selIdMat},
                success: function(result){
                    $( "#transContent" ).html( result );
                }
@@ -366,9 +326,34 @@
         trans_chkBox.disabled  = false;
         chart_chkBox.disabled  = false;
         spec_chkBox.disabled  = false;
-        selRowNow = selNameMat;
+        
+        if(selRowNow !=null)
+            selRowNow.classList.remove("selected");
+        
+        selRowNow = e;
+        e.classList.add("selected");
         material_name.innerHTML = selNameMat;
     }
+    /*Функция запускается при прогрузке страницы*/
+    function StartDocument(){
+        ajaxGenerateTable();
+    }
+    
+    //Функция для создания таблицы посредством Ajax
+    function ajaxGenerateTable(){
+        pageUrl= window.location.href;
+            $.ajax({
+               type: "POST",
+               url: "sklad/tableGeneratorMaterials.php",
+               data: {page:pageUrl, searchOzm:searchMatOzm,sort:sortType,categor:selCatId, minQty:minQty},
+               success: function(result,status,xhr){
+                   $( "#catalogContent" ).html( result );
+                   console.log("Success "+result+" Status "+status);
+                   DocumentReady();
+               }
+           });
+    }
+    
     
     /*Рисуем график*/
     function createGrafik(selMatInfo){
@@ -469,7 +454,8 @@
 				horizontalLine: [{
                     y: _max[0],
                     text: "Макс "+_max[0] //данные из БД
-                    },{
+                    },
+                    {
                     y: _min[0],
                     style: "rgba(255, 0, 0, .4)",
                     text: "Мин "+_min[0] //данные из БД
@@ -482,7 +468,6 @@
 					},
 			
           		legend: {
-            		//display: true,
             		position: 'top',            
 					labels: {
               			boxWidth: 15,
@@ -499,7 +484,6 @@
 							fontFamily: 'Roboto',
                     		suggestedMin: _min[0],
                     		suggestedMax: _max[0],
-//							maxTicksLimit: 1,
                     		display: true
                 			},
                 		gridLines: {
@@ -540,7 +524,7 @@
 					yPadding: 10
 					}			
         		};
-		
+        
 		var horizonalLinePlugin = {
                 afterDraw: function (chartInstance) {
                     var yScale = chartInstance.scales["y-axis-0"];
@@ -594,28 +578,11 @@
                 }
             };
             Chart.pluginService.register(horizonalLinePlugin);
-        
         var lineChart = new Chart(ctx, {
           		type: 'line',
           		data: allData,
           		options: chartOptions
         		});
     	}
-    
-    /*Сброс фильтра*/
-    function resetFiltr(){
-        selCatId =-1;
-        minQty = "";
-        sortType = "";
-           $.ajax({
-               type: "POST",
-               url: "sklad/tableGeneratorMaterials.php",
-               data: {searchOzm:"",sort:sortType,categor:selCatId, minQty:minQty},
-               success: function(result,status,xhr){
-                   $( "#catalogContent" ).html( result );
-                   console.log("Success "+result+" Status "+status);
-                   DocumentReady();
-               }
-           });
-    }
+
 </script>

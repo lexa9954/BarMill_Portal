@@ -9,10 +9,10 @@
             <ul class="Sklad1">
                 <li>
                    <!-- WMS Warehouse Management System / Страница о материалах -->
-                    <a href="index.php?page=sklad" onclick="close_all_sidebar()">Обзор материалов</a>
+                    <a href="index.php?page=AllMaterials" onclick="close_all_sidebar()">Обзор материалов</a>
                 </li>
                 <li>
-                    <a href="index.php?page=history" onclick="close_all_sidebar()">История транзакций</a>
+                    <a href="index.php?page=AllEngines" onclick="close_all_sidebar()">Обзор двигателей</a>
                 </li>
                 </ul>
             </li>	

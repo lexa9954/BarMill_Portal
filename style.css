@@ -956,6 +956,26 @@ input, input:hover, input:focus {
 .tableMats .zeroItemMatTR{
     background-color: #fdd2d2;
 }
+.tableMats .selected{
+    background-color: #d8d8d8;
+}
+
+.tableMats .statusRezerv{
+    background-color: rgb(107, 196, 86);
+    color: white;
+}
+.tableMats .statusRepair{
+    background-color: rgb(196, 86, 86);
+    color: white;
+}
+.tableMats .statusInstall{
+    background-color: rgb(196, 196, 86);
+    color: white;
+}
+.tableMats .statusUtil{
+    color: lightgray;
+    font-style: italic;
+}
 
 /*График*/
 #myChart{
@@ -965,7 +985,10 @@ input, input:hover, input:focus {
 /*	padding: 0 17px 10px 17px;*/
     height: 270px;
 }
-
+.unvisibleElement{
+    width: 0px;
+    visibility: hidden;
+}
 /*
 .itemNameTD{
     padding:0;

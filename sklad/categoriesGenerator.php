@@ -3,7 +3,7 @@ function GenerateCategories(){
     require "../sql_connect.php";
 		echo "	
 		<div class=\"items\">";
-    		$query_select_categor ="select  id,nameC from categories";
+    		$query_select_categor ="select  id,cg_name from categories";
     		$stmt = sqlsrv_query($conn,$query_select_categor);
 	
     		/*Генерация кнопок категорий*/
@@ -12,7 +12,7 @@ function GenerateCategories(){
     		while($row = sqlsrv_fetch_array($stmt)){
                 $id = $row['id'];
                 $func = "SelectCat($id);";
-				CreateItem($row['nameC'],$func);
+				CreateItem($row['cg_name'],$func);
     		}
     		sqlsrv_close($conn);
         echo "
@@ -41,32 +41,11 @@ function CreateItem($name,$funcName){
     /*Применение выбираемой категории полю с id*/
     function SelectCat(id){
         selCatId = id;
-        $(document).ready(function(){
-           $.ajax({
-               type: "POST",
-               url: "sklad/tableGeneratorMaterials.php",
-               data: {sort:sortType,categor:selCatId, minQty:minQty},
-               success: function(result,status,xhr){
-                   $( "#catalogContent" ).html( result );
-                   DocumentReady();
-               }
-           });
-        });
+        ajaxGenerateTable();
     }
     /*Выбор отображения по количеству*/
     function SelectQty(id){
         minQty = id;
-        $(document).ready(function(){
-           $.ajax({
-               type: "POST",
-               url: "sklad/tableGeneratorMaterials.php",
-               data: {sort:sortType,categor:selCatId, minQty:minQty},
-               success: function(result,status,xhr){
-                   $( "#catalogContent" ).html( result );
-                   console.log("Success "+result+" Status "+status);
-                   DocumentReady();
-               }
-           });
-        });
+        ajaxGenerateTable();
     }
 </script>

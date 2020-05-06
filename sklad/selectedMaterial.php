@@ -3,24 +3,24 @@
 $action = $_POST['action'];
 switch($action){
     case 'infoMatGrafic':
-        SelectMatVariables($_POST['nameMat']);
+        SelectMatVariables($_POST['idMat']);
     break;
     case 'imgSelMat':
-        imgSelMat($_POST['nameMat']);
+        imgSelMat($_POST['idMat']);
     break;
     case 'CreateTableTransaction':
-        SelectedMatTransactions($_POST['nameMat']);
+        SelectedMatTransactions($_POST['idMat']);
     break;
 }
 
-function SelectMatVariables($name){
+function SelectMatVariables($id){
     include   "../sql_connect.php";
     $matDateArr = array();
     $spisanieDobavlenieArr = array();
     $matQtyArr = array();
     $minArr = array();
     $maxArr = array();
-    $query_ = "select mat_date,spisanie_or_dobavlenie,mat_qty,min,max from history join materials on materials.id=history.mat_id where name_mat ='$name'";
+    $query_ = "select mat_date,spisanie_or_dobavlenie,mat_qty,min,max from history join materials on materials.id=history.mat_id where mat_id ='$id'";
     $stmt = sqlsrv_query($conn,$query_);
     while($row = sqlsrv_fetch_array($stmt)){
         $mat_date = $row['mat_date']->format('d.m.Y');
@@ -38,9 +38,9 @@ function SelectMatVariables($name){
     }
     sqlsrv_close($conn);
 }
-function imgSelMat($name){
+function imgSelMat($id){
     include   "../sql_connect.php";
-    $query_ = "select ozm from materials where name_mat ='$name'";
+    $query_ = "select ozm from materials where id ='$id'";
     $stmt = sqlsrv_query($conn,$query_);
     while($row = sqlsrv_fetch_array($stmt)){
         echo $row['ozm'];
@@ -48,12 +48,12 @@ function imgSelMat($name){
     sqlsrv_close($conn);
 }
 
-function SelectedMatTransactions($name){
+function SelectedMatTransactions($id){
     include   "../sql_connect.php";
-    $query_ = "select peoples.Second_name,peoples.First_name,peoples.Last_name,mat_date,mat_qty,spisanie_or_dobavlenie,ediniciIzmerenija.edinica_izmerenija  
+    $query_ = "select peoples.Second_name,peoples.First_name,peoples.Last_name,mat_date,mat_qty,spisanie_or_dobavlenie,ediniciIzmerenija.ei_name   
     from history join peoples on history.people = peoples.id join materials on history.mat_id = materials.id 
     join ediniciIzmerenija on materials.edinica_izmerenija=ediniciIzmerenija.id 
-    where name_mat='$name'";
+    where mat_id='$id'";
     
     CreateTableTransactions(sqlsrv_query($conn,$query_));
     sqlsrv_close($conn);
@@ -97,7 +97,7 @@ function CreateTableTransactions($stmt){
                             <td class=\"columnDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
                             <td class=\"colSod\">",$sod,"</td>
                             <td class=\"columnQty value\">",$row['mat_qty'],"</td>
-                            <td class=\"columnEdIzm\">",$row['edinica_izmerenija'],"</td>
+                            <td class=\"columnEdIzm\">",$row['ei_name'],"</td>
                     		<td class=\"colFio\">",$row['Second_name']," ",$row['First_name']," ",$row['Last_name'],"</td>	
                	 		</tr>
         				";

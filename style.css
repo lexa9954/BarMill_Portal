@@ -36,6 +36,14 @@ p {
 	background-color: rgba(40, 41, 51, 0.9);
 }
 
+.svg-header {
+	height: 3.2%;
+    display: flex;
+    position: fixed;
+    left: 75px;
+    top: 14px;
+}
+
 .svg-logo {
 /*	width: 100px;*/
 	
@@ -43,7 +51,7 @@ p {
 /*	margin-right: 80px;*/
 	max-width: 100px;
 	position: fixed;
-	left: 80px;
+	left: 140px;
 	top: 10px;
 
 	z-index: 7;

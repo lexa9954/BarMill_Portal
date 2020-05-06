@@ -23,6 +23,9 @@
  	<!-- Верхняя полоска -->  
 	<header class="header">
         <div class="header_logo">
-            <a href="index.php"><img src="img/logo.svg" alt="LOGO" class="svg-logo"></a>
+         	<div id="scan_barcode">
+          		<?php	require "img/scan_barcode.svg";?>         		
+         	</div>
+          	<a href="index.php"><img src="img/logo.svg" alt="LOGO" class="svg-logo"></a>           
         </div> 
 	</header>

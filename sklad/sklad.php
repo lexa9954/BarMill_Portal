@@ -12,8 +12,7 @@
 <!-- Доступ на страницу только после авторизации -->
 
 	<!-- Левая колонка с плитками -->
-	<div class="WH_left_column">
-  		   		
+	<div class="WH_left_column">  		   		
    		<!-- Плитка с фотографией и навигационной панелью -->
    		<div class="material_main_panel">
    		<!-- Навигационная панель под картинкой -->
@@ -43,6 +42,16 @@
    					<input type="checkbox" id="trans_chkBox" disabled>
   					<?php	require "sklad/sys_img/trans.svg";?>
 					</label>
+   			<!-- Кнопка добавления перемещения материала --> 
+  				<label for="create_chkBox" id="create_btn" class="material_nav_btn">
+   					<input type="checkbox" id="create_chkBox" disabled>
+  					<?php	require "sklad/sys_img/create.svg";?>
+					</label>
+   			<!-- Кнопка редактирования перемещения материала --> 
+  				<label for="edit_chkBox" id="edit_btn" class="material_nav_btn">
+   					<input type="checkbox" id="edit_chkBox" disabled>
+  					<?php	require "sklad/sys_img/edit.svg";?>
+					</label>
 			</form>
   			
   			<div class="material_img">
@@ -61,7 +70,7 @@
 				</div>
 				<div class="barTitle">Подробная информация</div>
 				<div id="infoCloseId" class="barClose">
-  					<?php	require "sklad/sys_img/close.svg";?>					
+  					<?php	require "sklad/sys_img/close.svg";?>				
 				</div>
 			</div>
 			<div class="barContent" id="infoContent">
@@ -77,7 +86,7 @@
 				</div>
 				<div class="barTitle">Характеристики</div>
 				<div id="specCloseId" class="barClose">
-  					<?php	require "sklad/sys_img/close.svg";?>					
+  					<?php	require "sklad/sys_img/close.svg";?>				
 				</div>
 			</div>
 			<div class="barContent" id="specContent">
@@ -87,8 +96,7 @@
    	</div>
    	
    	<!-- Правая колонка с плитками -->
-	<div class="WH_right_column">
-  		
+	<div class="WH_right_column" id="column_review">  		
    		<!-- Плитка с графиком -->
    		<div class="bar slide hidden" id="chart">
 			<div class="barHeader">
@@ -97,7 +105,7 @@
 				</div>
 				<div class="barTitle">График</div>
 				<div id="chartCloseId" class="barClose">
-  					<?php	require "sklad/sys_img/close.svg";?>					
+  					<?php	require "sklad/sys_img/close.svg";?>				
 				</div>
 			</div>
 			<div class="barContent" id="chartContent">
@@ -113,7 +121,7 @@
 				</div>
 				<div class="barTitle">История перемещений</div>
 				<div id="transCloseId" class="barClose">
-  					<?php	require "sklad/sys_img/close.svg";?>					
+  					<?php	require "sklad/sys_img/close.svg";?>				
 				</div>
 			</div>
 			<div class="barContent" id="transContent">
@@ -129,15 +137,48 @@
 				</div>
 				<div class="barTitle">Каталог</div>
 				<div id="catalogCloseId" class="barClose">
-  					<?php	require "sklad/sys_img/close.svg";?>					
+  					<?php	require "sklad/sys_img/close.svg";?>				
 				</div>
 			</div>
 			<div class="barContent" id="catalogContent">
 				<!-- В данный блок интегрируется "tableGeneratorMaterials.php" посредством AJAX -->		
 			</div>
-		</div>
-  	
+		</div>  	
    	</div>
+   	
+	<div class="WH_right_column column_hide" id="column_create">
+	<!-- Плитка с графиком -->
+   		<div class="bar slide hidden" id="own">
+			<div class="barHeader">
+				<div class="barLogo">
+  					<?php	require "sklad/sys_img/create.svg";?>
+				</div>
+				<div class="barTitle">Добавление / создание</div>
+				<div id="chartCloseId" class="barClose">
+  					<?php	require "sklad/sys_img/close.svg";?>		
+				</div>
+			</div>
+			<div class="barContent" id="ownContent">
+            </div>
+   		</div>
+	</div>
+   	
+	<div class="WH_right_column column_hide" id="column_edit">
+	<!-- Плитка с графиком -->
+   		<div class="bar slide hidden" id="own">
+			<div class="barHeader">
+				<div class="barLogo">
+  					<?php	require "sklad/sys_img/edit.svg";?>
+				</div>
+				<div class="barTitle">Редактирование</div>
+				<div id="chartCloseId" class="barClose">
+  					<?php	require "sklad/sys_img/close.svg";?>		
+				</div>
+			</div>
+			<div class="barContent" id="ownContent">
+            </div>
+   		</div>
+	</div>
 </div>
 
 <script type="text/javascript">

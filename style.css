@@ -510,6 +510,10 @@ input, input:hover, input:focus {
 	margin: 0 25px;
 }
 
+.WH_right_column.column_hide {
+	display: none;
+}
+
 /* Цвет плиток и их тени */
 .bar, .material_nav_btn {
 	background-color: #ffffff;

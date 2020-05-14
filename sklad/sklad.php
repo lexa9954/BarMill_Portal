@@ -6,7 +6,7 @@
 <?php
 	// Доступ на страницу только после авторизации
 	if(empty($_COOKIE['name'])){
-    	header('Location:/Barmill_Portal/index.php');
+    	header('Location:/BarMill_Portal/index.php');
     }
 ?>
 <!-- Доступ на страницу только после авторизации -->
@@ -43,13 +43,13 @@
   					<?php	require "sklad/sys_img/trans.svg";?>
 					</label>
    			<!-- Кнопка добавления перемещения материала --> 
-  				<label for="create_chkBox" id="create_btn" class="material_nav_btn">
-   					<input type="checkbox" id="create_chkBox" disabled>
+  				<label for="create_chkBox" id="create_btn" class="material_nav_btn closeTab">
+   					<input type="checkbox" id="create_chkBox">
   					<?php	require "sklad/sys_img/create.svg";?>
 					</label>
    			<!-- Кнопка редактирования перемещения материала --> 
-  				<label for="edit_chkBox" id="edit_btn" class="material_nav_btn">
-   					<input type="checkbox" id="edit_chkBox" disabled>
+  				<label for="edit_chkBox" id="edit_btn" class="material_nav_btn closeTab">
+   					<input type="checkbox" id="edit_chkBox">
   					<?php	require "sklad/sys_img/edit.svg";?>
 					</label>
 			</form>
@@ -147,35 +147,37 @@
    	</div>
    	
 	<div class="WH_right_column column_hide" id="column_create">
-	<!-- Плитка с графиком -->
-   		<div class="bar slide hidden" id="own">
+	<!-- Плитка с созданием/добавлением -->
+   		<div class="bar slide hidden" id="create">
 			<div class="barHeader">
 				<div class="barLogo">
   					<?php	require "sklad/sys_img/create.svg";?>
 				</div>
 				<div class="barTitle">Добавление / создание</div>
-				<div id="chartCloseId" class="barClose">
+				<div id="creatorCloseId" class="barClose">
   					<?php	require "sklad/sys_img/close.svg";?>		
 				</div>
 			</div>
-			<div class="barContent" id="ownContent">
+			<div class="barContent" id="createContent">
+                <?php	require "sklad/creatorPanel.php";?>
             </div>
    		</div>
 	</div>
    	
 	<div class="WH_right_column column_hide" id="column_edit">
 	<!-- Плитка с графиком -->
-   		<div class="bar slide hidden" id="own">
+   		<div class="bar slide hidden" id="edit">
 			<div class="barHeader">
 				<div class="barLogo">
   					<?php	require "sklad/sys_img/edit.svg";?>
 				</div>
 				<div class="barTitle">Редактирование</div>
-				<div id="chartCloseId" class="barClose">
+				<div id="editorCloseId" class="barClose">
   					<?php	require "sklad/sys_img/close.svg";?>		
 				</div>
 			</div>
 			<div class="barContent" id="ownContent">
+                
             </div>
    		</div>
 	</div>
@@ -189,6 +191,8 @@
     var selRowNow;
     var matInfoForGrafic;
     var pageUrl ="";
+    var imgMat;
+    var allRightBlocks;
     
     $(document).ready(function(){
         StartDocument();
@@ -196,11 +200,11 @@
     function DocumentReady(){
         close_all_sidebar();
         switch(pageUrl){
-            case "http://localhost/Barmill_Portal/index.php?page=AllMaterials":
+            case "http://localhost/BarMill_Portal/index.php?page=AllMaterials":
                 searchElementsAllMaterialsTable();
             break;
-            case "http://localhost/Barmill_Portal/index.php?page=AllEngines":
-                SelectEngines($selCategor,$searchOzm,$minQty,$sortMat);
+            case "http://localhost/BarMill_Portal/index.php?page=AllEngines":
+                //SelectEngines($selCategor,$searchOzm,$minQty,$sortMat);
             break;
         }
             
@@ -226,25 +230,26 @@
     }
     //Поиск и применение действий для кнопок снизу картинки
     function searchPlitkiAndAddEvents(){
+        allRightBlocks = document.getElementsByClassName("WH_right_column");
         // Управление отображением плитки с каталогом (таблица материалов)
         var catalog = document.getElementById('catalog');
         var catalog_btn = document.getElementById('catalog_btn');
         catalog_chkBox.addEventListener("change",function(){displayBlockOrNone(catalog_btn,catalog,this);});
-        
+        //закрытие панели с каталогом
         catalogCloseId.addEventListener("click",function(){CloseBar(catalog_btn,catalog,catalog_chkBox);});
         
         // Управление отображением плитки с информацией о материале
         var info = document.getElementById('info');
         var info_btn = document.getElementById('info_btn');
         info_chkBox.addEventListener("change",function(){displayBlockOrNone(info_btn,info,this);});
-        
+        //закртыие панели информации
         infoCloseId.addEventListener("click",function(){CloseBar(info_btn,info,info_chkBox);});
         
         // Управление отображением плитки с характеристиками материала
         var spec = document.getElementById('spec');
         var spec_btn = document.getElementById('spec_btn');
         spec_chkBox.addEventListener("change",function(){displayBlockOrNone(spec_btn,spec,this);});
-        
+        //закрытие панели с характеристиками
         specCloseId.addEventListener("click",function(){CloseBar(spec_btn,spec,spec_chkBox);});
         
         // Управление отображением плитки с графиком
@@ -255,16 +260,29 @@
             if(this.checked)
                 setTimeout(() => { createGrafik(matInfoForGrafic); }, 350);                             
         });
-        
-        chartCloseId.addEventListener("click",function(){CloseBar(material_chart_btn,material_chart,chart_chkBox);
-            chartContent.innerHTML = '<canvas id="myChart"></canvas>';});
+        //закрытие панели графика
+        chartCloseId.addEventListener("click",function(){CloseBar(material_chart_btn,material_chart,chart_chkBox);});
         
         // Управление отображением плитки с информацией о перемещении материала
         var trans = document.getElementById('trans');
         var trans_btn = document.getElementById('trans_btn');
         trans_chkBox.addEventListener("change",function(){displayBlockOrNone(trans_btn,trans,this);});
-        
+        //закрытие панели транзакций
         transCloseId.addEventListener("click",function(){CloseBar(trans_btn,trans,trans_chkBox);});
+        
+        // Управление отображением плитки с информацией о перемещении материала
+        var create = document.getElementById('create');
+        var create_btn = document.getElementById('create_btn');
+        create_chkBox.addEventListener("change",function(){displayBlockOrNone(create_btn,create,this);});
+        //закрытие панели транзакций
+        creatorCloseId.addEventListener("click",function(){CloseBlock(create_btn,create,create_chkBox);});
+        
+        // Управление отображением плитки с информацией о перемещении материала
+        var edit = document.getElementById('edit');
+        var edit_btn = document.getElementById('edit_btn');
+        edit_chkBox.addEventListener("change",function(){displayBlockOrNone(edit_btn,edit,this);});
+        //закрытие панели транзакций
+        editorCloseId.addEventListener("click",function(){CloseBlock(edit_btn,edit,edit_chkBox);});
     }
     
     function DynamicMargin(parentTableId,lastColumnClass){
@@ -287,6 +305,7 @@
             }
         }
     }
+    
     //При изменении окна браузера
     function displayWindowSize(){
         let rootCss = document.documentElement;
@@ -295,29 +314,41 @@
     }
 	//Здесь функция скрытие/открытие плиток кнопками навигационной панели под картинкой
     function displayBlockOrNone(_btn,_block,_chk){
+        if(_block.parentElement.className != "WH_left_column")
+        for(var i =0;i<allRightBlocks.length;i++){
+            allRightBlocks[i].classList.add("column_hide");
+            if(allRightBlocks[i] != _block.parentElement){
+                var allChild = allRightBlocks[i].children;
+                for(var j=0;j<allChild.length;j++){
+                    if(allChild[j] != _block){
+                        var btn = document.getElementById(allChild[j].id+"_btn");
+                        var chk = document.getElementById(allChild[j].id+"_chkBox");
+                        CloseBar(btn,allChild[j],chk); 
+                    }
+                }
+            }
+        }
+        _block.parentElement.classList.remove("column_hide");
   			if (_chk.checked) {
     			 _block.classList.remove ('hidden');
-				setTimeout(function () {
-      				_block.classList.remove('slide');
-    				}, 
-					20);
+//				setTimeout(function () {
+//      				_block.classList.remove('slide');
+//    				}, 
+//					20);
+                _block.classList.remove('slide');
                  _btn.classList.add ('openTab');
 			     _btn.classList.remove ('closeTab');
   			} else {
-    			_block.classList.add ('slide');
-				_block.addEventListener('transitionend', function(e) {
-      				_block.classList.add('hidden');
-   				 	}, {
-     				 capture: false,
-    				  once: true,
-     				 passive: false
-    				});
-				_btn.classList.remove ('openTab');
-				_btn.classList.add ('closeTab');
+                CloseBar(_btn,_block,_chk);
   			}
     }
+    //Закрытие плиток нажатием на крестик
     function CloseBar(_btn,_block,_chk){
-    			_block.classList.add ('slide');
+        setTimeout(function () {
+      				_block.classList.add('slide');
+    				}, 
+					20);
+    			//_block.classList.add ('slide');
 				_block.addEventListener('transitionend', function(e) {
       				_block.classList.add('hidden');
    				 	}, {
@@ -329,12 +360,38 @@
 				_btn.classList.add ('closeTab');
         _chk.checked = false;
     }
+    
     /*Выбор материала в таблице*/
     function selectTd(e){
 		// ?? элементов с классом .itemNameTD я не нашел !!
         var selNameMat = e.querySelector('.columnName').innerHTML;
         var selIdMat = e.querySelector('#id_mat').innerHTML;
-        var imgMat = document.getElementById("material_image");
+        imgMat = document.getElementById("material_image");
+        switch(pageUrl){
+            //если это страница с материалами
+            case "http://localhost/BarMill_Portal/index.php?page=AllMaterials":
+                SelectMaterial(selIdMat,selNameMat);
+            break;
+            //если это страница с двигателями
+            case "http://localhost/BarMill_Portal/index.php?page=AllEngines":
+                
+            break;
+        }
+        
+
+        trans_chkBox.disabled  = false;
+        chart_chkBox.disabled  = false;
+        spec_chkBox.disabled  = false;
+        
+        if(selRowNow !=null)
+            selRowNow.classList.remove("selected");
+        
+        selRowNow = e;
+        e.classList.add("selected");
+        material_name.innerHTML = selNameMat;
+    }
+    
+    function SelectMaterial(selIdMat,selNameMat){
             $.ajax({
                type: "POST",
                url: "sklad/selectedMaterial.php",
@@ -364,17 +421,8 @@
                    $( "#transContent" ).html( result );
                }
            });
-        trans_chkBox.disabled  = false;
-        chart_chkBox.disabled  = false;
-        spec_chkBox.disabled  = false;
-        
-        if(selRowNow !=null)
-            selRowNow.classList.remove("selected");
-        
-        selRowNow = e;
-        e.classList.add("selected");
-        material_name.innerHTML = selNameMat;
     }
+    
     /*Функция запускается при прогрузке страницы*/
     function StartDocument(){
         ajaxGenerateTable();

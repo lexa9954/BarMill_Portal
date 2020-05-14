@@ -1,4 +1,17 @@
 <?php
+$action = "";
+if (!empty($_POST["action"]))
+    $action = $_POST['action'];
+
+switch($action){
+    case "generateMestoNah":
+        GenerateMestoNah();
+    break;
+    case "generateMestoMore":
+        GenerateMestoMore();
+    break;
+}
+
 function GenerateCategories(){ 
     require "../sql_connect.php";
 		echo "	
@@ -7,12 +20,12 @@ function GenerateCategories(){
     		$stmt = sqlsrv_query($conn,$query_select_categor);
 	
     		/*Генерация кнопок категорий*/
-            CreateItem("Все","SelectCat(-1);");
+            CreateItem("Все","SelectCat(-1);",-1,"categor");
 	
     		while($row = sqlsrv_fetch_array($stmt)){
                 $id = $row['id'];
                 $func = "SelectCat($id);";
-				CreateItem($row['cg_name'],$func);
+				CreateItem($row['cg_name'],$func,$id,"categor");
     		}
     		sqlsrv_close($conn);
         echo "
@@ -22,16 +35,102 @@ function GenerateCategories(){
 function GenerateQty(){
     echo "
     	<div class=\"items\">";
-        	CreateItem("Все","SelectQty(0);");
-        	CreateItem("> min","SelectQty(1);");
-        	CreateItem("⩽ min","SelectQty(2);");
-        	CreateItem("отсутствует","SelectQty(3);");
+        	CreateItem("Все","SelectQty(0);",1,"qty");
+        	CreateItem("> min","SelectQty(1);",2,"qty");
+        	CreateItem("⩽ min","SelectQty(2);",3,"qty");
+        	CreateItem("отсутствует","SelectQty(3);",4,"qty");
     	echo "
 		</div>";
 }
 
-function CreateItem($name,$funcName){
-    echo "<div onclick=\"$funcName\">";
+function GenerateStatus(){
+    require "sql_connect.php";
+    $query_select_categor ="select id,status_name from status_mat";
+    $stmt = sqlsrv_query($conn,$query_select_categor);
+    
+    while($row = sqlsrv_fetch_array($stmt)){
+        $id = $row['id'];
+        $func = "SelectStatus($id);";
+        CreateItem($row['status_name'],$func,$id,"status");
+    }
+    sqlsrv_close($conn);
+}
+
+function GenerateMestoNah(){
+    require "../sql_connect.php";
+    $statusId;
+    $column = "";
+    $table = "";
+    if (!empty($_POST["_idStatus"]))
+        $statusId = $_POST['_idStatus'];
+    
+    switch($statusId){
+        case 1:
+            $column = "wh_name";
+            $table = "all_wh";
+        break;
+        case 2:
+            $column = "ceh_name";
+            $table = "all_ceh";
+        break;
+        case 3:
+            $column = "agregat_name";
+            $table = "all_agregats";
+        break;
+        default:
+            return;
+    }
+    
+    $query_select_categor ="select id,$column from $table";
+    $stmt = sqlsrv_query($conn,$query_select_categor);
+    while($row = sqlsrv_fetch_array($stmt)){
+        $id = $row['id'];
+        $func = "SelectMestoNah($statusId,$id);";
+        CreateItem($row[$column],$func,$id,"mestoNah");
+    }
+    sqlsrv_close($conn);
+}
+
+function GenerateMestoMore(){
+    require "../sql_connect.php";
+    $statusId;
+    $mestoNahId;
+    $column = "";
+    $table = "";
+    if (!empty($_POST["_idStatus"]))
+        $statusId = $_POST['_idStatus'];
+    if (!empty($_POST["_idMestoNah"]))
+        $mestoNahId = $_POST['_idMestoNah'];
+    
+    switch($statusId){
+        case 1:
+            $column = "hran_name";
+            $table = "all_mesto_hran";
+        break;
+        case 2:
+            $column = "remPloshadka_name";
+            $table = "all_remPloshadka";
+        break;
+        case 3:
+            $column = "agregatUzel_name";
+            $table = "all_agrUzel";
+        break;
+        default:
+            return;
+    }
+    
+    $query_select_categor ="select id,$column from $table";
+    $stmt = sqlsrv_query($conn,$query_select_categor);
+    while($row = sqlsrv_fetch_array($stmt)){
+        $id = $row['id'];
+        $func = "SelectMestoMore($id);";
+        CreateItem($row[$column],$func,$id,"mestoMore");
+    }
+    sqlsrv_close($conn);
+}
+
+function CreateItem($name,$funcName,$id,$type){
+    echo "<div id=\"",$type,"_",$id,"\" onclick=\"$funcName\">";
         echo $name;
     echo "</div>";
 }

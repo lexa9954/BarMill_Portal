@@ -19,10 +19,10 @@ if (!empty($_POST["page"]))
     $pageURL = $_POST['page'];
 
 switch($pageURL){
-    case "http://localhost/Barmill_Portal/index.php?page=AllMaterials":
+    case "http://localhost/BarMill_Portal/index.php?page=AllMaterials":
         SelectMats($selCategor,$searchOzm,$minQty,$sortMat);
     break;
-    case "http://localhost/Barmill_Portal/index.php?page=AllEngines":
+    case "http://localhost/BarMill_Portal/index.php?page=AllEngines":
         SelectEngines($selCategor,$searchOzm,$minQty,$sortMat);
     break;
 }

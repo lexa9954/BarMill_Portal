@@ -159,7 +159,7 @@
 				</div>
 			</div>
 			<div class="barContent" id="createContent">
-                <?php	require "sklad/creatorPanel.php";?>
+                <!-- В данный блок интегрируется "createContent.php" посредством AJAX -->
             </div>
    		</div>
 	</div>
@@ -210,7 +210,7 @@
             
         searchPlitkiAndAddEvents();
         //
-        filtrUnselectSelect(0);
+        filtrUnselectSelect("selected");
         //
         //DynamicMargin(containerItems,"columnDate");
         //
@@ -273,7 +273,7 @@
         // Управление отображением плитки с информацией о перемещении материала
         var create = document.getElementById('create');
         var create_btn = document.getElementById('create_btn');
-        create_chkBox.addEventListener("change",function(){displayBlockOrNone(create_btn,create,this);});
+        create_chkBox.addEventListener("change",function(){displayBlockOrNone(create_btn,create,this); creatorMaterials();});
         //закрытие панели транзакций
         creatorCloseId.addEventListener("click",function(){CloseBlock(create_btn,create,create_chkBox);});
         
@@ -294,17 +294,7 @@
             }
         }
     }
-    //Штука для выпадающего списка
-    function filtrUnselectSelect(U_S){
-        var allDropDowns = document.getElementsByClassName("filtr");
-        for(var i=0;i<allDropDowns.length;i++){
-            if(U_S==0){
-                allDropDowns[i].addEventListener("click",function(){this.classList.add('selected');});
-            }else{
-                allDropDowns[i].classList.remove('selected');
-            }
-        }
-    }
+
     
     //При изменении окна браузера
     function displayWindowSize(){
@@ -344,11 +334,11 @@
     }
     //Закрытие плиток нажатием на крестик
     function CloseBar(_btn,_block,_chk){
-        setTimeout(function () {
-      				_block.classList.add('slide');
-    				}, 
-					20);
-    			//_block.classList.add ('slide');
+//        setTimeout(function () {
+//      				_block.classList.add('slide');
+//    				}, 
+//					20);
+    			_block.classList.add ('slide');
 				_block.addEventListener('transitionend', function(e) {
       				_block.classList.add('hidden');
    				 	}, {
@@ -443,7 +433,20 @@
            });
     }
     
-    
+    //Функция создания панели для создания материалов
+    function creatorMaterials(){
+        pageUrl= window.location.href;
+            $.ajax({
+               type: "POST",
+               url: "sklad/creatorPanel.php",
+               data: {page:pageUrl},
+               success: function(result,status,xhr){
+                   $( "#createContent" ).html( result );
+                   console.log("Success "+result+" Status "+status);
+                   DocumentReady();
+               }
+           });
+    }
     /*Рисуем график*/
     function createGrafik(selMatInfo){
         chartContent.innerHTML = '<canvas id="myChart"></canvas>';

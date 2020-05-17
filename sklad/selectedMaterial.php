@@ -11,6 +11,9 @@ switch($action){
     case 'CreateTableTransaction':
         SelectedMatTransactions($_POST['idMat']);
     break;
+    case 'QueryGetValues':
+        SelectMatVariablesCreatorPanel($_POST['_idMat']);
+    break;
 }
 
 function SelectMatVariables($id){
@@ -106,4 +109,16 @@ function CreateTableTransactions($stmt){
 				</tbody>
             </table>";
 }
+
+function SelectMatVariablesCreatorPanel($id){
+    include   "../sql_connect.php";
+    
+    $query_ = "select bar_code from materials where id =$id";
+    $stmt = sqlsrv_query($conn,$query_);
+    while($row = sqlsrv_fetch_array($stmt)){
+        echo $row['bar_code'];
+    }
+    sqlsrv_close($conn);
+}
+
 ?>

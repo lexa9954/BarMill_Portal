@@ -15,16 +15,32 @@
 		
 		//скрипт скрывания менюшек	
 		function close_all_sidebar() {
-			document.getElementById("interface").classList.remove('move_left_sidebar', 'move_right_sidebar', 'show_overlay');
-            filtrUnselectSelect(1);
+            
+			filtrUnselectSelect("close");
+            document.getElementById("interface").classList.remove('move_left_sidebar', 'move_right_sidebar', 'show_overlay');
+            
 		}
 		
 		//если в контенте нажата кнопка с вызовом меню, затемняет фон	
 		function show_overlay() {
+            filtrUnselectSelect("selected");
 			document.getElementById("interface").classList.remove('move_left_sidebar', 'move_right_sidebar');
 			document.getElementById("interface").classList.add('show_overlay');
-            
-            filtrUnselectSelect(0);
 		}
+        
+        //Штука для выпадающего списка
+        function filtrUnselectSelect(type){
+            var allDropDowns = document.getElementsByClassName("filtr");
+            for(var i=0;i<allDropDowns.length;i++){
+                switch(type){
+                       case "close":
+                        allDropDowns[i].classList.remove('selected');
+                       break;
+                       case "selected":
+                        allDropDowns[i].addEventListener("click",function(){this.classList.add('selected');});
+                       break;
+                }
+            }
+        }   
 		
 	</script>

@@ -10,6 +10,9 @@ switch($action){
     case "generateMestoMore":
         GenerateMestoMore();
     break;
+    case "generateMaterials":
+        GenerateMaterials();
+    break;
 }
 
 function GenerateCategories(){ 
@@ -32,6 +35,26 @@ function GenerateCategories(){
 		</div>";
 }
 
+function GenerateCategoriesFromValue($categor){ 
+    require "../sql_connect.php";
+    $categorWhere = "id='$categor'";
+    $query_select_categor ="select  id,cg_name from categories ";
+    if($categor!=0)
+        $query_select_categor.= ' where '.$categorWhere;
+    
+    $stmt = sqlsrv_query($conn,$query_select_categor);
+	
+    		/*Генерация кнопок категорий*/
+            CreateItem("Новоя категория","SelectCategorCreatorPanel(-1);",-1,"categorCreatorPanel");
+	
+    		while($row = sqlsrv_fetch_array($stmt)){
+                $id = $row['id'];
+                $func = "SelectCategorCreatorPanel($id);";
+				CreateItem($row['cg_name'],$func,$id,"categorCreatorPanel");
+    		}
+    		sqlsrv_close($conn);
+}
+
 function GenerateQty(){
     echo "
     	<div class=\"items\">";
@@ -44,7 +67,7 @@ function GenerateQty(){
 }
 
 function GenerateStatus(){
-    require "sql_connect.php";
+    require "../sql_connect.php";
     $query_select_categor ="select id,status_name from status_mat";
     $stmt = sqlsrv_query($conn,$query_select_categor);
     
@@ -125,6 +148,26 @@ function GenerateMestoMore(){
         $id = $row['id'];
         $func = "SelectMestoMore($id);";
         CreateItem($row[$column],$func,$id,"mestoMore");
+    }
+    sqlsrv_close($conn);
+}
+
+function GenerateMaterials(){
+    require "../sql_connect.php";
+    $query_materials;
+    $categorId;
+    $column;
+    if (!empty($_POST["_idCategor"]))
+        $categorId = $_POST['_idCategor'];
+    if (!empty($_POST["_typeColumn"]))
+        $column = $_POST['_typeColumn'];
+
+    $query_materials = "select id,$column from materials where categor = $categorId";
+    $stmt = sqlsrv_query($conn,$query_materials);
+    while($row = sqlsrv_fetch_array($stmt)){
+        $id = $row['id'];
+        $func = "SelectMatrialCreatorPanel($id);";
+        CreateItem($row[$column],$func,$id,$column);
     }
     sqlsrv_close($conn);
 }

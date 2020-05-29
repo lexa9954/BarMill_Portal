@@ -1008,3 +1008,6 @@ input, input:hover, input:focus {
     text-align: left;
 }
 */
+.labelSelectedFiltr{
+    text-decoration-line: underline;
+}

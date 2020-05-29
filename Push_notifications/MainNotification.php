@@ -1,5 +1,5 @@
 <?php
-AllMaterials();
+//AllMaterials();
 function AllMaterials(){
     require "sql_connect.php";
     $query_select_mats = "select distinct name_mat,mat_box_polka.qty,min,max,mat_box_polka.id_box,mat_box_polka.id_polka,ozm,ediniciIzmerenija.edinica_izmerenija,nameC,max(mat_date) 'mat_date' from materials join history on history.mat_id = materials.id 

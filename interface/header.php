@@ -9,7 +9,7 @@
         <title>BarMill Portal</title>
 	   <script language="JavaScript" type="text/javascript" src="/BarMill_portal/libs/chart.js"></script>
     <script language="JavaScript" type="text/javascript" src="/BarMill_portal/Push_notifications/Notifications.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="libs/ajax.js"></script>
 </head>
 <body id="interface"
   <?php /* присвоение класса "move_right_sidebar" к блоку с id "interface" для фиксации правого сайдбара в случае если при авторизации были введены неверные АMEI и/или пароль */
@@ -26,6 +26,31 @@
          	<div id="scan_barcode">
           		<?php	require "img/scan_barcode.svg";?>         		
          	</div>
-          	<a href="index.php"><img src="img/logo.svg" alt="LOGO" class="svg-logo"></a>           
+          	<a href="index.php"><img src="img/logo.svg" alt="LOGO" class="svg-logo"></a>
+            <div style="margin:100px; color:white;">
+                <?php 
+                    $page = $_SERVER['REQUEST_URI'];
+                    switch($page){
+                        case "/BarMill_Portal/index.php?page=profile":
+                            echo "ПРОФИЛЬ";
+                            break;
+                        case "/BarMill_Portal/index.php":
+                            echo "ГЛАВНАЯ";
+                            break;
+                        case "/BarMill_Portal/index.php?page=AllMaterials":
+                            echo "МАТЕРИАЛЫ";
+                            break;
+                        case "/BarMill_Portal/index.php?page=AllEngines":
+                            echo "ДВИГАТЕЛЯ";
+                            break;
+                        case "/BarMill_Portal/index.php?page=testTable":
+                            echo "ТЕСТ";
+                            break;
+                        default: 
+                            echo "???";
+                            break;
+                    }
+                ?>
+            </div>
         </div> 
 	</header>

@@ -113,10 +113,36 @@ function CreateTableTransactions($stmt){
 function SelectMatVariablesCreatorPanel($id){
     include   "../sql_connect.php";
     
-    $query_ = "select bar_code from materials where id =$id";
+    $query_ = "select id_mat,status,status_name,wh_name,ceh_name,agregat_name,hran_name,remPloshadka_name,agregatUzel_name,mesto 
+from material_objects 
+join status_mat on status_mat.id = status
+left join all_wh on all_wh.id = mesto_wh
+left join all_ceh on all_ceh.id = mesto_ceh
+left join all_agregats on all_agregats.id = mesto_agregat
+left join all_mesto_hran on all_mesto_hran.id = mesto_hran
+left join all_remPloshadka on all_remPloshadka.id = mesto_rem_ploshadka
+left join all_agrUzel on all_agrUzel.id = mesto_agregat_uzel where id_mat =$id";
     $stmt = sqlsrv_query($conn,$query_);
     while($row = sqlsrv_fetch_array($stmt)){
-        echo $row['bar_code'];
+        echo $row['status_name'];
+        switch($row['status']){
+            case 1:
+                echo $row['wh_name'];
+                echo $row['hran_name'];
+            break;
+            case 2:
+                echo $row['ceh_name'];
+                echo $row['remPloshadka_name'];
+            break;
+            case 3:
+                echo $row['agregat_name'];
+                echo $row['agregatUzel_name'];
+            break;
+            case 4:
+                echo "Утиль";
+            break;
+        }
+        echo "</br>";
     }
     sqlsrv_close($conn);
 }

@@ -45,6 +45,7 @@ function GenerateCategoriesFromValue($categor){
     $stmt = sqlsrv_query($conn,$query_select_categor);
 	
     		/*Генерация кнопок категорий*/
+    if($categor==0)
             CreateItem("Новоя категория","SelectCategorCreatorPanel(-1);",-1,"categorCreatorPanel");
 	
     		while($row = sqlsrv_fetch_array($stmt)){
@@ -162,6 +163,8 @@ function GenerateMaterials(){
     if (!empty($_POST["_typeColumn"]))
         $column = $_POST['_typeColumn'];
 
+    CreateItem("Новой материал","SelectMatrialCreatorPanel(-1);",-1,$column);
+    
     $query_materials = "select id,$column from materials where categor = $categorId";
     $stmt = sqlsrv_query($conn,$query_materials);
     while($row = sqlsrv_fetch_array($stmt)){

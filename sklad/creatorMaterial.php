@@ -34,8 +34,9 @@ function CreateMaterial(){
     
     
     $Search_material_query = "select id from materials where name_mat='$_name_mat'";
-    $Search_material_stmt = sqlsrv_query($conn,$Search_material_query);
-    echo sqlsrv_fetch_array($Search_material_stmt);
+    $Search_material_stmt = mysqli_query( $conn, $Search_material_query);
+    //$Search_material_stmt = mysqli_query($conn,$Search_material_query);
+    echo mysqli_fetch_array($Search_material_stmt);
     
     //Добавление в таблицу материалов
     $Add_to_materials_query = "insert into materials (name_mat,bar_code,categor,min,max,edinica_izmerenija,ozm) values 

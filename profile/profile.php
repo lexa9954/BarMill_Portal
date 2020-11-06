@@ -12,7 +12,7 @@
 <?php
 //Если время существования кукисов закончилось пользователя выкидывает и переотправляет на индексную страницу
 if(empty($_COOKIE['name'])){
-	header('Location:/Barmill_Portal/index.php');
+	header('Location:/index.php');
 }
 	
 // ↓ Блок кода для отображения существующей аватарки (возможно выводить информацию о пользователе сюда же)↓
@@ -22,10 +22,11 @@ if(empty($_COOKIE['name'])){
 	$COOKIE_AMEI = $_COOKIE['AMEI'];
 	//запрос в БД для получения пути и имени файла картинки профиля
 	$sql = "SELECT * FROM img_ava WHERE id = (SELECT imgId FROM login_img WHERE loginAMEI = 	'$COOKIE_AMEI')";	
-	$stmt = sqlsrv_query( $conn, $sql);
-	
+	//$stmt = mysqli_query( $conn, $sql);
+	$stmt = mysqli_query( $conn, $sql);
+    
 	//формирование массива со зачениями пути и имени файла картинки из ответа от БД
-	$img = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
+	$img = mysqli_fetch_array( $stmt);
 	//создания переменной пути к файлу
 	$target = $img['img_tmp'];
 	//создание переменной имени файла

@@ -10,21 +10,21 @@ require "../sql_connect.php";
 
 $AMEI = $_COOKIE['AMEI'];
 	
-$sql = "SELECT pass FROM login WHERE AMEI = '$AMEI'";
-$stmt = sqlsrv_query( $conn, $sql);
+$sql = "SELECT pass FROM login WHERE AMEI = $AMEI";
 
-$sqlData = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);	
+$stmt = mysqli_query( $conn, $sql);
 
+$sqlData = mysqli_fetch_array( $stmt);	
 	if($hash_old_pass == $sqlData['pass']){
 		unset($_SESSION['wrongPass']);
 		$_SESSION['correctPass'] = "Пароль изменён спешно!";
 		$sql = "UPDATE login SET pass = '$hash_new_pass' WHERE AMEI = '$AMEI'";
-		$stmt = sqlsrv_query( $conn, $sql);
+		$stmt = mysqli_query( $conn, $sql);
 	}else{
 		unset($_SESSION['correctPass']);
 		$_SESSION['wrongPass'] = "Пароль не изменён!<br>Так как прежний пароль введён неправильно.";
 	}
 
-sqlsrv_free_stmt($stmt);
-header('Location:/gamburger/index.php?page=profile');
+mysqli_fetch_array($stmt);
+header('Location:/index.php?page=profile');
 ?>

@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +8,8 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
         <title>BarMill Portal</title>
-	   <script language="JavaScript" type="text/javascript" src="/BarMill_portal/libs/chart.js"></script>
-    <script language="JavaScript" type="text/javascript" src="/BarMill_portal/Push_notifications/Notifications.js"></script>
+	   <script language="JavaScript" type="text/javascript" src="/libs/chart.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/Push_notifications/Notifications.js"></script>
 <script src="libs/ajax.js"></script>
 </head>
 <body id="interface"
@@ -31,23 +32,23 @@
                 <?php 
                     $page = $_SERVER['REQUEST_URI'];
                     switch($page){
-                        case "/BarMill_Portal/index.php?page=profile":
+                        case "/index.php?page=profile":
                             echo "ПРОФИЛЬ";
                             break;
-                        case "/BarMill_Portal/index.php":
+                        case "/index.php":
                             echo "ГЛАВНАЯ";
                             break;
-                        case "/BarMill_Portal/index.php?page=AllMaterials":
+                        case "/index.php?page=AllMaterials":
                             echo "МАТЕРИАЛЫ";
                             break;
-                        case "/BarMill_Portal/index.php?page=AllEngines":
+                        case "/index.php?page=AllEngines":
                             echo "ДВИГАТЕЛЯ";
                             break;
-                        case "/BarMill_Portal/index.php?page=testTable":
-                            echo "ТЕСТ";
+                        case "/index.php?page=ExamPage":
+                            echo "ЭКЗАМЕНЫ";
                             break;
                         default: 
-                            echo "???";
+                            echo "ГЛАВНАЯ";
                             break;
                     }
                 ?>

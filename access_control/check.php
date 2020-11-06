@@ -31,7 +31,8 @@ if( $conn === false ) {
 
 $sql = "INSERT INTO login (AMEI, name, pass) VALUES ('$AMEI',  '$name', '$pass')";
 
-$stmt = sqlsrv_query( $conn, $sql);
+$stmt = mysqli_query( $conn, $sql);
+//$stmt = mysqli_query( $conn, $sql);
 if( $stmt === false ) {
 	die( print_r( sqlsrv_errors(), true));
 }

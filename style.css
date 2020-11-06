@@ -501,6 +501,12 @@ input, input:hover, input:focus {
 	flex-grow: 1;
 	width: inherit;
 }
+.Exam{
+    display: flex;
+    flex-direction: row;
+	flex-grow: 1;
+	width: inherit;
+}
 
 /*Разделение контент-блока на два столбца*/
 .WH_left_column, .WH_right_column {
@@ -764,7 +770,7 @@ input, input:hover, input:focus {
 	width: 150px;
 }
 .columnEdIzm {
-	width: 80px;
+	width: 100px;
 }
 .colSod {
 	width: 200px;
@@ -780,6 +786,32 @@ input, input:hover, input:focus {
 }
 .tableMats thead th:last-child {
 	margin-right: 8px;
+}
+
+/*Ширина столбцов таблицы и drop-down менюшек*/
+.columnFN{
+    width: 150px;
+}
+.columnLN{
+    width: 150px;
+}
+.columnSN{
+    width: 150px;
+}
+.columnDateExam{
+    width: 100px;
+}
+.columnExamType{
+    width: 200px;
+}
+.columnPercent{
+    width: 100px;
+}
+.columnTimeExam{
+    width: 170px;
+}
+.columnTabNum{
+    width: 100px;
 }
 
 /*Отступ блока внутри ячейки хидера для смещения по отношению к дроп-даун менюшки*/

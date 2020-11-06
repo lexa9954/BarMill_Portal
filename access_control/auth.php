@@ -7,30 +7,31 @@ $hash_pass = $pass;
 
 require "../sql_connect.php";
 
-$sql = "SELECT * FROM login WHERE AMEI = '$AMEI' AND pass = '$pass'";
-$stmt = sqlsrv_query( $conn, $sql);
+
+$sql = "SELECT login.id,amei,first_name FROM login join peoples on peoples.id=login.people_id WHERE AMEI = $AMEI AND pass = '$pass'";
+$stmt = mysqli_query( $conn, $sql);
 
 if( $stmt === false) {
-    die( print_r( sqlsrv_errors(), true) );
+    //die( print_r( mysqli_connect_error(), true) );
+    //die( print_r( sqlsrv_errors(), true) );
 }
 
-$user = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
-	if(empty($user['AMEI'])){
-	//unset($_SESSION['wrongPass']);
-	//$_SESSION['correctPass'] = "Пароль изменён спешно!";
-	$_SESSION['loginError'] = "Не верный пароль<br>или имя пользователя.";
-	//echo "Такой пользователь не найден";
-	}else{
-	unset($_SESSION['loginError']);
-	//$_SESSION['loginError'] = "Не верный пароль<br>или имя пользователя.";
-	//echo "Success";
-	}
+$user = mysqli_fetch_array( $stmt);
 
+	if(empty($user['amei'])){
+	   unset($_SESSION['wrongPass']);
+	   $_SESSION['correctPass'] = "Пароль изменён спешно!";
+	   $_SESSION['loginError'] = "Не верный пароль<br>или имя пользователя.";
+	   echo "Такой пользователь не найден";
+	}else{
+	   unset($_SESSION['loginError']);
+	   $_SESSION['loginError'] = "Не верный пароль<br>или имя пользователя.";
+	   echo "Success";
+	}
 //exit();
 
-setcookie('name', $user['name'], time() + 36000, "/");
-setcookie('AMEI', $user['AMEI'], time() + 36000, "/");
+setcookie('name', $user['first_name'], time() + 36000, "/");
+setcookie('AMEI', $user['amei'], time() + 36000, "/");
 
-sqlsrv_free_stmt( $stmt);
 header('Location:../index.php');
 ?>

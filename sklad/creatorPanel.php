@@ -4,10 +4,10 @@
     if (!empty($_POST["page"]))
         $pageURL = $_POST['page'];
     switch($pageURL){
-        case "http://localhost/BarMill_Portal/index.php?page=AllMaterials":
+        case "http://10.21.186.101/index.php?page=AllMaterials":
             $categorPage=0;
         break;
-        case "http://localhost/BarMill_Portal/index.php?page=AllEngines":
+        case "http://10.21.186.101/index.php?page=AllEngines":
             $categorPage=5018;
         break;
     }
@@ -34,10 +34,10 @@
     
     function Start(){
         switch(pageUrl){
-            case "http://localhost/BarMill_Portal/index.php?page=AllMaterials":
+            case "http://10.21.186.101/index.php?page=AllMaterials":
                 selectCategor.style.display = "grid";
             break;
-            case "http://localhost/BarMill_Portal/index.php?page=AllEngines":
+            case "http://10.21.186.101/index.php?page=AllEngines":
                 SelectCategorCreatorPanel(5018);
             break;
         }

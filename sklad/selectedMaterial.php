@@ -23,10 +23,10 @@ function SelectMatVariables($id){
     $matQtyArr = array();
     $minArr = array();
     $maxArr = array();
-    $query_ = "select mat_date,spisanie_or_dobavlenie,mat_qty,min,max from history join materials on materials.id=history.mat_id where mat_id ='$id'";
-    $stmt = sqlsrv_query($conn,$query_);
-    while($row = sqlsrv_fetch_array($stmt)){
-        $mat_date = $row['mat_date']->format('d.m.Y');
+    $query_ = "select mat_date,spisanie_or_dobavlenie,mat_qty,min,max from history join materials on materials.id=history.mat_id where mat_id =$id";
+    $stmt = mysqli_query($conn,$query_);
+    while($row = mysqli_fetch_array($stmt)){
+        $mat_date = $row['mat_date'];
         $spisanie_or_dobavlenie = $row['spisanie_or_dobavlenie'];
         $mat_qty = $row['mat_qty'];
         $min = $row['min'];
@@ -39,28 +39,31 @@ function SelectMatVariables($id){
         $maxArr = $max;
         echo "$spisanieDobavlenieArr $matDateArr $matQtyArr $minArr $maxArr;";
     }
-    sqlsrv_close($conn);
+    mysqli_close($conn);
 }
 function imgSelMat($id){
     include   "../sql_connect.php";
     $query_ = "select ozm from materials where id ='$id'";
-    $stmt = sqlsrv_query($conn,$query_);
-    while($row = sqlsrv_fetch_array($stmt)){
+    $stmt = mysqli_query($conn,$query_);
+    
+    while($row = mysqli_fetch_array($stmt)){
         echo $row['ozm'];
     }
-    sqlsrv_close($conn);
+
+    mysqli_close($conn);
 }
 
+
 function SelectedMatTransactions($id){
-    include   "../sql_connect.php";
     $query_ = "select peoples.Second_name,peoples.First_name,peoples.Last_name,mat_date,mat_qty,spisanie_or_dobavlenie,ediniciIzmerenija.ei_name   
     from history join peoples on history.people = peoples.id join materials on history.mat_id = materials.id 
-    join ediniciIzmerenija on materials.edinica_izmerenija=ediniciIzmerenija.id 
-    where mat_id='$id'";
+    join ediniciIzmerenija on materials.ei_id=ediniciIzmerenija.id 
+    where mat_id=$id";
     
-    CreateTableTransactions(sqlsrv_query($conn,$query_));
-    sqlsrv_close($conn);
+    CreateTableTransactions($query_);
 }
+
+
 function CreateTableTransactions($stmt){
     echo "<table class=\"tableMats\">
                 <thead id=\"material_table_head\" class=\"material_table_head\">
@@ -84,11 +87,10 @@ function CreateTableTransactions($stmt){
                 	</tr>
                 </thead>
                 <tbody id=\"containerItems\">";
-                    $rows = sqlsrv_has_rows( $stmt );
-                    if ($rows === false)
-                        echo "<tr><td>Транзакций не обнаружено</td</tr";    
-                        
-    				while($row = sqlsrv_fetch_array($stmt)){
+                    include   "../sql_connect.php";
+                    $resQuery = mysqli_query($conn,$stmt);
+                    
+    				while($row = mysqli_fetch_array($resQuery)){
                         $sod = "";
                         if($row['spisanie_or_dobavlenie'])
                             $sod="Внёс"; 
@@ -97,18 +99,20 @@ function CreateTableTransactions($stmt){
   
         				echo "
                 		<tr class=\"tableRow\" onclick=\"selectTd(this)\">
-                            <td class=\"columnDate\">",$row['mat_date']->format('d-m-Y H:i:s'),"</td>
+                            <td class=\"columnDate\">",$row['mat_date'],"</td>
                             <td class=\"colSod\">",$sod,"</td>
                             <td class=\"columnQty value\">",$row['mat_qty'],"</td>
                             <td class=\"columnEdIzm\">",$row['ei_name'],"</td>
-                    		<td class=\"colFio\">",$row['Second_name']," ",$row['First_name']," ",$row['Last_name'],"</td>	
+                    		<td class=\"colFio\">",$row['Last_name']," ",$row['First_name']," ",$row['Second_name'],"</td>	
                	 		</tr>
         				";
     				}
+                    mysqli_close($conn);
     				echo "
 				</tbody>
             </table>";
 }
+
 
 function SelectMatVariablesCreatorPanel($id){
     include   "../sql_connect.php";
@@ -122,8 +126,8 @@ left join all_agregats on all_agregats.id = mesto_agregat
 left join all_mesto_hran on all_mesto_hran.id = mesto_hran
 left join all_remPloshadka on all_remPloshadka.id = mesto_rem_ploshadka
 left join all_agrUzel on all_agrUzel.id = mesto_agregat_uzel where id_mat =$id";
-    $stmt = sqlsrv_query($conn,$query_);
-    while($row = sqlsrv_fetch_array($stmt)){
+    $stmt = mysqli_query($conn,$query_);
+    while($row = mysqli_fetch_array($stmt)){
         echo $row['status_name'];
         switch($row['status']){
             case 1:
@@ -144,7 +148,8 @@ left join all_agrUzel on all_agrUzel.id = mesto_agregat_uzel where id_mat =$id";
         }
         echo "</br>";
     }
-    sqlsrv_close($conn);
+    mysqli_close($conn);
 }
+
 
 ?>

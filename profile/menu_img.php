@@ -31,7 +31,7 @@
 					move_uploaded_file($file_tmp,"img/avatar/"."$COOKIE_AMEI.$file_ext");
 					$sql = "UPDATE img_ava SET img_name = '$COOKIE_AMEI.$file_ext' WHERE id = (SELECT 		imgId FROM login_img WHERE loginAMEI = '$COOKIE_AMEI')";
 	
-					$stmt = sqlsrv_query( $conn, $sql);
+                    $stmt = mysqli_query( $conn, $sql);
 				}else{
 					print $errors;
 				}	

@@ -19,10 +19,10 @@ if (!empty($_POST["page"]))
     $pageURL = $_POST['page'];
 
 switch($pageURL){
-    case "http://localhost/BarMill_Portal/index.php?page=AllMaterials":
+    case "http://10.21.186.101/index.php?page=AllMaterials":
         SelectMats($selCategor,$searchOzm,$minQty,$sortMat);
     break;
-    case "http://localhost/BarMill_Portal/index.php?page=AllEngines":
+    case "http://10.21.186.101/index.php?page=AllEngines":
         SelectEngines($selCategor,$searchOzm,$minQty,$sortMat);
     break;
 }
@@ -66,16 +66,21 @@ function SelectMats($categor,$search,$min,$sort){
     (select max(mat_date) from history where mat_id=materials.id and spisanie_or_dobavlenie=1)  'mat_date' 
 from materials 
 inner join material_objects on materials.id = material_objects.id_mat
-inner join ediniciIzmerenija on ediniciIzmerenija.id = materials.edinica_izmerenija 
+inner join ediniciIzmerenija on ediniciIzmerenija.id = materials.ei_id 
 inner join categories on categories.id = materials.categor 
 
 $query_select_categor $query_search_name $query_select_min 
 
 group by name_mat,ozm,ediniciIzmerenija.ei_name,categories.cg_name,min,max,materials.id  
     $query_sort_by";
-    CreateTableAllMaterials(sqlsrv_query($conn,$query_select_mats));
-    sqlsrv_close($conn);
+    
+    $stmt = mysqli_query($conn,$query_select_mats);
+    
+    CreateTableAllMaterials($stmt);
+    
+    mysqli_close($conn);
 }
+
     
 /*Запрос на получение материалов по фильтру*/
 function SelectEngines($categor,$search,$min,$sort){
@@ -127,8 +132,8 @@ where categor = 5018
 $query_select_categor $query_search_name $query_select_min 
  
     $query_sort_by";
-    CreateTableAllEngines(sqlsrv_query($conn,$query_select_mats));
-    sqlsrv_close($conn);
+    CreateTableAllEngines(mysqli_query($conn,$query_select_mats));
+    mysqli_close($conn);
 }
 
 
@@ -206,14 +211,13 @@ function CreateTableAllMaterials($stmt){
                 	</tr>
                 </thead>
                 <tbody id=\"containerItems\">";
-                    $rows = sqlsrv_has_rows( $stmt );
-                    if ($rows === false)
+                    $rows = mysqli_num_rows ( $stmt );
+                    if ($rows ==0 )
                         echo "<tr><td>материал не найден</td</tr";    
-                        
-    				while($row = sqlsrv_fetch_array($stmt)){
-        				$classMin = "itemMatTR";
+    
+                    while($row = mysqli_fetch_array($stmt) ){
+                        $classMin = "itemMatTR";
                         $date = "";
-                        
         				if($row['qty']<=$row['min'] && $row['qty']!=0){
             				$classMin = "minItemMatTR";
         				}else if($row['qty']==0){
@@ -221,9 +225,9 @@ function CreateTableAllMaterials($stmt){
                         }
                         //Проверка на историю
                         if($row['mat_date'] !=null){
-                            $date = $row['mat_date']->format('d-m-Y H:i:s');
+                            $date = $row['mat_date'];
                         }
-        				echo "
+                        echo "
                 		<tr id=\"item\" class=\"tableRow $classMin\" onclick=\"selectTd(this)\">
                             <td id=\"id_mat\" class=\"unvisibleElement\">",$row['id'],"</td>
                     		<td class=\"columnOZM value\">",$row['ozm'],"</td>					
@@ -233,8 +237,8 @@ function CreateTableAllMaterials($stmt){
                     		<td class=\"columnCategory\">",$row['cg_name'],"</td>
                     		<td class=\"columnDate value\">",$date,"</td>
                	 		</tr>
-        				";
-    				}
+        				";                    
+                    }
     				echo "
 				</tbody>
             </table>";	
@@ -296,7 +300,7 @@ function CreateTableAllEngines($stmt){
                     if ($rows === false)
                         echo "<tr><td>материал не найден</td</tr";    
                         
-    				while($row = sqlsrv_fetch_array($stmt)){
+    				while($row = mysqli_fetch_array($stmt)){
                         $status =$row['status_name'];
                         $statusClass;
                         $mesto_nah = "";

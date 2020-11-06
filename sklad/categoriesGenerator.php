@@ -20,17 +20,17 @@ function GenerateCategories(){
 		echo "	
 		<div class=\"items\">";
     		$query_select_categor ="select  id,cg_name from categories";
-    		$stmt = sqlsrv_query($conn,$query_select_categor);
+    		$stmt = mysqli_query($conn,$query_select_categor);
 	
     		/*Генерация кнопок категорий*/
             CreateItem("Все","SelectCat(-1);",-1,"categor");
 	
-    		while($row = sqlsrv_fetch_array($stmt)){
+    		while($row = mysqli_fetch_array($stmt)){
                 $id = $row['id'];
                 $func = "SelectCat($id);";
 				CreateItem($row['cg_name'],$func,$id,"categor");
     		}
-    		sqlsrv_close($conn);
+    		mysqli_close($conn);
         echo "
 		</div>";
 }
@@ -42,18 +42,18 @@ function GenerateCategoriesFromValue($categor){
     if($categor!=0)
         $query_select_categor.= ' where '.$categorWhere;
     
-    $stmt = sqlsrv_query($conn,$query_select_categor);
+    $stmt = mysqli_query($conn,$query_select_categor);
 	
     		/*Генерация кнопок категорий*/
     if($categor==0)
             CreateItem("Новоя категория","SelectCategorCreatorPanel(-1);",-1,"categorCreatorPanel");
 	
-    		while($row = sqlsrv_fetch_array($stmt)){
+    		while($row = mysqli_fetch_array($stmt)){
                 $id = $row['id'];
                 $func = "SelectCategorCreatorPanel($id);";
 				CreateItem($row['cg_name'],$func,$id,"categorCreatorPanel");
     		}
-    		sqlsrv_close($conn);
+    		mysqli_close($conn);
 }
 
 function GenerateQty(){
@@ -70,14 +70,14 @@ function GenerateQty(){
 function GenerateStatus(){
     require "../sql_connect.php";
     $query_select_categor ="select id,status_name from status_mat";
-    $stmt = sqlsrv_query($conn,$query_select_categor);
+    $stmt = mysqli_query($conn,$query_select_categor);
     
-    while($row = sqlsrv_fetch_array($stmt)){
+    while($row = mysqli_fetch_array($stmt)){
         $id = $row['id'];
         $func = "SelectStatus($id);";
         CreateItem($row['status_name'],$func,$id,"status");
     }
-    sqlsrv_close($conn);
+    mysqli_close($conn);
 }
 
 function GenerateMestoNah(){
@@ -106,13 +106,13 @@ function GenerateMestoNah(){
     }
     
     $query_select_categor ="select id,$column from $table";
-    $stmt = sqlsrv_query($conn,$query_select_categor);
-    while($row = sqlsrv_fetch_array($stmt)){
+    $stmt = mysqli_query($conn,$query_select_categor);
+    while($row = mysqli_fetch_array($stmt)){
         $id = $row['id'];
         $func = "SelectMestoNah($statusId,$id);";
         CreateItem($row[$column],$func,$id,"mestoNah");
     }
-    sqlsrv_close($conn);
+    mysqli_close($conn);
 }
 
 function GenerateMestoMore(){
@@ -144,13 +144,13 @@ function GenerateMestoMore(){
     }
     
     $query_select_categor ="select id,$column from $table";
-    $stmt = sqlsrv_query($conn,$query_select_categor);
-    while($row = sqlsrv_fetch_array($stmt)){
+    $stmt = mysqli_query($conn,$query_select_categor);
+    while($row = mysqli_fetch_array($stmt)){
         $id = $row['id'];
         $func = "SelectMestoMore($id);";
         CreateItem($row[$column],$func,$id,"mestoMore");
     }
-    sqlsrv_close($conn);
+    mysqli_close($conn);
 }
 
 function GenerateMaterials(){
@@ -166,13 +166,13 @@ function GenerateMaterials(){
     CreateItem("Новой материал","SelectMatrialCreatorPanel(-1);",-1,$column);
     
     $query_materials = "select id,$column from materials where categor = $categorId";
-    $stmt = sqlsrv_query($conn,$query_materials);
-    while($row = sqlsrv_fetch_array($stmt)){
+    $stmt = mysqli_query($conn,$query_materials);
+    while($row = mysqli_fetch_array($stmt)){
         $id = $row['id'];
         $func = "SelectMatrialCreatorPanel($id);";
         CreateItem($row[$column],$func,$id,$column);
     }
-    sqlsrv_close($conn);
+    mysqli_close($conn);
 }
 
 function CreateItem($name,$funcName,$id,$type){

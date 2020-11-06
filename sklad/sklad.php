@@ -6,7 +6,7 @@
 <?php
 	// Доступ на страницу только после авторизации
 	if(empty($_COOKIE['name'])){
-    	header('Location:/BarMill_Portal/index.php');
+    	header('Location:/index.php');
     }
 ?>
 <!-- Доступ на страницу только после авторизации -->
@@ -109,7 +109,7 @@
 				</div>
 			</div>
 			<div class="barContent" id="chartContent">
-                <canvas id="myChart"></canvas>
+                <!--canvas id="myChart"></canvas-->
             </div>
    		</div>
    		
@@ -200,10 +200,10 @@
     function DocumentReady(){
         close_all_sidebar();
         switch(pageUrl){
-            case "http://localhost/BarMill_Portal/index.php?page=AllMaterials":
+            case "http://10.21.186.101/index.php?page=AllMaterials":
                 searchElementsAllMaterialsTable();
             break;
-            case "http://localhost/BarMill_Portal/index.php?page=AllEngines":
+            case "http://10.21.186.101/index.php?page=AllEngines":
                 //SelectEngines($selCategor,$searchOzm,$minQty,$sortMat);
             break;
         }
@@ -235,7 +235,7 @@
         var catalog = document.getElementById('catalog');
         var catalog_btn = document.getElementById('catalog_btn');
         catalog_chkBox.addEventListener("change",function(){displayBlockOrNone(catalog_btn,catalog,this);});
-        //закрытие панели с каталогом
+        //закрытие панели с каталогом 
         catalogCloseId.addEventListener("click",function(){CloseBar(catalog_btn,catalog,catalog_chkBox);});
         
         // Управление отображением плитки с информацией о материале
@@ -250,30 +250,26 @@
         var spec_btn = document.getElementById('spec_btn');
         spec_chkBox.addEventListener("change",function(){displayBlockOrNone(spec_btn,spec,this);});
         //закрытие панели с характеристиками
-        specCloseId.addEventListener("click",function(){CloseBar(spec_btn,spec,spec_chkBox);});
+        specCloseId.addEventListener("click",function(){CloseBar(spec_btn,spec,spec_chkBox); });
         
         // Управление отображением плитки с графиком
         var material_chart = document.getElementById('chart');
         var material_chart_btn = document.getElementById('chart_btn');
-        chart_chkBox.addEventListener("change",function(){displayBlockOrNone(material_chart_btn,material_chart,this);
-            chartContent.innerHTML = '<canvas id="myChart"></canvas>';
-            if(this.checked)
-                setTimeout(() => { createGrafik(matInfoForGrafic); }, 350);                             
-        });
+        chart_chkBox.addEventListener("change",function(){displayBlockOrNone(material_chart_btn,material_chart,this);});
         //закрытие панели графика
         chartCloseId.addEventListener("click",function(){CloseBar(material_chart_btn,material_chart,chart_chkBox);});
         
         // Управление отображением плитки с информацией о перемещении материала
         var trans = document.getElementById('trans');
         var trans_btn = document.getElementById('trans_btn');
-        trans_chkBox.addEventListener("change",function(){displayBlockOrNone(trans_btn,trans,this);});
+        trans_chkBox.addEventListener("change",function(){displayBlockOrNone(trans_btn,trans,this); });
         //закрытие панели транзакций
-        transCloseId.addEventListener("click",function(){CloseBar(trans_btn,trans,trans_chkBox);});
+        transCloseId.addEventListener("click",function(){CloseBar(trans_btn,trans,trans_chkBox); });
         
         // Управление отображением плитки с информацией о перемещении материала
         var create = document.getElementById('create');
         var create_btn = document.getElementById('create_btn');
-        create_chkBox.addEventListener("change",function(){displayBlockOrNone(create_btn,create,this); creatorMaterials();});
+        create_chkBox.addEventListener("change",function(){displayBlockOrNone(create_btn,create,this); creatorMaterials(); });
         //закрытие панели транзакций
         creatorCloseId.addEventListener("click",function(){CloseBlock(create_btn,create,create_chkBox);});
         
@@ -301,6 +297,7 @@
         let rootCss = document.documentElement;
         var heightMatTable = document.querySelector('#catalogContent').offsetHeight;
         rootCss.style.setProperty('--transAnim', (heightMatTable/1.5)+"ms");
+           
     }
 	//Здесь функция скрытие/открытие плиток кнопками навигационной панели под картинкой
     function displayBlockOrNone(_btn,_block,_chk){
@@ -320,6 +317,7 @@
         }
         _block.parentElement.classList.remove("column_hide");
   			if (_chk.checked) {
+                
     			 _block.classList.remove ('hidden');
 //				setTimeout(function () {
 //      				_block.classList.remove('slide');
@@ -331,9 +329,11 @@
   			} else {
                 CloseBar(_btn,_block,_chk);
   			}
+        createGrafik(matInfoForGrafic);
     }
     //Закрытие плиток нажатием на крестик
     function CloseBar(_btn,_block,_chk){
+        
 //        setTimeout(function () {
 //      				_block.classList.add('slide');
 //    				}, 
@@ -359,11 +359,11 @@
         imgMat = document.getElementById("material_image");
         switch(pageUrl){
             //если это страница с материалами
-            case "http://localhost/BarMill_Portal/index.php?page=AllMaterials":
+            case "http://10.21.186.101/index.php?page=AllMaterials":
                 SelectMaterial(selIdMat,selNameMat);
             break;
             //если это страница с двигателями
-            case "http://localhost/BarMill_Portal/index.php?page=AllEngines":
+            case "http://10.21.186.101/index.php?page=AllEngines":
                 
             break;
         }
@@ -382,6 +382,7 @@
     }
     
     function SelectMaterial(selIdMat,selNameMat){
+        console.log("Select Material Graph");
             $.ajax({
                type: "POST",
                url: "sklad/selectedMaterial.php",
@@ -389,26 +390,34 @@
                success: function(result){
                    matInfoForGrafic = result;
                     createGrafik(result);
+                   console.log("Success Select Material Graph");
                    DocumentReady();
                }
            });
+        console.log("Select Material Image");
             $.ajax({
                type: "POST",
                url: "sklad/selectedMaterial.php",
                data: {action:'imgSelMat', idMat:selIdMat},
                success: function(result){
-                   if(result != "")
                     imgMat.src = "sklad/img/"+result+".jpg";
-                   else
-                    imgMat.src = "img/error_pictures/noImg.jpg";
+                    
+                    
+                    imgMat.onerror = function(e) {
+                       imgMat.src = "img/error_pictures/noImg.jpg"; 
+                    }
+                   
+                    console.log("Success Select Material Image!");
                }
            });
+        console.log("Generate Table Transaction");
             $.ajax({
                type: "POST",
                url: "sklad/selectedMaterial.php",
                data: {action:'CreateTableTransaction', idMat:selIdMat},
                success: function(result){
                    $( "#transContent" ).html( result );
+                   console.log("Success Generate Table Transaction!");
                }
            });
     }
@@ -421,13 +430,14 @@
     //Функция для создания таблицы посредством Ajax
     function ajaxGenerateTable(){
         pageUrl= window.location.href;
+        console.log("Generate Table Materials");
             $.ajax({
                type: "POST",
                url: "sklad/tableGeneratorMaterials.php",
                data: {page:pageUrl, searchOzm:searchMatOzm,sort:sortType,categor:selCatId, minQty:minQty},
                success: function(result,status,xhr){
                    $( "#catalogContent" ).html( result );
-                   console.log("Success "+result+" Status "+status);
+                   console.log("Success Generate Table Materials!");
                    DocumentReady();
                }
            });
@@ -436,24 +446,34 @@
     //Функция создания панели для создания материалов
     function creatorMaterials(){
         pageUrl= window.location.href;
+        console.log("Create Materials");
             $.ajax({
                type: "POST",
                url: "sklad/creatorPanel.php",
                data: {page:pageUrl},
                success: function(result,status,xhr){
                    $( "#createContent" ).html( result );
-                   console.log("Success "+result+" Status "+status);
+                   console.log("Success Create Materials!");
                    DocumentReady();
                }
            });
     }
     /*Рисуем график*/
     function createGrafik(selMatInfo){
-        chartContent.innerHTML = '<canvas id="myChart"></canvas>';
+        var oldCanvas = document.getElementById("chartContent");
+        oldCanvas.innerHTML = '';
+        
+        var tag = document.createElement("canvas");
+        tag.id = "myChart";
+        var element = document.getElementById("chartContent");
+        element.appendChild(tag);
+        
         
         var infoMat = selMatInfo;
         var ctx = document.querySelector('#myChart');
-        var chart    = document.getElementById('myChart').getContext('2d'),
+        
+        
+        var chart = document.getElementById('myChart').getContext('2d'),
     		gradientSpisanie = chart.createLinearGradient(0, 0, 0, 450),
     		gradientVnesenie = chart.createLinearGradient(0, 0, 0, 450),
     		gradientQty = chart.createLinearGradient(0, 0, 0, 450);
@@ -467,9 +487,10 @@
 		gradientVnesenie.addColorStop(1, 'rgba(40, 41, 51, 0)');
 		
 		gradientQty.addColorStop(0, 'rgba(255, 0,0, 0.5)');
+		gradientQty.addColorStop(0, 'rgba(255, 0,0, 0.5)');
 		gradientQty.addColorStop(0.5, 'rgba(255, 0, 0, 0.2)');
 		gradientQty.addColorStop(1, 'rgba(255, 0, 0, 0.2)');
-		
+		 
 		var res = infoMat.split(";");
 
         var _sod =new Array();
@@ -481,26 +502,26 @@
         var _min= new Array();
         var _max= new Array();
         
-        
         for(var i=0;i<res.length-1;i++){
             _sod.push(res[i].split(" ")[0]);
             _date.push(res[i].split(" ")[1]);
             if(_sod[i]==0){
-               _qtyS.push(res[i].split(" ")[2]);
+               _qtyS.push(res[i].split(" ")[3]);
                 _qtyV.push(0);
-                qtyNow -=Number(res[i].split(" ")[2]);
+                qtyNow -=Number(res[i].split(" ")[3]);
+                
             }else{
                 _qtyS.push(0);
-               _qtyV.push(res[i].split(" ")[2]);
-                qtyNow +=Number(res[i].split(" ")[2]);
+               _qtyV.push(res[i].split(" ")[3]);
+                qtyNow +=Number(res[i].split(" ")[3]);
             }
             _qty.push(qtyNow);
-            _min.push(res[i].split(" ")[3]);
-            _max.push(res[i].split(" ")[4]);
+            _min.push(res[i].split(" ")[4]);
+            _max.push(res[i].split(" ")[5]);
         }
         
         Chart.defaults.global.defaultFontFamily = "Lato";
-        Chart.defaults.global.defaultFontSize = 14;
+        Chart.defaults.global.defaultFontSize = 12;
 		
         var dataQty = {
             	label: "Наличие",
@@ -609,7 +630,7 @@
 				tooltips: {
 					titleFontFamily: 'Open Sans',
 					backgroundColor: 'rgba(0,0,0,0.3)',
-					titleFontColor: 'red',
+					titleFontColor: 'white',
 					caretSize: 5,
 					cornerRadius: 2,
 					xPadding: 10,
@@ -651,7 +672,7 @@
           						ctx.lineTo(canvas.width-35, yValue);
           						ctx.strokeStyle = style;
           						ctx.stroke();
-        						}
+        				    }
           
           					if (chartInstance.options.scales.yAxes[0].ticks.fontSize != undefined){
               					labelSize = parseInt(chartInstance.options.scales.yAxes[0].ticks.fontSize);
@@ -661,7 +682,7 @@
 
         					if (line.text) {
           					ctx.fillStyle = style;
-          					ctx.textBaseline = 'hanging'; //<-- set this
+          					//ctx.textBaseline = 'hanging'; //<-- set this
           					ctx.fillText(line.text, 70, yValue-labelSize-4);
         					}
                         }
@@ -669,12 +690,16 @@
                     };
                 }
             };
-            Chart.pluginService.register(horizonalLinePlugin);
+        
         var lineChart = new Chart(ctx, {
           		type: 'line',
           		data: allData,
-          		options: chartOptions
+          		options: chartOptions,
+                plugins: [horizonalLinePlugin]
         		});
-    	}
+    }
+    
+    
+    
 
 </script>

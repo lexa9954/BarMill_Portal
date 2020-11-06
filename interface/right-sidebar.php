@@ -9,17 +9,15 @@
 			require "sql_connect.php";
 	
 			$COOKIE_AMEI = $_COOKIE['AMEI'];
-	
-			$sql = "SELECT * FROM img_ava WHERE id = (SELECT imgId FROM login_img WHERE loginAMEI = '$COOKIE_AMEI')";
+			$sql = "SELECT * FROM img_ava WHERE id = (SELECT imgId FROM login_img WHERE loginAMEI = $COOKIE_AMEI)";
 			
-			$stmt = sqlsrv_query( $conn, $sql);
-
-			$img = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
-
+            $stmt = mysqli_query( $conn, $sql);
+			//$stmt = mysqli_query( $conn, $sql);
+            $img = mysqli_fetch_array( $stmt);
+			//$img = mysqli_fetch_array( $stmt, SQLSRV_FETCH_ASSOC);
 			$target = $img['img_tmp'];
 			$fName = $img['img_name'];
 			echo "<img class=\"ava\" src=\"$target$fName\" alt=\"Avatar\">";
-			
 			?>       	
 		<?php endif;?>        	
     </div> 
@@ -51,7 +49,7 @@
 			<ul>
 				<li><p class="exit">Привет <?=$_COOKIE['name']?></p></li>
 				<li><a href="index.php?page=profile" onclick="close_all_sidebar()">Профиль</a></li>
-				<li><a href="#" onclick="close_all_sidebar()">Профиль какойто</a></li>
+				<!--li><a href="#" onclick="close_all_sidebar()">Профиль какойто</a></li-->
 				<li><a href="access_control/exit.php">Выйти</a></li>
 			</ul>			
 		<?php endif;?>

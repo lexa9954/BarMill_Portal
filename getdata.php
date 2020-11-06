@@ -13,5 +13,5 @@ $imagetmp=addslashes(file_get_contents($_FILES['myimage']['tmp_name']));
 //Вставляем имя изображения и содержимое изображения в img_ava
 $insert_image="INSERT INTO img_ava VALUES('$imagetmp','$imagename')";
 
-$stmt = sqlsrv_query($conn, $insert_image);
+$stmt = mysqli_query($conn, $insert_image);
 ?>

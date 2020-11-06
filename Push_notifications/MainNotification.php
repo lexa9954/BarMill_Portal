@@ -9,15 +9,17 @@ function AllMaterials(){
     where spisanie_or_dobavlenie=1 and (deleted_mat is null or deleted_mat = 0) 
     group by materials.name_mat,mat_box_polka.qty,min,max,mat_box_polka.id_box,mat_box_polka.id_polka,ozm,ediniciIzmerenija.edinica_izmerenija,nameC";
     $query_select_notifications = "";
-    $allMats = sqlsrv_query($conn,$query_select_mats);
-    $allNotifications = sqlsrv_query($conn,$query_select_notifications);
+    $allMats  = mysqli_query( $conn, $query_select_mats);
+    $allNotifications  = mysqli_query( $conn, $query_select_notifications);
+    //$allMats = mysqli_query($conn,$query_select_mats);
+    //$allNotifications = mysqli_query($conn,$query_select_notifications);
     
     
-//    while($row = sqlsrv_fetch_array($allMats)){
+//    while($row = mysqli_fetch_array($allMats)){
 ////    echo $row['name_mat'];
 //    }
     
-    sqlsrv_close($conn);
+    mysqli_close($conn);
 }
 //    echo "<script>
 //    notifSet('Материал на исходе',","'",$row['name_mat'],"','sklad/img/",$row['ozm'],".jpg');

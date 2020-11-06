@@ -35,31 +35,30 @@
                     }
 
                     function SelectTypeHistory($typeHistory){
-                        require "sql_connect.php";
-                        $query_type_enter_exit = "select convert(varchar,door_controll.date_enter,106) 'enterDate',
-                        convert(varchar,door_controll.date_enter,8) 'enterTime',
-                        convert(varchar,door_controll.date_exit,106) 'exitDate',
-                        convert(varchar,door_controll.date_exit,8) 'exitTime',
+                        
+                        $query_type_enter_exit = "select door_controll.date_enter 'enterDate',
+                       door_controll.date_enter 'enterTime',
+                        door_controll.date_exit 'exitDate',
+                        door_controll.date_exit 'exitTime',
                         First_name,second_name,last_name,TabNumberSap from peoples right join door_controll on peoples.id=door_controll.people";
-                        CreateMatRow(sqlsrv_query($conn,$query_type_enter_exit));
+                        CreateMatRow($query_type_enter_exit);
                     }
                     function CreateMatRow($queryArray){
-                        while($row = sqlsrv_fetch_array($queryArray)){
+                        require "sql_connect.php";
+                        $result = mysqli_query( $conn, $queryArray);
+                        while($row = mysqli_fetch_array($result)){
                             if($row['second_name']==null){
                                 echo "<tr class=\"historyItemTR\" style=\"background-color:hotpink\">";
                             }else{
                                 echo "<tr class=\"historyItemTR\">";
                             } 
-                            
                             echo 
                             "<td>",$row['enterDate'],"<br>",
                             $row['enterTime'],"</td>
                             <td>",$row['exitDate'],"<br>",
                             $row['exitTime'],"</td>
                             <td>",$row['second_name'],"</td>";
-                            
                             echo "</tr>";
-
                         }
                     }
                 ?>

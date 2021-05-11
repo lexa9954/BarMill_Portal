@@ -1028,7 +1028,7 @@ input, input:hover, input:focus {
     max-height: 270px;
     min-height: 120px;
 /*	padding: 0 17px 10px 17px;*/
-    height: 270px;
+   /* height: 270px;*/
 }
 .unvisibleElement{
     width: 0px;
@@ -1039,7 +1039,14 @@ input, input:hover, input:focus {
     padding:0;
     text-align: left;
 }
-*/
+
 .labelSelectedFiltr{
     text-decoration-line: underline;
 }
+
+.createWarehouse{
+    width: 800px;
+    height: 400px;
+    position: absolute;
+    background:gray; text-align: -webkit-center;color: black;
+}*/

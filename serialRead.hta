@@ -1,0 +1,51 @@
+<html>
+<head>
+<script type="text/javascript">
+  var port;
+  function SetPort()
+  { 
+    port = document.getElementById("comport"); //Получение ссылки на объект ActiveX на странице
+
+    //CommEventHandler будет обрабатывать события от порта
+    port.attachEvent("CommEvent", CommEventHandler);
+
+    port.Port=5; //Проверьте корректность номера порта!!
+    port.BaudRate=9600;
+    port.DataBits=8;
+    port.Parity=0; //NOPARITY
+    port.StopBits=0; //1 стоп-бит
+
+    port.Connected=1; //Соединение с последовательным портом
+	
+    if(port.error>0) //Отобразим описание ошибки при ее возникновении
+       alert(port.ErrorDescription);
+  }
+
+//Функция-обработчик событий порта
+  function CommEventHandler(Evt, Data)
+  {
+    if(Evt==1) //=EVT_DATA
+    {
+      s = port.Read(1);
+      output.value = output.value + s;
+    }
+   }
+
+//Пример отправки данных через порт
+  function SendData() 
+  { 
+    var port = document.getElementById("comport");
+    port.Send("ABCD\n");
+  }
+</script>
+</head>
+
+<body onload="SetPort()">  
+  <object classid="CLSID:7E42B8C5-73BE-4806-8904-FF4080A696EC" id="comport"></object>
+
+  <button onclick="javascript:SendData()">Send</button>
+  <br/>
+  <textarea name="output" rows=10 cols=50></textarea>
+
+</body>
+</html>

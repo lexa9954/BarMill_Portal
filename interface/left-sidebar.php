@@ -10,6 +10,7 @@
                 <li>
                    <!-- WMS Warehouse Management System / Страница о материалах -->
                     <a href="index.php?page=AllMaterials" onclick="close_all_sidebar()">Обзор материалов</a>
+                    <a href="index.php?page=EditorWarehouse" onclick="close_all_sidebar()">Настройка интерфейса в ПО</a>
                 </li>
                 <?php
                 	if(empty($_COOKIE['name'])){

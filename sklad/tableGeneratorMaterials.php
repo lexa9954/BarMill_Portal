@@ -211,6 +211,7 @@ function CreateTableAllMaterials($stmt){
                 	</tr>
                 </thead>
                 <tbody id=\"containerItems\">";
+
                     $rows = mysqli_num_rows ( $stmt );
                     if ($rows ==0 )
                         echo "<tr><td>материал не найден</td</tr";    
@@ -296,7 +297,8 @@ function CreateTableAllEngines($stmt){
                 	</tr>
                 </thead>
                 <tbody id=\"containerItems\">";
-                    $rows = sqlsrv_has_rows( $stmt );
+                    
+                    $rows = mysqli_num_rows( $stmt );
                     if ($rows === false)
                         echo "<tr><td>материал не найден</td</tr";    
                         
@@ -305,7 +307,6 @@ function CreateTableAllEngines($stmt){
                         $statusClass;
                         $mesto_nah = "";
                         $more ="";
-                        
                         
                         switch($status){
                             case "Хранение(Резерв)":

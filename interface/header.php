@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
         <meta charset="UTF-8">
-
+        <link rel="icon" href="/img/armatera.png" type = "image/x-icon">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
         <title>BarMill Portal</title>

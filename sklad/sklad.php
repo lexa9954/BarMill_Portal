@@ -330,6 +330,7 @@
                 CloseBar(_btn,_block,_chk);
   			}
         createGrafik(matInfoForGrafic);
+        displayWindowSize();
     }
     //Закрытие плиток нажатием на крестик
     function CloseBar(_btn,_block,_chk){
@@ -561,8 +562,12 @@
 			
 				animation: {				
 					easing: 'easeInOutQuad',
-					duration: 1000
+					duration: 0
 					},
+                hover: {
+                    animationDuration: 0 // duration of animations when hovering an item
+                    },
+                responsiveAnimationDuration: 0, // animation duration after a resize
 			
 				horizontalLine: [{
                     y: _max[0],
@@ -697,6 +702,7 @@
           		options: chartOptions,
                 plugins: [horizonalLinePlugin]
         		});
+                
     }
     
     

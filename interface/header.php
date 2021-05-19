@@ -48,7 +48,7 @@
                             echo "ЭКЗАМЕНЫ";
                             break;
                         default: 
-                            echo "ГЛАВНАЯ";
+                            echo "ГЛАВНАЯ!";
                             break;
                     }
                 ?>

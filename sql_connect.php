@@ -13,7 +13,8 @@ $serverName = "DESKTOP-03CJ4S4";
 //Соединение с БД Олега
 //$serverName = "DESKTOP-08NAQ0K\SQLEXPRESS";
 
-$conn = mysqli_connect("10.21.186.101", $userName, $userPass,"WareHousebm" );
+$conn = mysqli_connect("localhost", $userName, $userPass,"WareHousebm" );
+//$conn = mysqli_connect("10.21.186.101", $userName, $userPass,"WareHousebm" );
 //$connectionInfo = array ("UID"=>$userName, "PWD"=>$userPass,"Database"=>"WareHouseBM", "CharacterSet"=>"UTF-8");
 //$conn = sqlsrv_connect( $serverName, $connectionInfo);
 

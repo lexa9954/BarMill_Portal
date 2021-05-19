@@ -18,7 +18,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-
 --
 -- База данных: `warehousebm`
 --
@@ -28,12 +27,11 @@ SET time_zone = "+00:00";
 --
 -- Структура таблицы `categories`
 --
-
 CREATE TABLE `categories` (
   `id` int NOT NULL,
   `cg_name` text NOT NULL,
   `cg_type` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `categories`
@@ -91,7 +89,7 @@ CREATE TABLE `door_controll` (
   `date_enter` datetime NOT NULL,
   `date_exit` datetime NOT NULL,
   `people` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `door_controll`
@@ -144,7 +142,7 @@ INSERT INTO `door_controll` (`id`, `date_enter`, `date_exit`, `people`) VALUES
 CREATE TABLE `ediniciizmerenija` (
   `id` int NOT NULL,
   `ei_name` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `ediniciizmerenija`
@@ -170,7 +168,7 @@ CREATE TABLE `exam_date` (
   `success_quest_percent` int NOT NULL,
   `last_date` datetime NOT NULL,
   `time_exam` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `exam_date`
@@ -371,8 +369,8 @@ INSERT INTO `exam_date` (`id`, `people_id`, `type_quest_id`, `success_quest_perc
 
 CREATE TABLE `exam_typequest` (
   `id` int NOT NULL,
-  `Type_quest_text` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Type_quest_text` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `exam_typequest`
@@ -395,7 +393,7 @@ CREATE TABLE `history` (
   `mat_qty` int NOT NULL,
   `people` int NOT NULL,
   `spisanie_or_dobavlenie` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `history`
@@ -668,7 +666,7 @@ CREATE TABLE `img_ava` (
   `id` int NOT NULL,
   `img_tmp` varchar(15) NOT NULL,
   `img_name` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `img_ava`
@@ -688,7 +686,7 @@ CREATE TABLE `login` (
   `amei` int NOT NULL,
   `pass` varchar(50) NOT NULL,
   `people_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `login`
@@ -706,7 +704,7 @@ INSERT INTO `login` (`id`, `amei`, `pass`, `people_id`) VALUES
 CREATE TABLE `login_img` (
   `loginAMEI` int NOT NULL,
   `imgId` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `login_img`
@@ -732,7 +730,7 @@ CREATE TABLE `materials` (
   `ozm` int NOT NULL,
   `deleted_mat` int NOT NULL,
   `message` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `materials`
@@ -964,7 +962,7 @@ CREATE TABLE `material_objects` (
   `inv_num` int NOT NULL,
   `serial_num` int NOT NULL,
   `carantin` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `material_objects`
@@ -1193,7 +1191,7 @@ CREATE TABLE `peoples` (
   `Individual_key` varchar(20) NOT NULL,
   `TabNumberSAP` int NOT NULL,
   `Doljnost_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `peoples`
